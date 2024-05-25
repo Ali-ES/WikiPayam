@@ -31,4 +31,11 @@
         <item name="android:indeterminate">true</item>
         <item name="android:layout_gravity">center</item>
     </style>
+
+
+    <style name="bottom_bar_texts">
+        <item name="android:textSize">@dimen/ts_bottom_bar</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>
