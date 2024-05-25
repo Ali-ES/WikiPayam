@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:layout_marginStart="@dimen/login_start_end"
+        android:layout_marginEnd="@dimen/login_start_end"
+        android:paddingBottom="20dp"
+        tools:context=".Fragment.Login.SingupFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/singup"
+            android:text="@string/signup"
+            android:textSize="@dimen/title"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/login_top"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_layout"
+            style="@style/login_field_layout"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@id/singup" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/login_field_icon"
+                android:id="@+id/user_iv"
+                android:src="@drawable/ic_user"
+                android:contentDescription="@string/username"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_tv"
+                android:text="@string/username"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/user_iv" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_et"
+                style="@style/login_field_et"
+                android:inputType="text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/user_iv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pass_layout"
+            style="@style/login_field_layout"
+            app:layout_constraintTop_toBottomOf="@id/user_layout" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/login_field_icon"
+                android:id="@+id/pass_iv"
+                android:src="@drawable/ic_pass"
+                android:contentDescription="@string/password"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pass_tv"
+                android:text="@string/password"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/pass_iv" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/pass_et"
+                style="@style/login_field_et"
+                android:inputType="textPassword"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/pass_iv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pass_repeat_layout"
+            style="@style/login_field_layout"
+            app:layout_constraintTop_toBottomOf="@id/pass_layout" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/login_field_icon"
+                android:id="@+id/pass_repeat_iv"
+                android:src="@drawable/ic_pass"
+                android:contentDescription="@string/password_repeat"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pass_repeat_tv"
+                android:text="@string/password_repeat"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/pass_repeat_iv" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/pass_repeat_et"
+                style="@style/login_field_et"
+                android:inputType="textPassword"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/pass_repeat_iv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/email_layout"
+            style="@style/login_field_layout"
+            app:layout_constraintTop_toBottomOf="@id/pass_repeat_layout" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/login_field_icon"
+                android:id="@+id/email_iv"
+                android:src="@drawable/ic_email"
+                android:contentDescription="@string/email"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/email_tv"
+                android:text="@string/email"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/email_iv" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/email_et"
+                style="@style/login_field_et"
+                android:inputType="textEmailAddress"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/email_iv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/name_layout"
+            style="@style/login_field_layout"
+            app:layout_constraintTop_toBottomOf="@id/email_layout" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="@dimen/login_field_icon"
+                android:id="@+id/name_iv"
+                android:src="@drawable/ic_name"
+                android:contentDescription="@string/name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/name_tv"
+                android:text="@string/name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/name_iv" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/name_et"
+                style="@style/login_field_et"
+                android:gravity="right"
+                android:inputType="text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/name_iv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mobile_layout"
+            style="@style/login_field_layout"
+            app:layout_constraintTop_toBottomOf="@id/name_layout" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="@dimen/login_field_icon"
+                android:id="@+id/mobile_iv"
+                android:src="@drawable/ic_mobile"
+                android:contentDescription="@string/mobile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mobile_tv"
+                android:text="@string/mobile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/mobile_iv" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/mobile_et"
+                style="@style/login_field_et"
+                android:inputType="phone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/mobile_iv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rules_check_layout"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/login_field_top"
+            app:layout_constraintTop_toBottomOf="@id/mobile_layout">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rules_check"
+                android:background="@drawable/bg_checkbox" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rules_tv"
+                android:text="@string/agree_to_rules"
+                android:textSize="@dimen/options" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/singup_bt"
+            android:text="@string/signup"
+            style="@style/login_button"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/rules_check_layout" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

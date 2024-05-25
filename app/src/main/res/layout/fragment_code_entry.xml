@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:layout_marginStart="@dimen/login_start_end"
+        android:layout_marginEnd="@dimen/login_start_end"
+        android:paddingBottom="20dp"
+        tools:context=".Fragment.Login.CodeEntryFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgot_password"
+            android:text="@string/forgot_password"
+            android:textSize="@dimen/title"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/login_top"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/explain_tv"
+            android:text="@string/exp_code_entry"
+            android:textSize="@dimen/options"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@id/forgot_password" />
+
+    bv
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/confirm_code_layout"
+            style="@style/login_field_layout"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_field_focused"
+            app:layout_constraintTop_toBottomOf="@id/explain_tv" >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="@dimen/login_field_icon"
+                android:id="@+id/confirm_code_iv"
+                android:src="@drawable/ic_code"
+                android:contentDescription="@string/confirm_code"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/confirm_code_tv"
+                android:text="@string/confirm_code"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/confirm_code_iv" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/confirm_code_et"
+                style="@style/login_field_et"
+                android:inputType="text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/confirm_code_bt"
+            android:text="@string/submit_confirm_code"
+            style="@style/login_button"
+            app:layout_constraintTop_toBottomOf="@id/confirm_code_layout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

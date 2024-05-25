@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Object Dimensions -->
+    <dimen name="login_field_icon">15dp</dimen>
+    <dimen name="snack_h">20dp</dimen>
+
+    <!-- Margins -->
+    <dimen name="login_top">40dp</dimen>
+    <dimen name="login_start_end">20dp</dimen>
+    <dimen name="login_field_top">30dp</dimen>
+    <dimen name="margin_snack_se">20dp</dimen>
+    <dimen name="margin_snack_tick_s">15dp</dimen>
+    
+    
+    <!-- Paddings -->
+    <dimen name="edit_top_bottom">12dp</dimen>
+    <dimen name="edit_start_end">10dp</dimen>
+
+
+    <!-- Font Sizes -->
+    <dimen name="header">20sp</dimen>
+    <dimen name="text">16sp</dimen>
+    <dimen name="title">30sp</dimen>
+    <dimen name="button">18sp</dimen>
+    <dimen name="options">14sp</dimen>
+</resources>

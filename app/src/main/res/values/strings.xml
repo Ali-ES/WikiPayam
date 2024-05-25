@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">5m5</string>
+
+
+    <!-- Login Fragment -->
+    <string name="enter_app">ورود به برنامه</string>
+    <string name="username">نام کاربری</string>
+    <string name="password">رمز عبور</string>
+    <string name="submit">ثبت</string>
+    <string name="signup_in_site">عضویت در سایت</string>
+    <string name="forgot_password">فراموش کردن رمز عبور</string>
+    <string name="note_login_success">با موفقیت وارد شدید</string>
+    <string name="warn_empty_user_pass">نام کاربری و رمز عبور نمی تواند خالی باشد</string>
+    <string name="error_incorrect_user_pass">نام کاربری یا رمز عبور نادرست است!</string>
+
+
+    <!-- Signup Fragment -->
+    <string name="password_repeat">تکرار رمز عبور</string>
+    <string name="email">ایمیل</string>
+    <string name="name">نام و نام خانوادگی</string>
+    <string name="mobile">موبایل</string>
+    <string name="signup">ثبت نام</string>
+    <string name="agree_to_rules">با قوانین سایت موافقم</string>
+
+
+    <!-- Forgot Password Fragment -->
+    <string name="submit_forgot_password">ثبت درخواست بازیابی رمز عبور</string>
+
+    <!-- Code Entry Fragment -->
+    <string name="exp_code_entry">کد تایید دریافت شده از طریق ایمیل یا موبایل را وارد کنید</string>
+    <string name="submit_confirm_code">ثبت کد تایید</string>
+    <string name="confirm_code">کد تایید</string>
+
+
+    <!-- Snackbar -->
+    <string name="email_send_success">ایمیل با موفقیت ارسال شد</string>
+    <string name="desc_success_snack">موفق</string>
+
+
+    <!-- Content Description -->
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
