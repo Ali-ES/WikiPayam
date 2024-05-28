@@ -25,6 +25,7 @@ import ir.FiveMFive.FiveMFive.ProgressIndicatorListener;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.RetrofitClient;
 import ir.FiveMFive.FiveMFive.RetrofitInterface;
+import ir.FiveMFive.FiveMFive.Utility.ConnectivityChecker;
 import ir.FiveMFive.FiveMFive.Utility.SnackbarBuilder;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -35,6 +36,7 @@ import retrofit2.Retrofit;
 public class LoginFragment extends Fragment {
     public static final String TAG = "LoginFragment";
     private Context c;
+    private View v;
     private ProgressIndicatorListener progressListener;
     private ConstraintLayout userLayout;
     private TextView userText;
@@ -50,7 +52,7 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_login, container, false);
+        v = inflater.inflate(R.layout.fragment_login, container, false);
         c = getContext();
         userLayout = v.findViewById(R.id.user_layout);
         userText = v.findViewById(R.id.user_tv);
@@ -74,39 +76,21 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 showProgress();
                 if(!checkEditNulls(userEdit, passEdit)) {
-                    String user = userEdit.getText().toString();
-                    String pass = passEdit.getText().toString();
 
-
-                    Retrofit retrofit = RetrofitClient.getClient();
-                    RetrofitInterface apiInterface = retrofit.create(RetrofitInterface.class);
-                    Call<ResponseBody> call = apiInterface.login(user, pass);
-                    call.enqueue(new Callback<ResponseBody>() {
+                    ConnectivityChecker connectivityChecker = new ConnectivityChecker(new ConnectivityChecker.ConnectionListener() {
                         @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if(response.isSuccessful()) {
-                                try {
-                                    String r = response.body().string();
-                                    if(r.contains("error")) {
-                                        SnackbarBuilder.showSnack(c, v, getString(R.string.error_incorrect_user_pass), SnackbarBuilder.SnackType.ERROR);
-                                    } else {
-                                        SnackbarBuilder.showSnack(c, v, getString(R.string.note_login_success), SnackbarBuilder.SnackType.SUCCESS);
-                                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                                        startActivity(intent);
-                                    }
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                        public void isConnected(boolean status) {
+                            if(status) {
+                                login();
+                            } else {
+                                ConnectivityChecker.showConnectionFailSnack(getContext(), v);
+                                hideProgress();
                             }
-                            hideProgress();
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Log.v(TAG, "failed", t);
-                            hideProgress();
                         }
                     });
+                    connectivityChecker.checkConnection(requireActivity());
+
+
 
                 } else {
                     SnackbarBuilder.showSnack(c, v, getString(R.string.warn_empty_user_pass), SnackbarBuilder.SnackType.WARNING);
@@ -156,6 +140,43 @@ public class LoginFragment extends Fragment {
         if(progressListener != null) {
             progressListener.hideProgress();
         }
+    }
+
+    private void login() {
+        String user = userEdit.getText().toString();
+        String pass = passEdit.getText().toString();
+
+
+        Retrofit retrofit = RetrofitClient.getClient();
+        RetrofitInterface apiInterface = retrofit.create(RetrofitInterface.class);
+        Call<ResponseBody> call = apiInterface.login(user, pass);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()) {
+                    try {
+                        String r = response.body().string();
+                        if(r.contains("error")) {
+                            SnackbarBuilder.showSnack(c, v, getString(R.string.error_incorrect_user_pass), SnackbarBuilder.SnackType.ERROR);
+                        } else {
+                            SnackbarBuilder.showSnack(c, v, getString(R.string.note_login_success), SnackbarBuilder.SnackType.SUCCESS);
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                hideProgress();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.v(TAG, "failed", t);
+                hideProgress();
+                ConnectivityChecker.showConnectionFailSnack(getContext(), v);
+            }
+        });
     }
 
 }
