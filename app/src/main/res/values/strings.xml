@@ -35,6 +35,12 @@
     <!-- Dashboard Fragment -->
     <string name="inventory">موجودی:</string>
     <string name="rial">ریال</string>
+    <string name="user_menu">منوی کاربری</string>
+    <string name="send_message">ارسال پیام</string>
+    <string name="finance">امور مالی</string>
+    <string name="receive_message">دریافت پیام</string>
+    <string name="contacts">دفترچه تلفن</string>
+    <string name="monthly_stats">آمار ماهیانه</string>
 
 
     <!-- Snackbar -->
