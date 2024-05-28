@@ -23,7 +23,7 @@
             android:id="@+id/name_tv"
             android:textSize="@dimen/ts_bottom_bar"
             android:textColor="@color/white"
-            android:text="علیرضا اسحاقی"
+            android:text="حسین اکبری"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
