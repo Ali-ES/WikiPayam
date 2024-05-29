@@ -46,6 +46,7 @@
     <!-- Snackbar -->
     <string name="email_send_success">ایمیل با موفقیت ارسال شد</string>
     <string name="desc_success_snack">موفق</string>
+    <string name="warn_connection_failed">لطفا اتصال اینترنت خود را بررسی کنید</string>
 
 
     <!-- Content Description -->
