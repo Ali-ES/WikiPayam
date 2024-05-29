@@ -49,6 +49,9 @@
     <string name="warn_connection_failed">لطفا اتصال اینترنت خود را بررسی کنید</string>
 
 
+    <!-- Action Bar -->
+    <string name="more">بیشتر</string>
+
     <!-- Content Description -->
 
     <!-- TODO: Remove or change this placeholder text -->

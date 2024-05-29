@@ -15,6 +15,7 @@
     <color name="gray_stroke">#eeeeee</color>
     <color name="gray_loading">#747676</color>
     <color name="gray_dashboard_item">#e9ebef</color>
+    <color name="gray_popup_divider">#ededed</color>
 
 
     <!-- Snackbar Colors -->
