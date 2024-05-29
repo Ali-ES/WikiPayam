@@ -30,11 +30,17 @@
     <string name="exp_code_entry">کد تایید دریافت شده از طریق ایمیل یا موبایل را وارد کنید</string>
     <string name="submit_confirm_code">ثبت کد تایید</string>
     <string name="confirm_code">کد تایید</string>
-    
-    
+
+
     <!-- Dashboard Fragment -->
     <string name="inventory">موجودی:</string>
     <string name="rial">ریال</string>
+    <string name="user_menu">منوی کاربری</string>
+    <string name="send_message">ارسال پیام</string>
+    <string name="finance">امور مالی</string>
+    <string name="receive_message">دریافت پیام</string>
+    <string name="contacts">دفترچه تلفن</string>
+    <string name="monthly_stats">آمار ماهیانه</string>
 
 
     <!-- Snackbar -->

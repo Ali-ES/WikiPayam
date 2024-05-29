@@ -79,6 +79,22 @@ public class LoginFragment extends Fragment {
 
                     ConnectivityChecker connectivityChecker = new ConnectivityChecker(new ConnectivityChecker.ConnectionListener() {
                         @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if(response.isSuccessful()) {
+                                try {
+                                    String r = response.body().string();
+                                    if(r.contains("error")) {
+                                        SnackbarBuilder.showSnack(c, v, getString(R.string.error_incorrect_user_pass), SnackbarBuilder.SnackType.ERROR);
+                                    } else {
+                                        SnackbarBuilder.showSnack(c, v, getString(R.string.note_login_success), SnackbarBuilder.SnackType.SUCCESS);
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        startActivity(intent);
+                                        getActivity().finish();
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
                         public void isConnected(boolean status) {
                             if(status) {
                                 login();

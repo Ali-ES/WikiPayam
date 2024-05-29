@@ -22,6 +22,9 @@
     <dimen name="login_field_icon">15dp</dimen>
     <dimen name="snack_h">20dp</dimen>
     <dimen name="h_bottom_bar">30dp</dimen>
+    <dimen name="w_dashboard_items">150dp</dimen>
+    <dimen name="h_dashboard_items">40dp</dimen>
+    <dimen name="wh_dashboard_icons">18dp</dimen>
 
     <!-- Margins -->
     <dimen name="login_top">40dp</dimen>
@@ -30,12 +33,17 @@
     <dimen name="margin_snack_se">20dp</dimen>
     <dimen name="margin_snack_tick_s">15dp</dimen>
     <dimen name="mg_s_bottom_bar_text">5dp</dimen>
+    <dimen name="mg_t_dashboard_card_view">20dp</dimen>
+    <dimen name="mg_se_dashboard_card_view">15dp</dimen>
     
     
     <!-- Paddings -->
     <dimen name="edit_top_bottom">12dp</dimen>
     <dimen name="edit_start_end">10dp</dimen>
     <dimen name="pad_se_bottom_bar">20dp</dimen>
+    <dimen name="pad_se_dashboard_items">8dp</dimen>
+
+    <dimen name="pad_tb_main">10dp</dimen>
 
 
     <!-- Font Sizes -->
