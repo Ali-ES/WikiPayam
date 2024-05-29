@@ -75,28 +75,11 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showProgress();
-                if(!checkEditNulls(userEdit, passEdit)) {
-
+                if (!checkEditNulls(userEdit, passEdit)) {
                     ConnectivityChecker connectivityChecker = new ConnectivityChecker(new ConnectivityChecker.ConnectionListener() {
                         @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if(response.isSuccessful()) {
-                                try {
-                                    String r = response.body().string();
-                                    if(r.contains("error")) {
-                                        SnackbarBuilder.showSnack(c, v, getString(R.string.error_incorrect_user_pass), SnackbarBuilder.SnackType.ERROR);
-                                    } else {
-                                        SnackbarBuilder.showSnack(c, v, getString(R.string.note_login_success), SnackbarBuilder.SnackType.SUCCESS);
-                                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                                        startActivity(intent);
-                                        getActivity().finish();
-                                    }
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-
                         public void isConnected(boolean status) {
-                            if(status) {
+                            if (status) {
                                 login();
                             } else {
                                 ConnectivityChecker.showConnectionFailSnack(getContext(), v);
@@ -105,9 +88,6 @@ public class LoginFragment extends Fragment {
                         }
                     });
                     connectivityChecker.checkConnection(requireActivity());
-
-
-
                 } else {
                     SnackbarBuilder.showSnack(c, v, getString(R.string.warn_empty_user_pass), SnackbarBuilder.SnackType.WARNING);
                     hideProgress();
@@ -140,7 +120,6 @@ public class LoginFragment extends Fragment {
                 ft.commit();
             }
         });
-
         return v;
     }
 
@@ -194,5 +173,4 @@ public class LoginFragment extends Fragment {
             }
         });
     }
-
 }
