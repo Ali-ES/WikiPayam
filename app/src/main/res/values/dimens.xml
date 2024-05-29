@@ -38,7 +38,6 @@
     <dimen name="mg_s_bottom_bar_text">5dp</dimen>
     <dimen name="mg_t_dashboard_card_view">20dp</dimen>
     <dimen name="mg_se_dashboard_card_view">15dp</dimen>
-    <dimen name="mg_se_action_bar">16dp</dimen>
     <dimen name="mg_s_popup_title">5dp</dimen>
     
     
@@ -52,6 +51,9 @@
 
     <dimen name="pad_se_popup_item">5dp</dimen>
     <dimen name="pad_tb_popup_item">10dp</dimen>
+
+    <dimen name="pad_se_action_bar">16dp</dimen>
+
 
 
     <!-- Font Sizes -->
