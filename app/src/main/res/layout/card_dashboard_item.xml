@@ -16,11 +16,13 @@
         <ImageView
             android:layout_width="@dimen/wh_dashboard_icons"
             android:layout_height="@dimen/wh_dashboard_icons"
+            android:id="@+id/icon"
             android:src="@drawable/ic_person"
             android:contentDescription="@string/user_menu" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/title"
             android:text="@string/user_menu"
             android:layout_marginStart="@dimen/pad_se_dashboard_items" />
 
