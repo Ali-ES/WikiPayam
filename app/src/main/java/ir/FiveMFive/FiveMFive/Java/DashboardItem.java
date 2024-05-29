@@ -3,6 +3,10 @@ package ir.FiveMFive.FiveMFive.Java;
 public class DashboardItem {
     private int imageResID;
     private String title;
+    public DashboardItem(int imageResID, String title) {
+        this.imageResID = imageResID;
+        this.title = title;
+    }
 
     public int getImageResID() {
         return imageResID;

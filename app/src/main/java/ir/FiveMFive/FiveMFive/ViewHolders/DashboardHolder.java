@@ -26,6 +26,8 @@ public class DashboardHolder extends RecyclerView.ViewHolder implements View.OnC
 
         icon = itemView.findViewById(R.id.icon);
         title = itemView.findViewById(R.id.title);
+        this.fragment = fragment;
+
         itemView.setOnClickListener(this);
     }
     public void bind(DashboardItem item, Context c) {

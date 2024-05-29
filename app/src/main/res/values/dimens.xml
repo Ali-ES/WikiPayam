@@ -33,6 +33,8 @@
     <dimen name="margin_snack_se">20dp</dimen>
     <dimen name="margin_snack_tick_s">15dp</dimen>
     <dimen name="mg_s_bottom_bar_text">5dp</dimen>
+    <dimen name="mg_t_dashboard_card_view">20dp</dimen>
+    <dimen name="mg_se_dashboard_card_view">15dp</dimen>
     
     
     <!-- Paddings -->
@@ -40,6 +42,8 @@
     <dimen name="edit_start_end">10dp</dimen>
     <dimen name="pad_se_bottom_bar">20dp</dimen>
     <dimen name="pad_se_dashboard_items">8dp</dimen>
+
+    <dimen name="pad_tb_main">10dp</dimen>
 
 
     <!-- Font Sizes -->

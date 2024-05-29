@@ -5,24 +5,25 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.FiveMFive.FiveMFive.Java.DashboardItem;
-import ir.FiveMFive.FiveMFive.ViewHolders.DashboardViewHolder;
+import ir.FiveMFive.FiveMFive.ViewHolders.DashboardHolder;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter {
-    private Context c;
+    private Fragment fragment;
     private LayoutType layoutType;
     private List<?> items;
 
     public enum LayoutType {
         DASHBOARD
     }
-    public RecyclerViewAdapter(Context c, LayoutType layoutType, ArrayList<?> items) {
-        this.c = c;
+    public RecyclerViewAdapter(Fragment fragment, LayoutType layoutType, ArrayList<?> items) {
+        this.fragment = fragment;
         this.layoutType = layoutType;
         this.items = items;
     }
@@ -32,7 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         switch (layoutType) {
             case DASHBOARD:
-            return new DashboardViewHolder(inflater, parent);
+            return new DashboardHolder(inflater, parent, fragment);
 
 
 
@@ -45,8 +46,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch(layoutType) {
             case DASHBOARD:
-                DashboardViewHolder dashboard = (DashboardViewHolder) holder;
-                dashboard.bind((DashboardItem) items.get(position), c);
+                DashboardHolder dashboard = (DashboardHolder) holder;
+                dashboard.bind((DashboardItem) items.get(position), fragment.requireContext());
                 break;
 
         }

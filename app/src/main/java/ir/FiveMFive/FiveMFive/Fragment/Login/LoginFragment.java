@@ -93,6 +93,7 @@ public class LoginFragment extends Fragment {
                                         SnackbarBuilder.showSnack(c, v, getString(R.string.note_login_success), SnackbarBuilder.SnackType.SUCCESS);
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
                                         startActivity(intent);
+                                        getActivity().finish();
                                     }
                                 } catch (IOException e) {
                                     e.printStackTrace();
