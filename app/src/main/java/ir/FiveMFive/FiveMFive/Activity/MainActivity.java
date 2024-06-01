@@ -11,12 +11,12 @@ import ir.FiveMFive.FiveMFive.Fragment.DashboardFragment;
 import ir.FiveMFive.FiveMFive.R;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
 
         Fragment fragment = new DashboardFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBackPressed() {
         super.onBackPressed();
-        if(getSupportFragmentManager().getBackStackEntryCount() == 0) {
+        if(getSupportFragmentManager().getBackStackEntryCount() < 0) {
             finishAffinity();
         }
     }

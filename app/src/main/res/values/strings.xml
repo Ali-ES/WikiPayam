@@ -41,6 +41,7 @@
     <string name="receive_message">دریافت پیام</string>
     <string name="contacts">دفترچه تلفن</string>
     <string name="monthly_stats">آمار ماهیانه</string>
+    <string name="exit">خروج</string>
 
 
     <!-- Snackbar -->
@@ -48,6 +49,9 @@
     <string name="desc_success_snack">موفق</string>
     <string name="warn_connection_failed">لطفا اتصال اینترنت خود را بررسی کنید</string>
 
+
+    <!-- Action Bar -->
+    <string name="more">بیشتر</string>
 
     <!-- Content Description -->
 
