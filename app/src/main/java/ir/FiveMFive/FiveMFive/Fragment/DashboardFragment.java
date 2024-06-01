@@ -44,7 +44,12 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 PopupBuilder popupBuilder = new PopupBuilder(getContext());
-                popupBuilder.addItem(R.drawable.ic_exit, R.string.exit);
+                popupBuilder.addItem(R.drawable.ic_exit, R.string.exit, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //handle click
+                    }
+                });
                 popupBuilder.showPopup(actionBar);
             }
         });

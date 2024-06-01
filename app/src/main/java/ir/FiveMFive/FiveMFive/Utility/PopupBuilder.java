@@ -3,7 +3,6 @@ package ir.FiveMFive.FiveMFive.Utility;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,7 +26,7 @@ public class PopupBuilder {
         main.setOrientation(LinearLayout.VERTICAL);
     }
 
-    public void addItem(int imageResID, int titleId) throws Resources.NotFoundException {
+    public void addItem(int imageResID, int titleId, View.OnClickListener clickListener) throws Resources.NotFoundException {
         String title = c.getResources().getString(titleId);
 
         ImageView icon = new ImageView(c);
@@ -54,6 +53,7 @@ public class PopupBuilder {
 
         main.addView(layout, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         main.addView(getDivider());
+        layout.setOnClickListener(clickListener);
 
     }
 
