@@ -95,6 +95,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        /*
         signupText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +121,8 @@ public class LoginFragment extends Fragment {
                 ft.commit();
             }
         });
+
+         */
         return v;
     }
 
