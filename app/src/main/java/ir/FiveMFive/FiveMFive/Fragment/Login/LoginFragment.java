@@ -7,9 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
+import androidx.fragment.app.Fragment;;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +67,8 @@ public class LoginFragment extends Fragment {
 
         setEditTextFocus(getContext(), userLayout, userText, userEdit);
         setEditTextFocus(getContext(), passLayout, passText, passEdit);
+
+        
 
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +157,8 @@ public class LoginFragment extends Fragment {
                         if(r.contains("error")) {
                             SnackbarBuilder.showSnack(c, v, getString(R.string.error_incorrect_user_pass), SnackbarBuilder.SnackType.ERROR);
                         } else {
+                            //saveCredentials();
+
                             SnackbarBuilder.showSnack(c, v, getString(R.string.note_login_success), SnackbarBuilder.SnackType.SUCCESS);
                             Intent intent = new Intent(getActivity(), MainActivity.class);
                             startActivity(intent);
