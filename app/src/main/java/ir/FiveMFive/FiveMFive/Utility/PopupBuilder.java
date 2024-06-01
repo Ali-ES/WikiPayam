@@ -1,6 +1,7 @@
 package ir.FiveMFive.FiveMFive.Utility;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,9 @@ public class PopupBuilder {
         main.setOrientation(LinearLayout.VERTICAL);
     }
 
-    public void addItem(int imageResID, String title) {
+    public void addItem(int imageResID, int titleId) throws Resources.NotFoundException {
+        String title = c.getResources().getString(titleId);
+
         ImageView icon = new ImageView(c);
         icon.setImageDrawable(ResourcesCompat.getDrawable(c.getResources(), imageResID, null));
         icon.setContentDescription(title);

@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PopupBuilder popupBuilder = new PopupBuilder(MainActivity.this);
-                popupBuilder.addItem(R.drawable.ic_exit, "فراموشی رمز عبور");
-                popupBuilder.addItem(R.drawable.ic_exit, "خروج");
+                popupBuilder.addItem(R.drawable.ic_exit, R.string.exit);
                 popupBuilder.showPopup(actionBar);
             }
         });
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBackPressed() {
         super.onBackPressed();
-        if(getSupportFragmentManager().getBackStackEntryCount() == 0) {
+        if(getSupportFragmentManager().getBackStackEntryCount() < 0) {
             finishAffinity();
         }
     }
