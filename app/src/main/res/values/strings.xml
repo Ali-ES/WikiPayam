@@ -53,6 +53,12 @@
     <!-- Action Bar -->
     <string name="more">بیشتر</string>
 
+
+    <!-- Biometric Auth -->
+    <string name="user_authentication">احراز هویت کاربر</string>
+    <string name="biometric_auth">برای ورود به برنامه حسگر اثر انگشت را لمس کنید</string>
+    <string name="passcode_login">ورود به با کد ورود</string>
+
     <!-- Content Description -->
 
     <!-- TODO: Remove or change this placeholder text -->
