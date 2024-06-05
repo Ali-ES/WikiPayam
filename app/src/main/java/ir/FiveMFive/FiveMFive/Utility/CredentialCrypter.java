@@ -134,4 +134,11 @@ public class CredentialCrypter {
     private byte[] stringToByte(String data) {
         return Base64.decode(data, Base64.DEFAULT);
     }
+
+    public void removeSavedCredentials() {
+        SharedPreferences sp = c.getSharedPreferences(Constants.PREF_CREDENTIALS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.apply();
+    }
 }
