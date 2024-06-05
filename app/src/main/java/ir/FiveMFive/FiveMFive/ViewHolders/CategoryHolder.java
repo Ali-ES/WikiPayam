@@ -1,15 +1,16 @@
 package ir.FiveMFive.FiveMFive.ViewHolders;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import ir.FiveMFive.FiveMFive.Fragment.SendMessage.GroupMessageFragment;
+import ir.FiveMFive.FiveMFive.Fragment.SendMessage.SingleMessageFragment;
 import ir.FiveMFive.FiveMFive.Java.CategoryItem;
 import ir.FiveMFive.FiveMFive.R;
 
@@ -31,12 +32,19 @@ public class CategoryHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
     @Override
     public void onClick(View v) {
+        FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
         switch (categoryItem.getPosition()) {
             case 0:
-                //starts SingleMessageFragment
+                SingleMessageFragment singleMessageFragment = new SingleMessageFragment();
+                ft.replace(R.id.fragment_container, singleMessageFragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 break;
             case 1:
-                //start GroupMessageFragment
+                GroupMessageFragment groupMessageFragment = new GroupMessageFragment();
+                ft.replace(R.id.fragment_container, groupMessageFragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 break;
         }
     }
