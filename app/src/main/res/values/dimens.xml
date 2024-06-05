@@ -62,6 +62,8 @@
     <dimen name="pad_s_card_category">20dp</dimen>
     <dimen name="pad_e_card_category">15dp</dimen>
 
+    <dimen name="pad_t_fragment_category">5dp</dimen>
+
 
 
     <!-- Font Sizes -->
