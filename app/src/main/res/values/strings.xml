@@ -53,8 +53,30 @@
     <!-- Action Bar -->
     <string name="more">بیشتر</string>
 
+
+    <!-- Biometric Auth -->
+    <string name="user_authentication">احراز هویت کاربر</string>
+    <string name="biometric_auth">برای ورود به برنامه حسگر اثر انگشت را لمس کنید</string>
+    <string name="passcode_login">ورود به با کد ورود</string>
+
     <!-- Content Description -->
+    <string name="forward">رو به جلو</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="array_send_message">
+        <item>ارسال پیامک تکی</item>
+        <item>ارسال پیامک گروهی</item>
+        <item>ارسال پیامک نظیر به نظیر</item>
+        <item>تنظیمات شخصی سازی</item>
+        <item>ارسال پیامک داینامیک</item>
+        <item>ارسال پیامک از اکسل</item>
+        <item>ارسال بر اساس کد پستی</item>
+        <item>ارسال به تفکیک جنسیت</item>
+        <item>ارسال دانشجو</item>
+        <item>ارسال به دفتر تلفن سایت</item>
+    </string-array>
+
 </resources>

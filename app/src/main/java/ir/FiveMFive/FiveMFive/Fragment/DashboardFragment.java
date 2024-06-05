@@ -1,5 +1,6 @@
 package ir.FiveMFive.FiveMFive.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,10 +15,12 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
+import ir.FiveMFive.FiveMFive.Activity.LoginActivity;
 import ir.FiveMFive.FiveMFive.Java.DashboardItem;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.RecyclerViewAdapter;
 import ir.FiveMFive.FiveMFive.Singleton.DashboardLab;
+import ir.FiveMFive.FiveMFive.Utility.CredentialCrypter;
 import ir.FiveMFive.FiveMFive.Utility.PopupBuilder;
 
 public class DashboardFragment extends Fragment {
@@ -47,7 +50,11 @@ public class DashboardFragment extends Fragment {
                 popupBuilder.addItem(R.drawable.ic_exit, R.string.exit, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //handle click
+                        CredentialCrypter.removeSavedCredentials(requireContext());
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        requireActivity().finish();
+                        popupBuilder.dismiss();
                     }
                 });
                 popupBuilder.showPopup(actionBar);
@@ -56,4 +63,5 @@ public class DashboardFragment extends Fragment {
 
         return v;
     }
+
 }

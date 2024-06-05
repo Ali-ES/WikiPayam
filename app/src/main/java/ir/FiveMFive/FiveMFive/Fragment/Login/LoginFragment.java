@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
+import androidx.fragment.app.Fragment;;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,11 +21,13 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import ir.FiveMFive.FiveMFive.Activity.MainActivity;
+import ir.FiveMFive.FiveMFive.Java.User;
 import ir.FiveMFive.FiveMFive.ProgressIndicatorListener;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.RetrofitClient;
 import ir.FiveMFive.FiveMFive.RetrofitInterface;
 import ir.FiveMFive.FiveMFive.Utility.ConnectivityChecker;
+import ir.FiveMFive.FiveMFive.Utility.CredentialCrypter;
 import ir.FiveMFive.FiveMFive.Utility.SnackbarBuilder;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -69,6 +71,17 @@ public class LoginFragment extends Fragment {
 
         setEditTextFocus(getContext(), userLayout, userText, userEdit);
         setEditTextFocus(getContext(), passLayout, passText, passEdit);
+
+        passEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    submit.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -157,9 +170,13 @@ public class LoginFragment extends Fragment {
                         if(r.contains("error")) {
                             SnackbarBuilder.showSnack(c, v, getString(R.string.error_incorrect_user_pass), SnackbarBuilder.SnackType.ERROR);
                         } else {
+                            CredentialCrypter crypter = new CredentialCrypter(getContext());
+                            crypter.encrypt(new User(user, pass));
+
                             SnackbarBuilder.showSnack(c, v, getString(R.string.note_login_success), SnackbarBuilder.SnackType.SUCCESS);
                             Intent intent = new Intent(getActivity(), MainActivity.class);
                             startActivity(intent);
+                            requireActivity().finish();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
