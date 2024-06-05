@@ -19,11 +19,13 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import ir.FiveMFive.FiveMFive.Activity.MainActivity;
+import ir.FiveMFive.FiveMFive.Java.User;
 import ir.FiveMFive.FiveMFive.ProgressIndicatorListener;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.RetrofitClient;
 import ir.FiveMFive.FiveMFive.RetrofitInterface;
 import ir.FiveMFive.FiveMFive.Utility.ConnectivityChecker;
+import ir.FiveMFive.FiveMFive.Utility.CredentialCrypter;
 import ir.FiveMFive.FiveMFive.Utility.SnackbarBuilder;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -157,7 +159,8 @@ public class LoginFragment extends Fragment {
                         if(r.contains("error")) {
                             SnackbarBuilder.showSnack(c, v, getString(R.string.error_incorrect_user_pass), SnackbarBuilder.SnackType.ERROR);
                         } else {
-                            //saveCredentials();
+                            CredentialCrypter crypter = new CredentialCrypter(getContext());
+                            crypter.encrypt(new User(user, pass));
 
                             SnackbarBuilder.showSnack(c, v, getString(R.string.note_login_success), SnackbarBuilder.SnackType.SUCCESS);
                             Intent intent = new Intent(getActivity(), MainActivity.class);
