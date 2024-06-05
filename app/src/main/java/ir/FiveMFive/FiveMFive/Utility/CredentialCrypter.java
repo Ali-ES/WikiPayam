@@ -135,10 +135,14 @@ public class CredentialCrypter {
         return Base64.decode(data, Base64.DEFAULT);
     }
 
-    public void removeSavedCredentials() {
+    public static void removeSavedCredentials(Context c) {
         SharedPreferences sp = c.getSharedPreferences(Constants.PREF_CREDENTIALS, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
         editor.apply();
+    }
+    public static boolean hasLoggedIn(Context c) {
+        SharedPreferences sp = c.getSharedPreferences(Constants.PREF_CREDENTIALS, Context.MODE_PRIVATE);
+        return !sp.getString(KEY_USERNAME, "").isEmpty();
     }
 }
