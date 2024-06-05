@@ -19,6 +19,7 @@ public class PopupBuilder {
     private Context c;
     private LinearLayout main;
     private View lastDivider;
+    private PopupWindow window;
 
     public PopupBuilder(Context c) {
         this.c = c;
@@ -76,9 +77,15 @@ public class PopupBuilder {
         cardView.setRadius(toDp(5));
         cardView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         int popupWidth = (int) c.getResources().getDimension(R.dimen.w_popup);
-        PopupWindow window = new PopupWindow(cardView, toDp(popupWidth), ViewGroup.LayoutParams.WRAP_CONTENT);
+        window = new PopupWindow(cardView, toDp(popupWidth), ViewGroup.LayoutParams.WRAP_CONTENT);
         window.setFocusable(true);
         window.showAsDropDown(anchorView, 0, 0);
+    }
+
+    public void dismiss() {
+        if(window != null) {
+            window.dismiss();
+        }
     }
 
     private int toDp(int dps) {
