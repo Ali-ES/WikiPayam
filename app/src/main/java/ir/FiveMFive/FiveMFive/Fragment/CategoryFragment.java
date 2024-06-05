@@ -13,10 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
+import ir.FiveMFive.FiveMFive.Java.CategoryItem;
 import ir.FiveMFive.FiveMFive.R;
+import ir.FiveMFive.FiveMFive.RecyclerViewAdapter;
 
 public class CategoryFragment extends Fragment {
     private static final String KEY_CATEGORY_TYPE = "categoryType";
+    private static final RecyclerViewAdapter.LayoutType CATEGORY_LAYOUT_TYPE = RecyclerViewAdapter.LayoutType.CATEGORY;
     private View v;
     private Context c;
     private RecyclerView categoryRecycle;
@@ -26,7 +31,7 @@ public class CategoryFragment extends Fragment {
         SEND_MESSAGE
     }
 
-    public CategoryFragment newInstance(CategoryType type) {
+    public static CategoryFragment newInstance(CategoryType type) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(KEY_CATEGORY_TYPE, type);
 
@@ -56,12 +61,21 @@ public class CategoryFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(c);
         categoryRecycle.setLayoutManager(layoutManager);
 
-        assert categoryType != null;
-        switch (categoryType) {
-            case SEND_MESSAGE:
-                String[] sendMessageItems = getResources().getStringArray(R.array.array_send_message);
 
-                break;
+
+        if(categoryType != null) {
+            switch (categoryType) {
+                case SEND_MESSAGE:
+                    String[] sendMessageItems = getResources().getStringArray(R.array.array_send_message);
+                    ArrayList<CategoryItem> categoryItems = new ArrayList<>();
+                    for (int i = 0; i < sendMessageItems.length; i++) {
+                        categoryItems.add(new CategoryItem(sendMessageItems[i], i));
+                    }
+
+                    RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, CATEGORY_LAYOUT_TYPE, categoryItems);
+                    categoryRecycle.setAdapter(adapter);
+                    break;
+            }
         }
 
         getResources().getStringArray(R.array.array_send_message);

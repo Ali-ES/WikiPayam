@@ -42,7 +42,7 @@ public class DashboardHolder extends RecyclerView.ViewHolder implements View.OnC
     @Override
     public void onClick(View view) {
         // TODO: change this to newInstance and category types
-        Fragment f = new CategoryFragment();
+        Fragment f = CategoryFragment.newInstance(CategoryFragment.CategoryType.SEND_MESSAGE);
         FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, f);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

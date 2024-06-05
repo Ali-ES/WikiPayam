@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.FiveMFive.FiveMFive.Java.CategoryItem;
 import ir.FiveMFive.FiveMFive.Java.DashboardItem;
+import ir.FiveMFive.FiveMFive.ViewHolders.CategoryHolder;
 import ir.FiveMFive.FiveMFive.ViewHolders.DashboardHolder;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter {
@@ -20,7 +22,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     private List<?> items;
 
     public enum LayoutType {
-        DASHBOARD
+        DASHBOARD,
+        CATEGORY
     }
     public RecyclerViewAdapter(Fragment fragment, LayoutType layoutType, ArrayList<?> items) {
         this.fragment = fragment;
@@ -35,6 +38,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
             case DASHBOARD:
             return new DashboardHolder(inflater, parent, fragment);
 
+            case CATEGORY:
+                return new CategoryHolder(inflater, parent, fragment);
 
 
             default:
@@ -48,6 +53,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
             case DASHBOARD:
                 DashboardHolder dashboard = (DashboardHolder) holder;
                 dashboard.bind((DashboardItem) items.get(position), fragment.requireContext());
+                break;
+
+            case CATEGORY:
+                CategoryHolder category = (CategoryHolder) holder;
+                category.bind((CategoryItem) items.get(position));
                 break;
 
         }
