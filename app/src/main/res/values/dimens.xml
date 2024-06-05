@@ -28,6 +28,9 @@
 
     <dimen name="wh_popup_icon">12dp</dimen>
     <dimen name="w_popup">70dp</dimen>
+    
+    <dimen name="h_card_category_item">50dp</dimen>
+    <dimen name="h_card_category_arrow">20dp</dimen>
 
     <!-- Margins -->
     <dimen name="login_top">40dp</dimen>
@@ -39,6 +42,8 @@
     <dimen name="mg_t_dashboard_card_view">20dp</dimen>
     <dimen name="mg_se_dashboard_card_view">15dp</dimen>
     <dimen name="mg_s_popup_title">5dp</dimen>
+
+    <dimen name="mg_t_card_category">10dp</dimen>
     
     
     <!-- Paddings -->
@@ -54,6 +59,9 @@
 
     <dimen name="pad_se_action_bar">16dp</dimen>
 
+    <dimen name="pad_s_card_category">20dp</dimen>
+    <dimen name="pad_e_card_category">15dp</dimen>
+
 
 
     <!-- Font Sizes -->
@@ -63,5 +71,6 @@
     <dimen name="button">18sp</dimen>
     <dimen name="options">14sp</dimen>
     <dimen name="ts_bottom_bar">10sp</dimen>
+    <dimen name="ts_card_category_title">15sp</dimen>
 
 </resources>

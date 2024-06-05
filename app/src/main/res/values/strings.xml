@@ -60,6 +60,7 @@
     <string name="passcode_login">ورود به با کد ورود</string>
 
     <!-- Content Description -->
+    <string name="forward">رو به جلو</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

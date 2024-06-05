@@ -17,6 +17,8 @@
     <color name="gray_dashboard_item">#e9ebef</color>
     <color name="gray_popup_divider">#ededed</color>
 
+    <color name="white_category">#d5dce9</color>
+
 
     <!-- Snackbar Colors -->
     <color name="green">#01bd7d</color>
