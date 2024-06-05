@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import ir.FiveMFive.FiveMFive.Fragment.SendMessage.SendMessageFragment;
+import ir.FiveMFive.FiveMFive.Fragment.CategoryFragment;
 import ir.FiveMFive.FiveMFive.Java.DashboardItem;
 import ir.FiveMFive.FiveMFive.R;
 
@@ -41,7 +41,8 @@ public class DashboardHolder extends RecyclerView.ViewHolder implements View.OnC
     }
     @Override
     public void onClick(View view) {
-        Fragment f = new SendMessageFragment();
+        // TODO: change this to newInstance and category types
+        Fragment f = new CategoryFragment();
         FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, f);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
