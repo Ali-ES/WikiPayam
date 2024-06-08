@@ -4,32 +4,32 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class ToolbarIcon {
-    private String title;
-    private ImageView icon;
+    private int titleResID;
+    private int iconResID;
     private View.OnClickListener listener;
     public ToolbarIcon() {
 
     }
-    public ToolbarIcon(String title, ImageView icon, View.OnClickListener listener) {
-        this.title = title;
-        this.icon = icon;
+    public ToolbarIcon(int title, int icon, View.OnClickListener listener) {
+        this.titleResID = title;
+        this.iconResID = icon;
         this.listener = listener;
     }
 
-    public String getTitle() {
-        return title;
+    public int getTitleResID() {
+        return titleResID;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitleResID(int titleResID) {
+        this.titleResID = titleResID;
     }
 
-    public ImageView getIcon() {
-        return icon;
+    public int getIconResID() {
+        return iconResID;
     }
 
-    public void setIcon(ImageView icon) {
-        this.icon = icon;
+    public void setIconResID(int iconResID) {
+        this.iconResID = iconResID;
     }
 
     public View.OnClickListener getListener() {
