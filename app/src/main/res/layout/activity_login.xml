@@ -9,7 +9,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="66dp"
+        android:layout_height="@dimen/h_action_bar"
         android:id="@+id/action_bar"
         android:background="@color/navy_blue"
         app:layout_constraintTop_toTopOf="parent">
