@@ -51,6 +51,7 @@
     <dimen name="mg_s_action_bar_icons">16dp</dimen>
     <dimen name="mg_t_card_category">10dp</dimen>
 
+    <dimen name="mg_tb_fragment_category_recycler">5dp</dimen>
     
     
     <!-- Paddings -->
@@ -69,7 +70,6 @@
     <dimen name="pad_s_card_category">20dp</dimen>
     <dimen name="pad_e_card_category">15dp</dimen>
 
-    <dimen name="pad_t_fragment_category">5dp</dimen>
 
     <dimen name="pad_se_action_bar_icons">8dp</dimen>
 

@@ -44,6 +44,15 @@
     <string name="exit">خروج</string>
 
 
+    <!-- Send Single Message Fragment -->
+    <string name="send_single_message">ارسال پیامک تکی</string>
+    <string name="message_send_price">قیمت ارسال پیامک</string>
+
+
+    <!-- Send Group Message Fragment -->
+    <string name="send_group_message">ارسال پیامک گروهی</string>
+
+
     <!-- Snackbar -->
     <string name="email_send_success">ایمیل با موفقیت ارسال شد</string>
     <string name="desc_success_snack">موفق</string>
@@ -62,6 +71,7 @@
     <!-- Content Description -->
     <string name="forward">رو به جلو</string>
     <string name="go_back">برگشت به عقب</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
