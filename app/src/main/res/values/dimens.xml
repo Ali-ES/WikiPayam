@@ -19,6 +19,10 @@
     -->
 
     <!-- Object Dimensions -->
+    <dimen name="h_action_bar">66dp</dimen>
+
+    <dimen name="wh_action_bar_icons">48dp</dimen>
+
     <dimen name="login_field_icon">15dp</dimen>
     <dimen name="snack_h">20dp</dimen>
     <dimen name="h_bottom_bar">30dp</dimen>
@@ -43,7 +47,10 @@
     <dimen name="mg_se_dashboard_card_view">15dp</dimen>
     <dimen name="mg_s_popup_title">5dp</dimen>
 
+
+    <dimen name="mg_s_action_bar_icons">16dp</dimen>
     <dimen name="mg_t_card_category">10dp</dimen>
+
     
     
     <!-- Paddings -->
@@ -64,6 +71,8 @@
 
     <dimen name="pad_t_fragment_category">5dp</dimen>
 
+    <dimen name="pad_se_action_bar_icons">8dp</dimen>
+
 
 
     <!-- Font Sizes -->
@@ -74,5 +83,6 @@
     <dimen name="options">14sp</dimen>
     <dimen name="ts_bottom_bar">10sp</dimen>
     <dimen name="ts_card_category_title">15sp</dimen>
+    <dimen name="ts_action_bar_title">15sp</dimen>
 
 </resources>
