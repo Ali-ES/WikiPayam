@@ -152,7 +152,7 @@
                         android:layout_height="0dp"
                         android:id="@+id/message_et_layout"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/remaining_chars">
+                        app:layout_constraintBottom_toTopOf="@id/remaining_chars_tv">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -167,7 +167,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/remaining_chars"
+                        android:id="@+id/remaining_chars_tv"
                         android:text="@string/remaining_chars."
                         style="@style/remaining_char_texts"
                         android:layout_margin="@dimen/mg_send_message_header_footer"
@@ -180,7 +180,7 @@
                         android:layout_height="@dimen/wh_send_message_divider"
                         android:id="@+id/message_divider"
                         android:background="@color/gray_stroke"
-                        app:layout_constraintTop_toBottomOf="@id/remaining_chars"
+                        app:layout_constraintTop_toBottomOf="@id/remaining_chars_tv"
                         app:layout_constraintBottom_toTopOf="@id/attention_layout" />
                     
                     <LinearLayout

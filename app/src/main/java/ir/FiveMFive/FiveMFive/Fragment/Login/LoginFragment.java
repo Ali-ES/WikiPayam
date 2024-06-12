@@ -26,7 +26,7 @@ import ir.FiveMFive.FiveMFive.ProgressIndicatorListener;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.RetrofitClient;
 import ir.FiveMFive.FiveMFive.RetrofitInterface;
-import ir.FiveMFive.FiveMFive.Utility.ConnectivityChecker;
+import ir.FiveMFive.FiveMFive.Utility.Checkers.ConnectivityChecker;
 import ir.FiveMFive.FiveMFive.Utility.CredentialCrypter;
 import ir.FiveMFive.FiveMFive.Utility.SnackbarBuilder;
 import okhttp3.ResponseBody;
