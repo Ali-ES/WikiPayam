@@ -7,7 +7,7 @@ public class PhoneNumberFormatChecker {
     public static String checkFaultyNumber(String numbers) {
         String[] numbersSplitted = numbers.split(",");
 
-        Pattern pattern = Pattern.compile("(\\+?98)?(<number>0?9\\d{9})");
+        Pattern pattern = Pattern.compile("(\\+?98)?(?<number>0?9\\d{9})");
 
         for(String number : numbersSplitted) {
             Matcher mat = pattern.matcher(number);
