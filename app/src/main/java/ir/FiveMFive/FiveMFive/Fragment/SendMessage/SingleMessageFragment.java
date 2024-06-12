@@ -139,6 +139,7 @@ public class SingleMessageFragment extends Fragment {
                 messageEdit.setText(output);
                 remainingCharsText.setText(characterController.getCharactersCount());
                 messageEdit.setSelection(output.length()-6);
+
                 messageEdit.addTextChangedListener(this);
             }
         });
