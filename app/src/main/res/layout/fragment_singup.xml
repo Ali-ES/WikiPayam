@@ -268,7 +268,7 @@
             android:id="@+id/rules_check_layout"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="@dimen/login_field_top"
+            android:layout_marginTop="@dimen/mg_t_layout_fields"
             app:layout_constraintTop_toBottomOf="@id/mobile_layout">
 
             <CheckBox

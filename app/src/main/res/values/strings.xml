@@ -47,6 +47,25 @@
     <!-- Send Single Message Fragment -->
     <string name="send_single_message">ارسال پیامک تکی</string>
     <string name="message_send_price">قیمت ارسال پیامک</string>
+    <string name="sender_number">شماره ارسال کننده</string>
+    <string name="receiver">دریافت کننده</string>
+    <string name="message_text">متن پیامک</string>
+    <string name="attention.">توجه:</string>
+    <string name="attention_explain">قرار دادن \"لغو۱۱\" در کلیه ی پیامها \"ضروری\" است.</string>
+    <string name="remaining_chars.">تعداد کاراکتر باقی مانده: %d (%d پیامک) (%d کاراکتر)</string>
+    <string name="use_patterns">استفاده از الگوها</string>
+    <string name="message">پیامک</string>
+    <string name="character">کاراکتر</string>
+    <string name="future_send">ارسال در آینده</string>
+    <string name="flash_send">ارسال بصورت فلش</string>
+    <string name="flash_send_explain">پیامک بصورت فلش ارسال میشود.</string>
+    <string name="show_factor">نمایش فاکتور</string>
+    <string name="show_factor_explain">فقط هزینه ی ارسال پیامک را نمایش دهد.</string>
+    <string name="customers">مشتریان</string>
+    <string name="customers_explain">هزینه پیامک از مشتریان ثبت شده در قسمت مشتریان کسر شود.</string>
+    <string name="save">ذخیره</string>
+    <string name="save_explain">به عنوان الگو ذخیره شود.</string>
+    
 
 
     <!-- Send Group Message Fragment -->

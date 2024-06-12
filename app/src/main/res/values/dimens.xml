@@ -36,10 +36,14 @@
     <dimen name="h_card_category_item">50dp</dimen>
     <dimen name="h_card_category_arrow">20dp</dimen>
 
+    <dimen name="h_send_message_edit_text">50dp</dimen>
+    <dimen name="h_send_message_box">200dp</dimen>
+    <dimen name="wh_send_message_divider">2dp</dimen>
+
     <!-- Margins -->
     <dimen name="login_top">40dp</dimen>
     <dimen name="login_start_end">20dp</dimen>
-    <dimen name="login_field_top">30dp</dimen>
+    <dimen name="mg_t_layout_fields">30dp</dimen>
     <dimen name="margin_snack_se">20dp</dimen>
     <dimen name="margin_snack_tick_s">15dp</dimen>
     <dimen name="mg_s_bottom_bar_text">5dp</dimen>
@@ -52,6 +56,11 @@
     <dimen name="mg_t_card_category">10dp</dimen>
 
     <dimen name="mg_tb_fragment_category_recycler">5dp</dimen>
+
+    <dimen name="mg_b_send_message_title">5dp</dimen>
+    <dimen name="mg_s_send_message_title">5dp</dimen>
+    <dimen name="mg_send_message_header_footer">5dp</dimen>
+
     
     
     <!-- Paddings -->
@@ -72,8 +81,13 @@
 
 
     <dimen name="pad_se_action_bar_icons">8dp</dimen>
+    
+    <dimen name="pad_tb_send_message">10dp</dimen>
 
-
+    <dimen name="pad_se_send_message">20dp</dimen>
+    <dimen name="pad_se_send_message_fields">10dp</dimen>
+    <dimen name="pad_send_message_attention_layout">9dp</dimen>
+    <dimen name="pad_tb_send_message_field">10dp</dimen>
 
     <!-- Font Sizes -->
     <dimen name="header">20sp</dimen>
@@ -84,5 +98,7 @@
     <dimen name="ts_bottom_bar">10sp</dimen>
     <dimen name="ts_card_category_title">15sp</dimen>
     <dimen name="ts_action_bar_title">15sp</dimen>
+    <dimen name="ts_send_message_box_remaining_chars">9sp</dimen>
+    <dimen name="ts_send_message_header_footer">11sp</dimen>
 
 </resources>

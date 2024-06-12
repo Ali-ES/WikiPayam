@@ -122,12 +122,12 @@
             style="@style/login_options"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/submit_bt"
-            app:layout_constraintEnd_toStartOf="@id/divider" />
+            app:layout_constraintEnd_toStartOf="@id/receiver_divider" />
 
         <View
             android:layout_width="2dp"
             android:layout_height="20dp"
-            android:id="@+id/divider"
+            android:id="@+id/receiver_divider"
             android:background="@color/navy_blue"
             app:layout_constraintStart_toEndOf="@id/signup_tv"
             app:layout_constraintTop_toTopOf="@id/signup_tv"
@@ -141,9 +141,9 @@
             android:text="@string/forgot_password"
             style="@style/login_options"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/divider"
+            app:layout_constraintStart_toEndOf="@id/receiver_divider"
             app:layout_constraintTop_toBottomOf="@id/submit_bt"
-            app:layout_constraintEnd_toStartOf="@id/divider" />
+            app:layout_constraintEnd_toStartOf="@id/receiver_divider" />
 
 
 

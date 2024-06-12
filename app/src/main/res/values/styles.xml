@@ -6,7 +6,7 @@
         <item name="android:paddingBottom">@dimen/edit_top_bottom</item>
         <item name="android:paddingStart">@dimen/edit_start_end</item>
         <item name="android:paddingEnd">@dimen/edit_start_end</item>
-        <item name="android:layout_marginTop">@dimen/login_field_top</item>
+        <item name="android:layout_marginTop">@dimen/mg_t_layout_fields</item>
     </style>
     <style name="login_field_et">
         <item name="android:background">@null</item>
@@ -18,12 +18,12 @@
         <item name="android:background">@drawable/bg_round_button</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/button</item>
-        <item name="android:layout_marginTop">@dimen/login_field_top</item>
+        <item name="android:layout_marginTop">@dimen/mg_t_layout_fields</item>
     </style>
     <style name="login_options">
         <item name="android:textSize">@dimen/options</item>
         <item name="android:textColor">@color/navy_blue</item>
-        <item name="android:layout_marginTop">@dimen/login_field_top</item>
+        <item name="android:layout_marginTop">@dimen/mg_t_layout_fields</item>
     </style>
     <style name="progress_indicator">
         <item name="trackThickness">3dp</item>
@@ -36,6 +36,28 @@
     <style name="bottom_bar_texts">
         <item name="android:textSize">@dimen/ts_bottom_bar</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="send_message_fields_layout">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginTop">@dimen/mg_t_layout_fields</item>
+    </style>
+    <style name="send_message_fields_title">
+        <item name="android:layout_marginStart">@dimen/mg_s_send_message_title</item>
+        <item name="android:layout_marginBottom">@dimen/mg_b_send_message_title</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="send_message_fields_edit">
+        <item name="android:background">@drawable/bg_field_unfocused</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">@dimen/pad_se_send_message_fields</item>
+        <item name="android:paddingEnd">@dimen/pad_se_send_message_fields</item>
+        <item name="android:paddingTop">@dimen/pad_tb_send_message_field</item>
+        <item name="android:paddingBottom">@dimen/pad_tb_send_message_field</item>
+    </style>
+    <style name="remaining_char_texts">
+        <item name="android:textSize">@dimen/ts_send_message_box_remaining_chars</item>
+        <item name="android:textColor">@color/red_remaining_chars</item>
     </style>
 
 </resources>
