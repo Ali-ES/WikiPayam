@@ -14,9 +14,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import ir.FiveMFive.FiveMFive.Java.ToolbarIcon;
 import ir.FiveMFive.FiveMFive.R;
+import ir.FiveMFive.FiveMFive.Utility.Checkers.PhoneNumberFormatChecker;
 import ir.FiveMFive.FiveMFive.Utility.ToolbarHandler;
 
 import static ir.FiveMFive.FiveMFive.Utility.UM.*;
@@ -71,6 +73,12 @@ public class SingleMessageFragment extends Fragment {
 
         toolbarInit();
 
+        sendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMessage();
+            }
+        });
 
         return v;
     }
@@ -90,6 +98,15 @@ public class SingleMessageFragment extends Fragment {
         });
         toolbarHandler.addIcon(priceIcon);
         ToolbarHandler.handleBackNav(this, toolbar);
+    }
+
+    private void sendMessage() {
+        String numbers = receiverEdit.getText().toString();
+        String faultyNumber = PhoneNumberFormatChecker.checkFaultyNumber(numbers);
+        if(faultyNumber != null) {
+            Toast.makeText(requireContext(), faultyNumber, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }
