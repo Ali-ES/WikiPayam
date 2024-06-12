@@ -4,26 +4,70 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import ir.FiveMFive.FiveMFive.Java.ToolbarIcon;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.Utility.ToolbarHandler;
 
+import static ir.FiveMFive.FiveMFive.Utility.UM.*;
+
 public class SingleMessageFragment extends Fragment {
     private Context c;
     private View v;
     private Toolbar toolbar;
+    private LinearLayout senderLayout;
+    private EditText senderEdit;
+    private LinearLayout receiverLayout;
+    private ConstraintLayout receiverEditLayout;
+    private EditText receiverEdit;
+    private View receiverDivider;
+    private LinearLayout messageLayout;
+    private NestedScrollView messageEditLayout;
+    private ConstraintLayout messageBoxLayout;
+    private EditText messageEdit;
+    private View messageDivider;
+    private Button sendMessage;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_single_message, container, false);
         c = requireContext();
         toolbar = v.findViewById(R.id.toolbar);
+        senderLayout = v.findViewById(R.id.sender_layout);
+        senderEdit = v.findViewById(R.id.sender_et);
+        receiverLayout = v.findViewById(R.id.receiver_layout);
+        receiverEditLayout = v.findViewById(R.id.receiver_et_layout);
+        receiverEdit = v.findViewById(R.id.receiver_et);
+        receiverDivider = v.findViewById(R.id.receiver_divider);
+        messageLayout = v.findViewById(R.id.message_layout);
+        messageEditLayout = v.findViewById(R.id.message_et_layout);
+        messageBoxLayout = v.findViewById(R.id.message_box_layout);
+        messageEdit = v.findViewById(R.id.message_et);
+        messageDivider = v.findViewById(R.id.message_divider);
+        sendMessage = v.findViewById(R.id.send_message_bt);
+
+        giveFocus(senderLayout, senderEdit);
+        giveFocus(receiverLayout, receiverEdit);
+        giveFocus(messageLayout, messageEdit);
+
+        setEditTextFocus(c, senderEdit, null);
+        setEditTextLayoutFocus(c, receiverEditLayout, null, receiverEdit, receiverDivider);
+        setEditTextLayoutFocus(c, messageBoxLayout, null, messageEdit, messageDivider);
+
+        messageEditLayout.setOnTouchListener((v, event) -> {
+            messageEdit.requestFocus();
+            return false;
+        });
 
         toolbarInit();
 

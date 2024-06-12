@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import ir.FiveMFive.FiveMFive.R;
@@ -21,17 +22,46 @@ public class UM {
             }
         });
     }
-    public static void setEditTextFocus(Context c, ViewGroup layout, TextView text, EditText edit) {
+    public static void setEditTextLayoutFocus(Context c, ViewGroup layout, @Nullable TextView text, EditText edit, View divider) {
         edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus) {
                     layout.setBackground(ContextCompat.getDrawable(c, R.drawable.bg_field_focused));
-                    text.setVisibility(View.INVISIBLE);
+                    if(text != null) {
+                        text.setVisibility(View.INVISIBLE);
+                    }
+                    if(divider != null) {
+                        divider.setBackgroundColor(c.getColor(R.color.navy_blue));
+                    }
                 } else {
                     layout.setBackground(ContextCompat.getDrawable(c, R.drawable.bg_field_unfocused));
-                    if(edit.getText().toString().isEmpty()) {
-                        text.setVisibility(View.VISIBLE);
+                    if(text != null) {
+                        if (edit.getText().toString().isEmpty()) {
+                            text.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    if(divider != null) {
+                        divider.setBackgroundColor(c.getColor(R.color.gray_stroke));
+                    }
+                }
+            }
+        });
+    }
+
+    public static void setEditTextFocus(Context c, EditText edit, View otherView) {
+        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    edit.setBackground(ContextCompat.getDrawable(c, R.drawable.bg_field_focused));
+                    if(otherView != null) {
+                        otherView.setBackgroundColor(c.getColor(R.color.navy_blue));
+                    }
+                } else {
+                    edit.setBackground(ContextCompat.getDrawable(c, R.drawable.bg_field_unfocused));
+                    if(otherView != null) {
+                        otherView.setBackgroundColor(c.getColor(R.color.gray_stroke));
                     }
                 }
             }

@@ -69,8 +69,8 @@ public class LoginFragment extends Fragment {
         giveFocus(userLayout, userEdit);
         giveFocus(passLayout, passEdit);
 
-        setEditTextFocus(getContext(), userLayout, userText, userEdit);
-        setEditTextFocus(getContext(), passLayout, passText, passEdit);
+        setEditTextLayoutFocus(c, userLayout, userText, userEdit, null);
+        setEditTextLayoutFocus(c, passLayout, passText, passEdit, null);
 
         passEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

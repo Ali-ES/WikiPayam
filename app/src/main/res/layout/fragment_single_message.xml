@@ -66,6 +66,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/receiver_et_layout"
                     android:background="@drawable/bg_field_unfocused"
                     android:paddingStart="@dimen/pad_se_send_message_fields"
                     android:paddingEnd="@dimen/pad_se_send_message_fields" >
@@ -74,10 +75,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/receiver_et"
-                        android:background="@null"
                         android:inputType="phone"
                         android:textSize="16sp"
                         style="@style/send_message_fields_edit"
+                        android:background="@null"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/receiver_divider"
                         app:layout_constraintTop_toTopOf="parent"
@@ -85,12 +86,14 @@
                     
                     <View
                         android:layout_width="2dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="0dp"
                         android:id="@+id/receiver_divider"
                         android:background="@color/gray_stroke"
                         android:layout_marginEnd="@dimen/pad_se_send_message_fields"
                         app:layout_constraintStart_toEndOf="@id/receiver_et"
-                        app:layout_constraintEnd_toStartOf="@id/add_iv" />
+                        app:layout_constraintEnd_toStartOf="@id/add_iv"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
 
                     <ImageView
                         android:layout_width="35dp"
@@ -141,23 +144,21 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/h_send_message_box"
-                    android:background="@drawable/bg_field_focused" >
+                    android:id="@+id/message_box_layout"
+                    android:background="@drawable/bg_field_unfocused" >
 
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:id="@+id/message_box_layout"
-                        android:paddingStart="@dimen/pad_se_send_message_fields"
-                        android:paddingEnd="@dimen/pad_se_send_message_fields"
-                        android:paddingTop="@dimen/pad_tb_send_message_field"
-                        android:paddingBottom="@dimen/pad_tb_send_message_field"
+                        android:id="@+id/message_et_layout"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/remaining_chars">
 
                         <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/message_et"
+                            style="@style/send_message_fields_edit"
                             android:background="@null"
                             android:inputType="textMultiLine" />
 
@@ -170,15 +171,15 @@
                         android:text="@string/remaining_chars."
                         style="@style/remaining_char_texts"
                         android:layout_margin="@dimen/mg_send_message_header_footer"
-                        app:layout_constraintTop_toBottomOf="@id/message_box_layout"
-                        app:layout_constraintBottom_toTopOf="@id/message_box_divider"
+                        app:layout_constraintTop_toBottomOf="@id/message_et_layout"
+                        app:layout_constraintBottom_toTopOf="@id/message_divider"
                         app:layout_constraintEnd_toEndOf="parent" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/wh_send_message_divider"
-                        android:id="@+id/message_box_divider"
-                        android:background="@color/navy_blue"
+                        android:id="@+id/message_divider"
+                        android:background="@color/gray_stroke"
                         app:layout_constraintTop_toBottomOf="@id/remaining_chars"
                         app:layout_constraintBottom_toTopOf="@id/attention_layout" />
                     
@@ -189,7 +190,7 @@
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
                         android:padding="@dimen/pad_send_message_attention_layout"
-                        app:layout_constraintTop_toBottomOf="@id/message_box_divider"
+                        app:layout_constraintTop_toBottomOf="@id/message_divider"
                         app:layout_constraintBottom_toBottomOf="parent" >
 
                         <TextView
@@ -213,6 +214,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/send_message_bt"
                 android:text="@string/send_message"
                 android:backgroundTint="@null"
                 style="@style/login_button"
