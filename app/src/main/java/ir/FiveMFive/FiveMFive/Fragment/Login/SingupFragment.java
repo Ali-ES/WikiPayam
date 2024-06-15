@@ -88,12 +88,12 @@ public class SingupFragment extends Fragment {
         giveFocus(nameLayout, nameEdit);
         giveFocus(mobileLayout, mobileEdit);
 
-        setEditTextLayoutFocus(c, userLayout, userText, userEdit, null);
-        setEditTextLayoutFocus(c, passLayout, passText, passEdit, null);
-        setEditTextLayoutFocus(c, passRepeatLayout, passRepeatText, passRepeatEdit, null);
-        setEditTextLayoutFocus(c, emailLayout, emailText, emailEdit, null);
-        setEditTextLayoutFocus(c, nameLayout, nameText, nameEdit, null);
-        setEditTextLayoutFocus(c, mobileLayout, mobileText, mobileEdit, null);
+        setEditTextLayoutFocus(c, userLayout, userText, userEdit);
+        setEditTextLayoutFocus(c, passLayout, passText, passEdit);
+        setEditTextLayoutFocus(c, passRepeatLayout, passRepeatText, passRepeatEdit);
+        setEditTextLayoutFocus(c, emailLayout, emailText, emailEdit);
+        setEditTextLayoutFocus(c, nameLayout, nameText, nameEdit);
+        setEditTextLayoutFocus(c, mobileLayout, mobileText, mobileEdit);
 
         rulesText.setOnClickListener(new View.OnClickListener() {
             @Override

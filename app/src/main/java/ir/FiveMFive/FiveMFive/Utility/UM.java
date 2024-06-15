@@ -48,6 +48,26 @@ public class UM {
             }
         });
     }
+    public static void setEditTextLayoutFocus(Context c, ViewGroup layout, TextView text, EditText edit) {
+        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    layout.setBackground(ContextCompat.getDrawable(c, R.drawable.bg_field_focused));
+                    if(text != null) {
+                        text.setVisibility(View.INVISIBLE);
+                    }
+                } else {
+                    layout.setBackground(ContextCompat.getDrawable(c, R.drawable.bg_field_unfocused));
+                    if(text != null) {
+                        if (edit.getText().toString().isEmpty()) {
+                            text.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            }
+        });
+    }
 
     public static void setEditTextFocus(Context c, EditText edit, View otherView) {
         edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
