@@ -73,6 +73,15 @@
     <string name="go_back">برگشت به عقب</string>
 
 
+    <string name="price_dialog_default">پیامک فارسی %s ریال\n
+    پیامکـ لاتین %s ریال\n
+    پیامک فارسی به ایرانسل %s ریال\n
+    پیامک لاتین به ایرانسل %s ریال</string>
+    
+    <string name="price_dialog_title">قیمت ارسال پیامک</string>
+    <string name="price_dialog_subtitle">برای خطوط %s قیمت ارسال پیامک به شرح زیر میباشد:</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -18,6 +18,7 @@
     <color name="gray_popup_divider">#ededed</color>
 
     <color name="white_category">#d5dce9</color>
+    <color name="blue_highlight">#bcdefa</color>
 
 
     <!-- Snackbar Colors -->
