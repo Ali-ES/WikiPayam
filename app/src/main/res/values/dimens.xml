@@ -30,7 +30,7 @@
     <dimen name="h_dashboard_items">40dp</dimen>
     <dimen name="wh_dashboard_icons">18dp</dimen>
 
-    <dimen name="wh_popup_icon">12dp</dimen>
+    <dimen name="wh_popup_icon">11dp</dimen>
     <dimen name="w_popup">70dp</dimen>
     
     <dimen name="h_card_category_item">50dp</dimen>
@@ -100,5 +100,6 @@
     <dimen name="ts_action_bar_title">15sp</dimen>
     <dimen name="ts_send_message_box_remaining_chars">9sp</dimen>
     <dimen name="ts_send_message_header_footer">11sp</dimen>
+    <dimen name="ts_popup">8sp</dimen>
 
 </resources>

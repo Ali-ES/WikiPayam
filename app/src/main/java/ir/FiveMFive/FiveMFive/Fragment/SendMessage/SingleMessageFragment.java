@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import ir.FiveMFive.FiveMFive.Java.ToolbarIcon;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.MessageCharacterController;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.PhoneNumberFormatChecker;
+import ir.FiveMFive.FiveMFive.Utility.PopupBuilder;
 import ir.FiveMFive.FiveMFive.Utility.ToolbarHandler;
 
 import static ir.FiveMFive.FiveMFive.Utility.UM.*;
@@ -37,6 +39,7 @@ public class SingleMessageFragment extends Fragment {
     private ConstraintLayout receiverEditLayout;
     private EditText receiverEdit;
     private View receiverDivider;
+    private ImageView add;
     private LinearLayout messageLayout;
     private NestedScrollView messageEditLayout;
     private ConstraintLayout messageBoxLayout;
@@ -56,6 +59,7 @@ public class SingleMessageFragment extends Fragment {
         receiverEditLayout = v.findViewById(R.id.receiver_et_layout);
         receiverEdit = v.findViewById(R.id.receiver_et);
         receiverDivider = v.findViewById(R.id.receiver_divider);
+        add = v.findViewById(R.id.add_iv);
         messageLayout = v.findViewById(R.id.message_layout);
         messageEditLayout = v.findViewById(R.id.message_et_layout);
         messageBoxLayout = v.findViewById(R.id.message_box_layout);
@@ -78,6 +82,8 @@ public class SingleMessageFragment extends Fragment {
         });
 
         toolbarInit();
+
+        handleAdd();
 
         handleRemainingChars();
 
@@ -138,9 +144,47 @@ public class SingleMessageFragment extends Fragment {
                 String output = characterController.getText();
                 messageEdit.setText(output);
                 remainingCharsText.setText(characterController.getCharactersCount());
-                messageEdit.setSelection(output.length()-6);
+                try {
+                    messageEdit.setSelection(output.length() - 6);
+                } catch (IndexOutOfBoundsException e) {
+                    e.printStackTrace();
+                }
 
                 messageEdit.addTextChangedListener(this);
+            }
+        });
+    }
+    private void handleAdd() {
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupBuilder builder = new PopupBuilder(c);
+                View.OnClickListener contactImportListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                };
+                builder.addItem(R.drawable.ic_contacts, R.string.import_via_contacts, contactImportListener);
+
+                View.OnClickListener excelImportListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                };
+                builder.addItem(R.drawable.ic_excel, R.string.import_via_excel, contactImportListener);
+
+                View.OnClickListener textFileListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                };
+                builder.addItem(R.drawable.ic_text_file, R.string.import_via_text_file, textFileListener);
+
+
+                builder.showPopup(add);
             }
         });
     }

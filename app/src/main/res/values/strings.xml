@@ -66,6 +66,10 @@
     <string name="save">ذخیره</string>
     <string name="save_explain">به عنوان الگو ذخیره شود.</string>
     
+    <string name="import_via_contacts">ورود از دفترچه تلفن</string>
+    <string name="import_via_excel">ورود از اکسل</string>
+    <string name="import_via_text_file">ورود از فایل متنی</string>
+    
 
 
     <!-- Send Group Message Fragment -->
