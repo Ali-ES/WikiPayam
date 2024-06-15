@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import ir.FiveMFive.FiveMFive.Java.ToolbarIcon;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.Utility.ToolbarHandler;
+import ir.FiveMFive.FiveMFive.ViewsSetup.PriceDialogBuilder;
 
 public class SingleMessageFragment extends Fragment {
     private Context c;
@@ -41,7 +42,8 @@ public class SingleMessageFragment extends Fragment {
         ToolbarIcon priceIcon = new ToolbarIcon(R.string.message_send_price, R.drawable.ic_price, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                PriceDialogBuilder builder = new PriceDialogBuilder(c);
+                builder.showDialog();
             }
         });
         toolbarHandler.addIcon(priceIcon);

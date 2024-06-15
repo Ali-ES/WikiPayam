@@ -45,4 +45,38 @@ public class UM {
         }
         return false;
     }
+    public static int toDp(Context c, int dps) {
+        final float scale = c.getResources().getDisplayMetrics().density;
+        int pixels = (int) (dps * scale + 0.5f);
+        return pixels;
+    }
+    public static String addThousandSeparator(String in) {
+        String input = in;
+        if(input.length() > 1) {
+            if(input.charAt(0) == '0') {
+                input = input.substring(1);
+            }
+        }
+        String output = "";
+        int commas = input.length()/3;
+        if((input.length()%3) == 0) {
+            commas--;
+        }
+        if(input.contains("-") && (input.length()%3 == 1))  {
+            commas--;
+        }
+        int counter = 0;
+
+
+        for (int i = input.length()-1; i >= 0; i--) {
+            output = input.charAt(i) + output;
+            counter++;
+            if((counter%3 == 0) && (commas > 0)) {
+                output = "," + output;
+                commas--;
+            }
+        }
+
+        return output;
+    }
 }
