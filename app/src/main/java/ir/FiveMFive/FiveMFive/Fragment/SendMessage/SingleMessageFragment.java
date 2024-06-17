@@ -1,13 +1,9 @@
 package ir.FiveMFive.FiveMFive.Fragment.SendMessage;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -32,12 +28,11 @@ import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.Utility.ActivityContentResultHelper;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.MessageCharacterController;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.PhoneNumberFormatChecker;
+import ir.FiveMFive.FiveMFive.Utility.ExcelHandler;
 import ir.FiveMFive.FiveMFive.Utility.PopupBuilder;
 import ir.FiveMFive.FiveMFive.Utility.ToolbarHandler;
 
 import static ir.FiveMFive.FiveMFive.Utility.UM.*;
-
-import java.io.InputStream;
 
 public class SingleMessageFragment extends Fragment {
     public static final String TAG = "SingleMessage";
@@ -134,7 +129,7 @@ public class SingleMessageFragment extends Fragment {
 
     private void sendMessage() {
         String numbers = receiverEdit.getText().toString();
-        String faultyNumber = PhoneNumberFormatChecker.checkFaultyNumber(numbers);
+        String faultyNumber = PhoneNumberFormatChecker.checkFaultyNumbers(numbers);
         if(faultyNumber != null) {
             Toast.makeText(requireContext(), faultyNumber, Toast.LENGTH_SHORT).show();
         }
@@ -192,9 +187,9 @@ public class SingleMessageFragment extends Fragment {
                             @Override
                             public void gotResult(Uri uri) {
                                 if(uri != null) {
-                                    Log.v(TAG, "uri is not null");
+                                    ExcelHandler excelHandler = new ExcelHandler(c, uri);
                                 } else {
-                                    Log.v(TAG, "uri IS null");
+                                    contentResultHelper.showNoFileSelectedSnack(v);
                                 }
                             }
                         });
@@ -212,7 +207,7 @@ public class SingleMessageFragment extends Fragment {
                                 if(uri != null) {
                                     Log.v(TAG, "uri is not null");
                                 } else {
-                                    Log.v(TAG, "uri IS null");
+                                    contentResultHelper.showNoFileSelectedSnack(v);
                                 }
                             }
                         });

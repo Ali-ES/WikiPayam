@@ -1,26 +1,24 @@
 package ir.FiveMFive.FiveMFive.Utility;
 
-import android.app.Activity;
 import android.net.Uri;
+import android.view.View;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.ActivityResultRegistry;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.DefaultLifecycleObserver;
-import androidx.lifecycle.LifecycleOwner;
+
+import ir.FiveMFive.FiveMFive.R;
 
 public class ActivityContentResultHelper {
     public interface ContentResultListener {
         void gotResult(Uri uri);
     }
+    private Fragment fragment;
     private ActivityResultLauncher launcher;
     private ContentResultListener contentResultListener;
     public ActivityContentResultHelper(Fragment fragment) {
+        this.fragment = fragment;
         this.contentResultListener = contentResultListener;
         this.launcher = fragment.registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
@@ -39,5 +37,10 @@ public class ActivityContentResultHelper {
     }
     public void getTextFile() {
         launcher.launch("text/plain");
+    }
+
+    public void showNoFileSelectedSnack(View v) {
+        String message = fragment.getString(R.string.warn_no_file_selected);
+        SnackbarBuilder.showSnack(fragment.requireContext(), v, message, SnackbarBuilder.SnackType.WARNING);
     }
 }

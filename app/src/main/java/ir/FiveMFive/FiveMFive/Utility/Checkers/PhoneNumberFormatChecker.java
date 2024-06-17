@@ -4,10 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PhoneNumberFormatChecker {
-    public static String checkFaultyNumber(String numbers) {
+    private static final Pattern pattern = Pattern.compile("(\\+?98)?0?(?<number>9\\d{9})");
+    public static String checkFaultyNumbers(String numbers) {
         String[] numbersSplitted = numbers.split(",");
-
-        Pattern pattern = Pattern.compile("(\\+?98)?0?(?<number>9\\d{9})");
 
         for(String number : numbersSplitted) {
             Matcher mat = pattern.matcher(number);
@@ -16,5 +15,9 @@ public class PhoneNumberFormatChecker {
             }
         }
         return null;
+    }
+    public static boolean checkNumberFormat(String number) {
+        Matcher mat = pattern.matcher(number);
+        return mat.matches();
     }
 }
