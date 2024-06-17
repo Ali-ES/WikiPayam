@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import android.widget.Toast;
 
 import ir.FiveMFive.FiveMFive.Java.ToolbarIcon;
 import ir.FiveMFive.FiveMFive.R;
+import ir.FiveMFive.FiveMFive.Utility.ActivityContentResultHelper;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.MessageCharacterController;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.PhoneNumberFormatChecker;
 import ir.FiveMFive.FiveMFive.Utility.PopupBuilder;
@@ -37,6 +40,7 @@ import static ir.FiveMFive.FiveMFive.Utility.UM.*;
 import java.io.InputStream;
 
 public class SingleMessageFragment extends Fragment {
+    public static final String TAG = "SingleMessage";
     private Context c;
     private View v;
     private Toolbar toolbar;
@@ -54,6 +58,14 @@ public class SingleMessageFragment extends Fragment {
     private View messageDivider;
     private TextView remainingCharsText;
     private Button sendMessage;
+    private ActivityContentResultHelper contentResultHelper;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        contentResultHelper = new ActivityContentResultHelper(SingleMessageFragment.this);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -176,7 +188,17 @@ public class SingleMessageFragment extends Fragment {
                 View.OnClickListener excelImportListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        contentResultHelper.setContentResultListener(new ActivityContentResultHelper.ContentResultListener() {
+                            @Override
+                            public void gotResult(Uri uri) {
+                                if(uri != null) {
+                                    Log.v(TAG, "uri is not null");
+                                } else {
+                                    Log.v(TAG, "uri IS null");
+                                }
+                            }
+                        });
+                        contentResultHelper.getExcel();
                     }
                 };
                 builder.addItem(R.drawable.ic_excel, R.string.import_via_excel, excelImportListener);
@@ -184,7 +206,17 @@ public class SingleMessageFragment extends Fragment {
                 View.OnClickListener textFileListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        contentResultHelper.setContentResultListener(new ActivityContentResultHelper.ContentResultListener() {
+                            @Override
+                            public void gotResult(Uri uri) {
+                                if(uri != null) {
+                                    Log.v(TAG, "uri is not null");
+                                } else {
+                                    Log.v(TAG, "uri IS null");
+                                }
+                            }
+                        });
+                        contentResultHelper.getTextFile();
                     }
                 };
                 builder.addItem(R.drawable.ic_text_file, R.string.import_via_text_file, textFileListener);
