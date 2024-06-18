@@ -40,6 +40,8 @@
     <dimen name="h_send_message_box">200dp</dimen>
     <dimen name="wh_send_message_divider">2dp</dimen>
 
+    <dimen name="h_dialog_scroll">200dp</dimen>
+
     <!-- Margins -->
     <dimen name="login_top">40dp</dimen>
     <dimen name="login_start_end">20dp</dimen>
@@ -60,6 +62,8 @@
     <dimen name="mg_b_send_message_title">5dp</dimen>
     <dimen name="mg_s_send_message_title">5dp</dimen>
     <dimen name="mg_send_message_header_footer">5dp</dimen>
+    
+    <dimen name="mg_tb_dialog_items">15dp</dimen>
 
     
     
@@ -89,6 +93,9 @@
     <dimen name="pad_send_message_attention_layout">9dp</dimen>
     <dimen name="pad_tb_send_message_field">10dp</dimen>
 
+    <dimen name="pad_se_dialog_layout">15dp</dimen>
+    <dimen name="pad_tb_dialog_layout">25dp</dimen>
+
     <!-- Font Sizes -->
     <dimen name="header">20sp</dimen>
     <dimen name="text">16sp</dimen>
@@ -100,6 +107,8 @@
     <dimen name="ts_action_bar_title">15sp</dimen>
     <dimen name="ts_send_message_box_remaining_chars">9sp</dimen>
     <dimen name="ts_send_message_header_footer">11sp</dimen>
-    <dimen name="ts_popup">8sp</dimen>
+    <dimen name="ts_popup">12sp</dimen>
+    <dimen name="ts_dialog_title">25sp</dimen>
+    <dimen name="ts_dialog_items">14sp</dimen>
 
 </resources>

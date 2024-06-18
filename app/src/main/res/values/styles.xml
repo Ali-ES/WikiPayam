@@ -60,4 +60,16 @@
         <item name="android:textColor">@color/red_remaining_chars</item>
     </style>
 
+    <style name="dialog_layout">
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:paddingStart">@dimen/pad_se_dialog_layout</item>
+        <item name="android:paddingEnd">@dimen/pad_se_dialog_layout</item>
+        <item name="android:paddingTop">@dimen/pad_tb_dialog_layout</item>
+        <item name="android:paddingBottom">@dimen/pad_tb_dialog_layout</item>
+    </style>
+    <style name="dialog_title">
+        <item name="android:textSize">@dimen/ts_dialog_title</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

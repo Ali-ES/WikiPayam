@@ -31,6 +31,7 @@ import ir.FiveMFive.FiveMFive.Utility.Checkers.PhoneNumberFormatChecker;
 import ir.FiveMFive.FiveMFive.Utility.ExcelHandler;
 import ir.FiveMFive.FiveMFive.Utility.PopupBuilder;
 import ir.FiveMFive.FiveMFive.Utility.ToolbarHandler;
+import ir.FiveMFive.FiveMFive.ViewCreators.NumberDialogBuilder;
 
 import static ir.FiveMFive.FiveMFive.Utility.UM.*;
 
@@ -99,6 +100,20 @@ public class SingleMessageFragment extends Fragment {
         messageEditLayout.setOnTouchListener((v, event) -> {
             messageEdit.requestFocus();
             return false;
+        });
+
+        receiverLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> nums = new ArrayList<>();
+                nums.add("09192374565");
+                nums.add("09192374565");
+                nums.add("09192374565");
+                nums.add("09192374565");
+                nums.add("09192374565");
+                NumberDialogBuilder numberDialog = new NumberDialogBuilder(c, nums, getView());
+                numberDialog.showDialog();
+            }
         });
 
         toolbarInit();

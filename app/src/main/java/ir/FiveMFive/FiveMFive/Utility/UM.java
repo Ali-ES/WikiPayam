@@ -3,6 +3,7 @@ package ir.FiveMFive.FiveMFive.Utility;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -94,5 +95,18 @@ public class UM {
             }
         }
         return false;
+    }
+    public static int toDp(Context c, int dps) {
+        final float scale = c.getResources().getDisplayMetrics().density;
+        int pixels = (int) (dps * scale + 0.5f);
+        return pixels;
+    }
+    public static void showKeyboard(Context c, View v) {
+        InputMethodManager manager = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
+        manager.showSoftInput(v, 0);
+    }
+    public static void hideKeyboard(Context c, View v) {
+        InputMethodManager manager = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
+        manager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 }
