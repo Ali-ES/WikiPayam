@@ -39,9 +39,10 @@ public class NumberDialogBuilder {
     private List<String> numbers;
     private CancelListener cancelListener;
     private View lastDivider;
+    private boolean hasChanged;
 
     public interface CancelListener {
-        void onCancel();
+        void onCancel(boolean hasChanged);
     }
 
     public NumberDialogBuilder(Context c, ArrayList<String> numbers, View v) {
@@ -94,6 +95,7 @@ public class NumberDialogBuilder {
             public void onClick(View v) {
                 numberContainer.removeView(numberLayout);
                 numbers.remove(number);
+                hasChanged = true;
             }
         });
 
@@ -121,7 +123,7 @@ public class NumberDialogBuilder {
                     @Override
                     public void onCancel(DialogInterface dialog) {
                         if(cancelListener != null) {
-                            cancelListener.onCancel();
+                            cancelListener.onCancel(hasChanged);
                         }
                     }
                 })
@@ -138,7 +140,6 @@ public class NumberDialogBuilder {
         EditText mobileEdit = mobileLayout.findViewById(R.id.mobile_et);
         setEditTextLayoutFocus(c, mobileLayout, mobileText, mobileEdit);
 
-
         Button add = mainLayout.findViewById(R.id.add_bt);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +148,7 @@ public class NumberDialogBuilder {
                     String mobile = mobileEdit.getText().toString();
                     if(PhoneNumberFormatChecker.checkNumberFormat(mobile)) {
                         numbers.add(mobile);
+                        hasChanged = true;
                         createNumberView(mobile);
 
                         mobileEdit.setText("");
