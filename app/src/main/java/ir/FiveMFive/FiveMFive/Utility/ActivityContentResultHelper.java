@@ -1,7 +1,6 @@
 package ir.FiveMFive.FiveMFive.Utility;
 
 import android.net.Uri;
-import android.view.View;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -39,8 +38,8 @@ public class ActivityContentResultHelper {
         launcher.launch("text/plain");
     }
 
-    public void showNoFileSelectedSnack(View v) {
+    public void showNoFileSelectedSnack() {
         String message = fragment.getString(R.string.warn_no_file_selected);
-        SnackbarBuilder.showSnack(fragment.requireContext(), v, message, SnackbarBuilder.SnackType.WARNING);
+        SnackbarBuilder.showSnack(fragment.requireContext(), fragment.getView(), message, SnackbarBuilder.SnackType.WARNING);
     }
 }

@@ -34,6 +34,9 @@ import ir.FiveMFive.FiveMFive.Utility.ToolbarHandler;
 
 import static ir.FiveMFive.FiveMFive.Utility.UM.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SingleMessageFragment extends Fragment {
     public static final String TAG = "SingleMessage";
     private Context c;
@@ -54,6 +57,7 @@ public class SingleMessageFragment extends Fragment {
     private TextView remainingCharsText;
     private Button sendMessage;
     private ActivityContentResultHelper contentResultHelper;
+    private List<String> numbers;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,6 +93,8 @@ public class SingleMessageFragment extends Fragment {
         setEditTextFocus(c, senderEdit, null);
         setEditTextLayoutFocus(c, receiverEditLayout, null, receiverEdit, receiverDivider);
         setEditTextLayoutFocus(c, messageBoxLayout, null, messageEdit, messageDivider);
+
+        numbers = new ArrayList<>();
 
         messageEditLayout.setOnTouchListener((v, event) -> {
             messageEdit.requestFocus();
@@ -188,8 +194,11 @@ public class SingleMessageFragment extends Fragment {
                             public void gotResult(Uri uri) {
                                 if(uri != null) {
                                     ExcelHandler excelHandler = new ExcelHandler(c, uri);
+                                    List<String> importedNumbers = excelHandler.getNumbers();
+                                    numbers.addAll(importedNumbers);
+                                    excelHandler.showResultSnack(getView());
                                 } else {
-                                    contentResultHelper.showNoFileSelectedSnack(v);
+                                    contentResultHelper.showNoFileSelectedSnack();
                                 }
                             }
                         });
@@ -207,7 +216,7 @@ public class SingleMessageFragment extends Fragment {
                                 if(uri != null) {
                                     Log.v(TAG, "uri is not null");
                                 } else {
-                                    contentResultHelper.showNoFileSelectedSnack(v);
+                                    contentResultHelper.showNoFileSelectedSnack();
                                 }
                             }
                         });

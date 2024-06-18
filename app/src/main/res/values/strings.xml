@@ -81,6 +81,9 @@
     <string name="desc_success_snack">موفق</string>
     <string name="warn_connection_failed">لطفا اتصال اینترنت خود را بررسی کنید</string>
     <string name="warn_no_file_selected">هیچ فایلی انتخاب نشد</string>
+    <string name="success_importing_number">شماره ها با موفقیت وارد شدند</string>
+    <string name="empty_numbers_list">شماره ای جهت وارد کردن وجود ندارد!</string>
+    <string name="wrong_excel_format">فرمت فایل اکسل غلط است</string>
 
 
     <!-- Action Bar -->

@@ -2,6 +2,7 @@ package ir.FiveMFive.FiveMFive.Utility;
 
 import android.content.Context;
 import android.net.Uri;
+import android.view.View;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -13,6 +14,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.PhoneNumberFormatChecker;
 
 public class ExcelHandler {
@@ -20,6 +22,7 @@ public class ExcelHandler {
     private Context c;
     private Uri data;
     private List<String> numbers;
+    private boolean isExcelFormatWrong;
     public ExcelHandler(Context c, Uri uri) {
         this.c = c;
         this.data = uri;
@@ -46,11 +49,24 @@ public class ExcelHandler {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            numbers = null;
+            isExcelFormatWrong = true;
         }
 
     }
     public List<String> getNumbers() {
         return numbers;
+    }
+    public void showResultSnack(View v) {
+        if(numbers.size() != 0) {
+            String message = c.getString(R.string.success_importing_number);
+            SnackbarBuilder.showSnack(c, v, message, SnackbarBuilder.SnackType.SUCCESS);
+        } else if(isExcelFormatWrong) {
+            String message = c.getString(R.string.wrong_excel_format);
+            SnackbarBuilder.showSnack(c, v, message, SnackbarBuilder.SnackType.ERROR);
+        } else {
+            String message = c.getString(R.string.empty_numbers_list);
+            SnackbarBuilder.showSnack(c, v, message, SnackbarBuilder.SnackType.WARNING);
+        }
+
     }
 }
