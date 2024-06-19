@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,21 +15,22 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ir.FiveMFive.FiveMFive.Java.ToolbarIcon;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.Utility.ActivityContentResultHelper;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.MessageCharacterController;
-import ir.FiveMFive.FiveMFive.Utility.Checkers.PhoneNumberFormatChecker;
-import ir.FiveMFive.FiveMFive.Utility.ExcelHandler;
+import ir.FiveMFive.FiveMFive.Utility.Handlers.ExcelHandler;
+import ir.FiveMFive.FiveMFive.Utility.Handlers.TextFileHandler;
 import ir.FiveMFive.FiveMFive.Utility.PopupBuilder;
 import ir.FiveMFive.FiveMFive.Utility.ToolbarHandler;
 import ir.FiveMFive.FiveMFive.ViewCreators.NumberDialogBuilder;
@@ -40,6 +42,7 @@ import java.util.List;
 
 public class SingleMessageFragment extends Fragment {
     public static final String TAG = "SingleMessage";
+    private static final String EXTRA_NUMBERS = "numbers";
     private Context c;
     private View v;
     private Toolbar toolbar;
@@ -47,8 +50,7 @@ public class SingleMessageFragment extends Fragment {
     private EditText senderEdit;
     private LinearLayout receiverLayout;
     private ConstraintLayout receiverEditLayout;
-    private EditText receiverEdit;
-    private View receiverDivider;
+    private TextView receiverText;
     private ImageView add;
     private LinearLayout messageLayout;
     private NestedScrollView messageEditLayout;
@@ -59,11 +61,16 @@ public class SingleMessageFragment extends Fragment {
     private Button sendMessage;
     private ActivityContentResultHelper contentResultHelper;
     private List<String> numbers;
+    private FrameLayout progressIndicator;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         contentResultHelper = new ActivityContentResultHelper(SingleMessageFragment.this);
+
+        if(savedInstanceState != null) {
+            numbers = savedInstanceState.getStringArrayList(EXTRA_NUMBERS);
+        }
     }
 
     @Override
@@ -76,8 +83,7 @@ public class SingleMessageFragment extends Fragment {
         senderEdit = v.findViewById(R.id.sender_et);
         receiverLayout = v.findViewById(R.id.receiver_layout);
         receiverEditLayout = v.findViewById(R.id.receiver_et_layout);
-        receiverEdit = v.findViewById(R.id.receiver_et);
-        receiverDivider = v.findViewById(R.id.receiver_divider);
+        receiverText = v.findViewById(R.id.receiver_tv);
         add = v.findViewById(R.id.add_iv);
         messageLayout = v.findViewById(R.id.message_layout);
         messageEditLayout = v.findViewById(R.id.message_et_layout);
@@ -86,13 +92,12 @@ public class SingleMessageFragment extends Fragment {
         messageDivider = v.findViewById(R.id.message_divider);
         remainingCharsText = v.findViewById(R.id.remaining_chars_tv);
         sendMessage = v.findViewById(R.id.send_message_bt);
+        progressIndicator = v.findViewById(R.id.progress_indicator);
 
         giveFocus(senderLayout, senderEdit);
-        giveFocus(receiverLayout, receiverEdit);
         giveFocus(messageLayout, messageEdit);
 
         setEditTextFocus(c, senderEdit, null);
-        setEditTextLayoutFocus(c, receiverEditLayout, null, receiverEdit, receiverDivider);
         setEditTextLayoutFocus(c, messageBoxLayout, null, messageEdit, messageDivider);
 
         numbers = new ArrayList<>();
@@ -101,18 +106,33 @@ public class SingleMessageFragment extends Fragment {
             messageEdit.requestFocus();
             return false;
         });
+        progressIndicator.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
         receiverLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> nums = new ArrayList<>();
-                nums.add("09192374565");
-                nums.add("09192374565");
-                nums.add("09192374565");
-                nums.add("09192374565");
-                nums.add("09192374565");
-                NumberDialogBuilder numberDialog = new NumberDialogBuilder(c, nums, getView());
+                NumberDialogBuilder numberDialog = new NumberDialogBuilder(c, numbers, getView());
                 numberDialog.showDialog();
+                numberDialog.setChangeListener(new NumberDialogBuilder.ChangeListener() {
+                    @Override
+                    public void onRemove(int index) {
+                        numbers.remove(index);
+                        Log.v(TAG, String.valueOf(numbers.size()));
+                        updateNumberView();
+                    }
+
+                    @Override
+                    public void onAdd(String number) {
+                        numbers.add(number);
+                        Log.v(TAG, String.valueOf(numbers.size()));
+                        updateNumberView();
+                    }
+                });
             }
         });
 
@@ -131,6 +151,11 @@ public class SingleMessageFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArrayList(EXTRA_NUMBERS, (ArrayList<String>) numbers);
+    }
 
     private void toolbarInit() {
 
@@ -149,12 +174,14 @@ public class SingleMessageFragment extends Fragment {
     }
 
     private void sendMessage() {
+        /*
         String numbers = receiverEdit.getText().toString();
         String faultyNumber = PhoneNumberFormatChecker.checkFaultyNumbers(numbers);
         if(faultyNumber != null) {
             Toast.makeText(requireContext(), faultyNumber, Toast.LENGTH_SHORT).show();
         }
 
+         */
     }
     private void handleRemainingChars() {
         remainingCharsText.setText(MessageCharacterController.getCharacterCountDefault(c));
@@ -211,6 +238,7 @@ public class SingleMessageFragment extends Fragment {
                                     ExcelHandler excelHandler = new ExcelHandler(c, uri);
                                     List<String> importedNumbers = excelHandler.getNumbers();
                                     numbers.addAll(importedNumbers);
+                                    updateNumberView();
                                     excelHandler.showResultSnack(getView());
                                 } else {
                                     contentResultHelper.showNoFileSelectedSnack();
@@ -229,7 +257,12 @@ public class SingleMessageFragment extends Fragment {
                             @Override
                             public void gotResult(Uri uri) {
                                 if(uri != null) {
-                                    Log.v(TAG, "uri is not null");
+                                    TextFileHandler textFileHandler = new TextFileHandler(c, uri);
+                                    List<String> importedMobiles = textFileHandler.getMobiles();
+                                    numbers.addAll(importedMobiles);
+                                    updateNumberView();
+                                    textFileHandler.showResultSnack(getView());
+
                                 } else {
                                     contentResultHelper.showNoFileSelectedSnack();
                                 }
@@ -245,5 +278,23 @@ public class SingleMessageFragment extends Fragment {
             }
         });
     }
-
+    private void updateNumberView() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < 10 && i < numbers.size(); i++) {
+            stringBuilder.append(numbers.get(i));
+            stringBuilder.append(", ");
+        }
+        if(stringBuilder.length() > 0) {
+            int lastComma = stringBuilder.lastIndexOf(", ");
+            stringBuilder.delete(lastComma, lastComma + 2);
+        }
+        String result = stringBuilder.toString();
+        receiverText.setText(result);
+    }
+    private void showProgress() {
+        progressIndicator.setVisibility(View.VISIBLE);
+    }
+    private void hideProgress() {
+        progressIndicator.setVisibility(View.GONE);
+    }
 }

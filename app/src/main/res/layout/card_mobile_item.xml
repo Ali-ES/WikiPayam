@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mobile_tv"
+        android:textSize="@dimen/ts_dialog_items"
+        android:layout_gravity="center_vertical"
+        tools:text="09191234567"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/delete_iv"
+        android:src="@drawable/ic_delete"
+        android:contentDescription="@string/cont_desc_delete"
+        android:layout_gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/divider"
+        android:background="@color/gray_stroke"
+        android:layout_below="@id/mobile_tv"
+        android:layout_marginTop="@dimen/mg_tb_dialog_items" />
+
+</RelativeLayout>

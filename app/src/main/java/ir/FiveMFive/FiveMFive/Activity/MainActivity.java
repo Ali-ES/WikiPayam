@@ -13,15 +13,20 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import java.util.concurrent.Executor;
 
 import ir.FiveMFive.FiveMFive.Fragment.DashboardFragment;
+import ir.FiveMFive.FiveMFive.ProgressIndicatorListener;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.Utility.CredentialCrypter;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    private FrameLayout progressIndicator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
-
-
 
     }
 

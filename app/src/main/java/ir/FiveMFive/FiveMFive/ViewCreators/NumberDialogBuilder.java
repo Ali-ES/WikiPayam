@@ -2,9 +2,10 @@ package ir.FiveMFive.FiveMFive.ViewCreators;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -22,7 +23,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ir.FiveMFive.FiveMFive.R;
@@ -31,21 +31,23 @@ import ir.FiveMFive.FiveMFive.Utility.SnackbarBuilder;
 import static ir.FiveMFive.FiveMFive.Utility.UM.*;
 
 public class NumberDialogBuilder {
+    private static final String TAG = "NumberDialog";
     private Context c;
     private View v;
     private View mainLayout;
     private NestedScrollView numberScroll;
     private LinearLayout numberContainer;
     private List<String> numbers;
-    private CancelListener cancelListener;
+    private ChangeListener changeListener;
     private View lastDivider;
     private boolean hasChanged;
 
-    public interface CancelListener {
-        void onCancel(boolean hasChanged);
+    public interface ChangeListener {
+        void onRemove(int index);
+        void onAdd(String mobile);
     }
 
-    public NumberDialogBuilder(Context c, ArrayList<String> numbers, View v) {
+    public NumberDialogBuilder(Context c, List<String> numbers, View v) {
         this.c = c;
         this.numbers = numbers;
         this.v = v;
@@ -93,9 +95,19 @@ public class NumberDialogBuilder {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                numberContainer.removeView(numberLayout);
-                numbers.remove(number);
-                hasChanged = true;
+                delete.setClickable(false);
+                numberLayout.animate().alpha(0).translationY(100).setDuration(500).start();
+                numberContainer.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        numberContainer.removeView(numberLayout);
+                    }
+                }, 500);
+                int index = numbers.indexOf(number);
+                numbers.remove(index);
+                if(changeListener != null) {
+                    changeListener.onRemove(index);
+                }
             }
         });
 
@@ -119,19 +131,11 @@ public class NumberDialogBuilder {
         numberContainer.removeView(lastDivider);
         new AlertDialog.Builder(c)
                 .setView(mainLayout)
-                .setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        if(cancelListener != null) {
-                            cancelListener.onCancel(hasChanged);
-                        }
-                    }
-                })
                 .show();
     }
 
-    public void setCancelListener(CancelListener listener) {
-        this.cancelListener = listener;
+    public void setChangeListener(ChangeListener listener) {
+        this.changeListener = listener;
     }
 
     private void handleAddButton() {
@@ -147,14 +151,16 @@ public class NumberDialogBuilder {
                 if(!checkEditNulls(mobileEdit)) {
                     String mobile = mobileEdit.getText().toString();
                     if(PhoneNumberFormatChecker.checkNumberFormat(mobile)) {
+                        Log.v(TAG, String.valueOf(numbers.size()));
                         numbers.add(mobile);
-                        hasChanged = true;
                         createNumberView(mobile);
-
+                        if(changeListener != null) {
+                            changeListener.onAdd(mobile);
+                        }
                         mobileEdit.setText("");
                         numberScroll.requestFocus();
 
-                        numberScroll.postDelayed(new Runnable() {
+                        new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 int bottom = numberContainer.getBottom();
@@ -181,13 +187,19 @@ public class NumberDialogBuilder {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_ACTION_DONE) {
-                    add.performClick();
-                    mobileEdit.requestFocus();
+                    if(!checkEditNulls(mobileEdit)) {
+                        add.performClick();
+                        mobileEdit.requestFocus();
+                    } else {
+                        hideKeyboard(c, mobileEdit);
+                    }
                     return true;
                 }
                 return false;
             }
         });
     }
-
+    public List<String> getNumbers() {
+        return numbers;
+    }
 }

@@ -59,7 +59,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/receiver_tv"
+                    android:id="@+id/receiver_title_tv"
                     android:text="@string/receiver"
                     style="@style/send_message_fields_title" />
 
@@ -71,11 +71,12 @@
                     android:paddingStart="@dimen/pad_se_send_message_fields"
                     android:paddingEnd="@dimen/pad_se_send_message_fields" >
 
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/receiver_et"
-                        android:inputType="phone"
+                        android:id="@+id/receiver_tv"
+                        android:maxLines="1"
+                        android:ellipsize="start"
                         android:textSize="16sp"
                         style="@style/send_message_fields_edit"
                         android:background="@null"
@@ -90,7 +91,7 @@
                         android:id="@+id/receiver_divider"
                         android:background="@color/gray_stroke"
                         android:layout_marginEnd="@dimen/pad_se_send_message_fields"
-                        app:layout_constraintStart_toEndOf="@id/receiver_et"
+                        app:layout_constraintStart_toEndOf="@id/receiver_tv"
                         app:layout_constraintEnd_toStartOf="@id/add_iv"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -223,5 +224,8 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <include
+        layout="@layout/layout_progress_indicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
