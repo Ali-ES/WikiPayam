@@ -2,6 +2,7 @@ package ir.FiveMFive.FiveMFive.Utility.Handlers;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 
 import java.io.BufferedReader;
@@ -16,6 +17,7 @@ import ir.FiveMFive.FiveMFive.Utility.SnackbarBuilder;
 import ir.FiveMFive.FiveMFive.Utility.UM;
 
 public class TextFileHandler {
+    private static final String TAG = "TextFileHandler";
     private Context c;
     private Uri data;
     private List<String> mobiles;
@@ -34,6 +36,7 @@ public class TextFileHandler {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             for(String line; (line = reader.readLine()) != null;){
+                line = line.trim();
                 if(PhoneNumberFormatChecker.checkNumberFormat(line)) {
                     mobiles.add(line);
                 }
