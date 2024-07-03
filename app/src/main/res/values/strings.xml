@@ -70,6 +70,10 @@
     <string name="import_via_excel">ورود از اکسل</string>
     <string name="import_via_text_file">ورود از فایل متنی</string>
 
+    <string name="warn_empty_sender">شماره ارسال کننده نمیتواند خالی باشد</string>
+    <string name="warn_empty_receiver">دریافت کننده نمیتواند خالی باشد</string>
+    <string name="warn_empty_message">متن پیام نمیتواند خالی باشد</string>
+
     <!-- Phone Numbers Dialog -->
     <string name="add">افزودن</string>
     <string name="mobile_number">شماره موبایل</string>

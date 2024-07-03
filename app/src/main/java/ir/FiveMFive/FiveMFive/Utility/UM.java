@@ -96,6 +96,17 @@ public class UM {
         }
         return false;
     }
+    public static boolean checkEditNullWithResponse(Context c, View v, EditText[] editTexts, int[] errorIds) {
+
+        for(int i = 0; i < editTexts.length; i++) {
+            if(editTexts[i].getText().toString().equals("")) {
+                String text = c.getString(errorIds[i]);
+                SnackbarBuilder.showSnack(c, v, text, SnackbarBuilder.SnackType.ERROR);
+                return true;
+            }
+        }
+        return false;
+    }
     public static int toDp(Context c, int dps) {
         final float scale = c.getResources().getDisplayMetrics().density;
         int pixels = (int) (dps * scale + 0.5f);

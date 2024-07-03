@@ -1,6 +1,7 @@
 package ir.FiveMFive.FiveMFive.Fragment.SendMessage;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -25,18 +26,32 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import ir.FiveMFive.FiveMFive.Interface.ListModifyListener;
 import ir.FiveMFive.FiveMFive.Java.ToolbarIcon;
+import ir.FiveMFive.FiveMFive.Java.User;
 import ir.FiveMFive.FiveMFive.R;
+import ir.FiveMFive.FiveMFive.RetrofitClient;
+import ir.FiveMFive.FiveMFive.RetrofitInterface;
 import ir.FiveMFive.FiveMFive.Utility.ActivityContentResultHelper;
+import ir.FiveMFive.FiveMFive.Utility.Checkers.ConnectivityChecker;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.MessageCharacterController;
+import ir.FiveMFive.FiveMFive.Utility.Constants;
+import ir.FiveMFive.FiveMFive.Utility.CredentialCrypter;
 import ir.FiveMFive.FiveMFive.Utility.Handlers.ExcelHandler;
 import ir.FiveMFive.FiveMFive.Utility.Handlers.TextFileHandler;
 import ir.FiveMFive.FiveMFive.Utility.PopupBuilder;
+import ir.FiveMFive.FiveMFive.Utility.SnackbarBuilder;
 import ir.FiveMFive.FiveMFive.Utility.ToolbarHandler;
 import ir.FiveMFive.FiveMFive.ViewCreators.NumberDialogBuilder;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import static ir.FiveMFive.FiveMFive.Utility.UM.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,23 +131,19 @@ public class SingleMessageFragment extends Fragment {
         receiverLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NumberDialogBuilder numberDialog = new NumberDialogBuilder(c, numbers, getView());
-                numberDialog.showDialog();
+                NumberDialogBuilder numberDialog = new NumberDialogBuilder(SingleMessageFragment.this, numbers, getView());
                 numberDialog.setChangeListener(new NumberDialogBuilder.ChangeListener() {
                     @Override
-                    public void onRemove(int index) {
-                        numbers.remove(index);
-                        Log.v(TAG, String.valueOf(numbers.size()));
+                    public void onRemove() {
                         updateNumberView();
                     }
 
                     @Override
-                    public void onAdd(String number) {
-                        numbers.add(number);
-                        Log.v(TAG, String.valueOf(numbers.size()));
+                    public void onAdd() {
                         updateNumberView();
                     }
                 });
+                numberDialog.showDialog();
             }
         });
 
@@ -145,7 +156,7 @@ public class SingleMessageFragment extends Fragment {
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMessage();
+                handleSendMessage();
             }
         });
         return v;
@@ -173,40 +184,93 @@ public class SingleMessageFragment extends Fragment {
         ToolbarHandler.handleBackNav(this, toolbar);
     }
 
+    private void handleSendMessage() {
+        showProgress();
+        ConnectivityChecker checker = new ConnectivityChecker(new ConnectivityChecker.ConnectionListener() {
+            @Override
+            public void isConnected(boolean status) {
+                if(status) {
+                    if(!checkEditNullWithResponse(c, v, new EditText[] {senderEdit, messageEdit},
+                            new int[] {R.string.warn_empty_sender, R.string.warn_empty_message})) {
+                        if (numbers.size() != 0) {
+                            sendMessage();
+                        } else {
+                            String errorMsg = getString(R.string.warn_empty_receiver);
+                            SnackbarBuilder.showSnack(c, getView(), errorMsg, SnackbarBuilder.SnackType.WARNING);
+                            hideProgress();
+                        }
+                    } else {
+                        hideProgress();
+                    }
+                } else {
+                    ConnectivityChecker.showConnectionFailSnack(c, getView());
+                    hideProgress();
+                }
+            }
+        });
+        checker.checkConnection(requireActivity());
+    }
     private void sendMessage() {
-        /*
-        String numbers = receiverEdit.getText().toString();
-        String faultyNumber = PhoneNumberFormatChecker.checkFaultyNumbers(numbers);
-        if(faultyNumber != null) {
-            Toast.makeText(requireContext(), faultyNumber, Toast.LENGTH_SHORT).show();
+        String sender = senderEdit.getText().toString();
+        StringBuilder receiverComma = new StringBuilder();
+        for(String number : numbers) {
+            receiverComma.append(number);
+            receiverComma.append(",");
         }
+        String message = messageEdit.getText().toString();
 
-         */
+
+        CredentialCrypter crypter = new CredentialCrypter(c);
+        User user = crypter.decrypt();
+
+        Retrofit retrofit = RetrofitClient.getClient();
+        RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+        Call<ResponseBody> call = retrofitInterface.sendSingleMessage(user.getUsername(),
+                user.getPassword(), sender, receiverComma.toString(), message);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    Log.v(TAG, result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                hideProgress();
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                hideProgress();
+            }
+        });
     }
     private void handleRemainingChars() {
+        MessageCharacterController characterController = new MessageCharacterController(c);
         remainingCharsText.setText(MessageCharacterController.getCharacterCountDefault(c));
         messageEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                characterController.setText(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 messageEdit.removeTextChangedListener(this);
 
-                String text = messageEdit.getText().toString();
-                MessageCharacterController characterController = new MessageCharacterController(c, text);
-                String output = characterController.getText();
-                messageEdit.setText(output);
-                remainingCharsText.setText(characterController.getCharactersCount());
+                String outputText = characterController.getOutputText();
+                messageEdit.setText(outputText);
+
+                remainingCharsText.setText(characterController.getCharactersCountText());
+
                 try {
-                    messageEdit.setSelection(output.length() - 6);
+                    int messageEnd = outputText.length() - 6;
+                    if(messageEdit.getSelectionStart() == messageEnd) {
+                        messageEdit.setSelection(messageEnd);
+                    }
                 } catch (IndexOutOfBoundsException e) {
                     e.printStackTrace();
                 }
@@ -297,4 +361,5 @@ public class SingleMessageFragment extends Fragment {
     private void hideProgress() {
         progressIndicator.setVisibility(View.GONE);
     }
+
 }

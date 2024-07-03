@@ -2,6 +2,7 @@ package ir.FiveMFive.FiveMFive.ViewCreators;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -22,113 +23,65 @@ import android.widget.TextView;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import ir.FiveMFive.FiveMFive.Interface.ListModifyListener;
 import ir.FiveMFive.FiveMFive.R;
+import ir.FiveMFive.FiveMFive.RecyclerViewAdapter;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.PhoneNumberFormatChecker;
 import ir.FiveMFive.FiveMFive.Utility.SnackbarBuilder;
 import static ir.FiveMFive.FiveMFive.Utility.UM.*;
 
-public class NumberDialogBuilder {
+public class NumberDialogBuilder implements ListModifyListener {
     private static final String TAG = "NumberDialog";
+    private Fragment fragment;
     private Context c;
     private View v;
     private View mainLayout;
-    private NestedScrollView numberScroll;
-    private LinearLayout numberContainer;
+    private RecyclerView numberRecycle;
+    private RecyclerViewAdapter adapter;
     private List<String> numbers;
     private ChangeListener changeListener;
-    private View lastDivider;
-    private boolean hasChanged;
 
     public interface ChangeListener {
-        void onRemove(int index);
-        void onAdd(String mobile);
+        void onRemove();
+        void onAdd();
     }
 
-    public NumberDialogBuilder(Context c, List<String> numbers, View v) {
-        this.c = c;
+    public NumberDialogBuilder(Fragment fragment, List<String> numbers, View v) {
+        this.fragment = fragment;
+        this.c = fragment.requireContext();
         this.numbers = numbers;
         this.v = v;
 
         LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mainLayout = inflater.inflate(R.layout.dialog_phone_numbers, null);
-        numberScroll = mainLayout.findViewById(R.id.number_scroll);
-        numberContainer = mainLayout.findViewById(R.id.number_container_layout);
+        numberRecycle = mainLayout.findViewById(R.id.number_recycler);
 
-        loadNumbers();
+        setUpRecyclerView();
         handleAddButton();
     }
-
-    private void loadNumbers() {
-        for(String number : numbers) {
-            createNumberView(number);
-        }
-    }
-    private void createNumberView(String number) {
-        RelativeLayout numberLayout = new RelativeLayout(c);
-
-        int topMargin = (int) c.getResources().getDimension(R.dimen.mg_tb_dialog_items);
-
-        TextView numberText = new TextView(c);
-        numberText.setId(View.generateViewId());
-        numberText.setText(number);
-        DisplayMetrics metrics = c.getResources().getDisplayMetrics();
-        int textSize = (int) c.getResources().getDimension(R.dimen.ts_dialog_items);
-        int textSizePX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, textSize, metrics);
-        numberText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePX);
-
-        RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        textParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        textParams.addRule(RelativeLayout.ALIGN_PARENT_START);
-        textParams.setMargins(0, topMargin, 0, 0);
-        numberLayout.addView(numberText, textParams);
-
-
-        ImageView delete = new ImageView(c);
-        delete.setId(View.generateViewId());
-        String deleteContentDesc = c.getString(R.string.cont_desc_delete);
-        delete.setContentDescription(deleteContentDesc);
-        Drawable deleteDrawable= AppCompatResources.getDrawable(c, R.drawable.ic_delete);
-        delete.setImageDrawable(deleteDrawable);
-        delete.setOnClickListener(new View.OnClickListener() {
+    private void setUpRecyclerView() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                delete.setClickable(false);
-                numberLayout.animate().alpha(0).translationY(100).setDuration(500).start();
-                numberContainer.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        numberContainer.removeView(numberLayout);
-                    }
-                }, 500);
-                int index = numbers.indexOf(number);
-                numbers.remove(index);
-                if(changeListener != null) {
-                    changeListener.onRemove(index);
-                }
+            public void run() {
+                LinearLayoutManager manager = new LinearLayoutManager(c);
+                numberRecycle.setLayoutManager(manager);
+
+                adapter = new RecyclerViewAdapter(fragment, RecyclerViewAdapter.LayoutType.MOBILE, (ArrayList<String>) numbers);
+                adapter.setListModifyListener(NumberDialogBuilder.this);
+                numberRecycle.setAdapter(adapter);
             }
-        });
+        }, 100);
 
-        RelativeLayout.LayoutParams deleteParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        deleteParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        deleteParams.addRule(RelativeLayout.ALIGN_PARENT_END);
-        numberLayout.addView(delete, deleteParams);
-
-        View divider = new View(c);
-        lastDivider = divider;
-        divider.setBackgroundColor(c.getColor(R.color.gray_stroke));
-        RelativeLayout.LayoutParams dividerParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, toDp(c, 1));
-        dividerParams.addRule(RelativeLayout.BELOW, numberText.getId());
-        dividerParams.setMargins(0, topMargin, 0, 0);
-        numberLayout.addView(divider, dividerParams);
-
-        numberContainer.addView(numberLayout, LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     public void showDialog() {
-        numberContainer.removeView(lastDivider);
         new AlertDialog.Builder(c)
                 .setView(mainLayout)
                 .show();
@@ -151,22 +104,16 @@ public class NumberDialogBuilder {
                 if(!checkEditNulls(mobileEdit)) {
                     String mobile = mobileEdit.getText().toString();
                     if(PhoneNumberFormatChecker.checkNumberFormat(mobile)) {
-                        Log.v(TAG, String.valueOf(numbers.size()));
                         numbers.add(mobile);
-                        createNumberView(mobile);
+                        int position = numbers.size() - 1;
+                        adapter.notifyItemChanged(position);
+                        numberRecycle.smoothScrollToPosition(position);
+
                         if(changeListener != null) {
-                            changeListener.onAdd(mobile);
+                            changeListener.onAdd();
                         }
                         mobileEdit.setText("");
-                        numberScroll.requestFocus();
-
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                int bottom = numberContainer.getBottom();
-                                numberScroll.smoothScrollTo(0, bottom);
-                            }
-                        }, 100);
+                        numberRecycle.requestFocus();
 
                         String successMessage = c.getString(R.string.success_adding_number);
                         SnackbarBuilder.showSnack(c, v, successMessage, SnackbarBuilder.SnackType.SUCCESS);
@@ -199,7 +146,12 @@ public class NumberDialogBuilder {
             }
         });
     }
-    public List<String> getNumbers() {
-        return numbers;
+
+    @Override
+    public void onListRemove(int position) {
+        numbers.remove(position);
+        if(changeListener != null) {
+            changeListener.onRemove();
+        }
     }
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.FiveMFive.FiveMFive.Interface.ListModifyListener;
 import ir.FiveMFive.FiveMFive.Java.CategoryItem;
 import ir.FiveMFive.FiveMFive.Java.DashboardItem;
 import ir.FiveMFive.FiveMFive.ViewHolders.CategoryHolder;
@@ -21,6 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     private Fragment fragment;
     private LayoutType layoutType;
     private List<?> items;
+    private ListModifyListener listModifyListener;
 
     public enum LayoutType {
         DASHBOARD,
@@ -63,7 +65,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                 break;
             case MOBILE:
                 MobileHolder mobile = (MobileHolder) holder;
-                mobile.bind(items.get(position));
+                if(listModifyListener != null) {
+                    mobile.setListModifyListener(listModifyListener);
+                }
+                mobile.bind((String) items.get(position));
                 break;
         }
     }
@@ -76,5 +81,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         return super.getItemViewType(position);
+    }
+    public void setListModifyListener(ListModifyListener listener) {
+        this.listModifyListener = listener;
     }
 }
