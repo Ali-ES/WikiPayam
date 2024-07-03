@@ -47,6 +47,43 @@
     <!-- Send Single Message Fragment -->
     <string name="send_single_message">ارسال پیامک تکی</string>
     <string name="message_send_price">قیمت ارسال پیامک</string>
+    <string name="sender_number">شماره ارسال کننده</string>
+    <string name="receiver">دریافت کننده</string>
+    <string name="message_text">متن پیامک</string>
+    <string name="attention.">توجه:</string>
+    <string name="attention_explain">قرار دادن \"لغو۱۱\" در کلیه ی پیامها \"ضروری\" است.</string>
+    <string name="remaining_chars.">تعداد کاراکتر باقی مانده: %d (%d پیامک) (%d کاراکتر)</string>
+    <string name="use_patterns">استفاده از الگوها</string>
+    <string name="message">پیامک</string>
+    <string name="character">کاراکتر</string>
+    <string name="future_send">ارسال در آینده</string>
+    <string name="flash_send">ارسال بصورت فلش</string>
+    <string name="flash_send_explain">پیامک بصورت فلش ارسال میشود.</string>
+    <string name="show_factor">نمایش فاکتور</string>
+    <string name="show_factor_explain">فقط هزینه ی ارسال پیامک را نمایش دهد.</string>
+    <string name="customers">مشتریان</string>
+    <string name="customers_explain">هزینه پیامک از مشتریان ثبت شده در قسمت مشتریان کسر شود.</string>
+    <string name="save">ذخیره</string>
+    <string name="save_explain">به عنوان الگو ذخیره شود.</string>
+    
+    <string name="import_via_contacts">ورود از دفترچه تلفن</string>
+    <string name="import_via_excel">ورود از اکسل</string>
+    <string name="import_via_text_file">ورود از فایل متنی</string>
+
+    <string name="warn_empty_sender">شماره ارسال کننده نمیتواند خالی باشد</string>
+    <string name="warn_empty_receiver">دریافت کننده نمیتواند خالی باشد</string>
+    <string name="warn_empty_message">متن پیام نمیتواند خالی باشد</string>
+
+    <string name="success_sending_single_sms">ارسال پیامک تکی با موفقیت انجام شد</string>
+    <string name="error_sending_single_sms">ارسال پیامک با شکست مواجه شد</string>
+
+    <!-- Phone Numbers Dialog -->
+    <string name="add">افزودن</string>
+    <string name="mobile_number">شماره موبایل</string>
+    <string name="warn_empty_mobile">شماره موبایل خالی است</string>
+    <string name="error_wrong_number_format">فرمت شماره موبایل غلط است</string>
+    <string name="success_adding_number">شماره موبایل اضافه شد</string>
+
 
 
     <!-- Send Group Message Fragment -->
@@ -57,6 +94,10 @@
     <string name="email_send_success">ایمیل با موفقیت ارسال شد</string>
     <string name="desc_success_snack">موفق</string>
     <string name="warn_connection_failed">لطفا اتصال اینترنت خود را بررسی کنید</string>
+    <string name="warn_no_file_selected">هیچ فایلی انتخاب نشد</string>
+    <string name="success_importing_number">شماره ها با موفقیت وارد شدند</string>
+    <string name="empty_numbers_list">شماره ای جهت وارد کردن وجود ندارد!</string>
+    <string name="wrong_excel_format">فرمت فایل اکسل غلط است</string>
 
 
     <!-- Action Bar -->
@@ -71,6 +112,7 @@
     <!-- Content Description -->
     <string name="forward">رو به جلو</string>
     <string name="go_back">برگشت به عقب</string>
+    <string name="cont_desc_delete">حذف</string>
 
 
     <string name="price_dialog_default">پیامک فارسی %s ریال\n

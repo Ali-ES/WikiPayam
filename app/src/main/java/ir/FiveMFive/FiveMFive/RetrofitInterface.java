@@ -9,5 +9,10 @@ public interface RetrofitInterface {
 
     @GET("user_credit.php")
     Call<ResponseBody> login(@Query("username") String user, @Query("password") String pass);
-
+    @GET("send_sms.php")
+    Call<ResponseBody> sendSingleMessage(@Query("username") String user,
+                             @Query("password") String pass,
+                             @Query("sender_number") String senderNumber,
+                             @Query("receiver_number") String receiverNumber,
+                             @Query("note") String message);
 }

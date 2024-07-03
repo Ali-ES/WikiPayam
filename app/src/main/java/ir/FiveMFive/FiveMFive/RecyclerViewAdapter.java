@@ -11,19 +11,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.FiveMFive.FiveMFive.Interface.ListModifyListener;
 import ir.FiveMFive.FiveMFive.Java.CategoryItem;
 import ir.FiveMFive.FiveMFive.Java.DashboardItem;
 import ir.FiveMFive.FiveMFive.ViewHolders.CategoryHolder;
 import ir.FiveMFive.FiveMFive.ViewHolders.DashboardHolder;
+import ir.FiveMFive.FiveMFive.ViewHolders.MobileHolder;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter {
     private Fragment fragment;
     private LayoutType layoutType;
     private List<?> items;
+    private ListModifyListener listModifyListener;
 
     public enum LayoutType {
         DASHBOARD,
-        CATEGORY
+        CATEGORY,
+        MOBILE
     }
     public RecyclerViewAdapter(Fragment fragment, LayoutType layoutType, ArrayList<?> items) {
         this.fragment = fragment;
@@ -40,8 +44,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
             case CATEGORY:
                 return new CategoryHolder(inflater, parent, fragment);
-
-
+            case MOBILE:
+                return new MobileHolder(inflater, parent, this);
             default:
                 return null;
         }
@@ -59,7 +63,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                 CategoryHolder category = (CategoryHolder) holder;
                 category.bind((CategoryItem) items.get(position));
                 break;
-
+            case MOBILE:
+                MobileHolder mobile = (MobileHolder) holder;
+                if(listModifyListener != null) {
+                    mobile.setListModifyListener(listModifyListener);
+                }
+                mobile.bind((String) items.get(position));
+                break;
         }
     }
 
@@ -71,5 +81,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         return super.getItemViewType(position);
+    }
+    public void setListModifyListener(ListModifyListener listener) {
+        this.listModifyListener = listener;
     }
 }

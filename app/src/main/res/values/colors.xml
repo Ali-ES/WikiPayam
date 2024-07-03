@@ -16,10 +16,15 @@
     <color name="gray_loading">#747676</color>
     <color name="gray_dashboard_item">#e9ebef</color>
     <color name="gray_popup_divider">#ededed</color>
+    <color name="gray_attention_explain">#606f7b</color>
 
     <color name="white_category">#d5dce9</color>
     <color name="blue_highlight">#bcdefa</color>
 
+
+    <color name="red_remaining_chars">#bc2f2f</color>
+
+    <color name="yellow_attention">#f2d024</color>
 
     <!-- Snackbar Colors -->
     <color name="green">#01bd7d</color>

@@ -32,20 +32,23 @@ public class CategoryHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
     @Override
     public void onClick(View v) {
-        FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
+
         switch (categoryItem.getPosition()) {
             case 0:
                 SingleMessageFragment singleMessageFragment = new SingleMessageFragment();
-                ft.replace(R.id.fragment_container, singleMessageFragment);
-                ft.addToBackStack(null);
-                ft.commit();
+                openFragment(singleMessageFragment);
                 break;
             case 1:
                 GroupMessageFragment groupMessageFragment = new GroupMessageFragment();
-                ft.replace(R.id.fragment_container, groupMessageFragment);
-                ft.addToBackStack(null);
-                ft.commit();
+                openFragment(groupMessageFragment);
                 break;
         }
+    }
+    private void openFragment(Fragment fragment) {
+        FragmentTransaction ft = this.fragment.getParentFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+        ft.replace(R.id.fragment_container, fragment);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 }

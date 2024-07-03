@@ -1,4 +1,4 @@
-package ir.FiveMFive.FiveMFive.Utility;
+package ir.FiveMFive.FiveMFive.Utility.Checkers;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import ir.FiveMFive.FiveMFive.R;
+import ir.FiveMFive.FiveMFive.Utility.SnackbarBuilder;
 
 public class ConnectivityChecker {
     public static final String TAG = "ConnectivityChecker";

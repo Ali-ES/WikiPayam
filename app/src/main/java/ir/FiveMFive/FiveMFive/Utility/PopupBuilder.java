@@ -2,6 +2,8 @@ package ir.FiveMFive.FiveMFive.Utility;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,10 @@ public class PopupBuilder {
         TextView text = new TextView(c);
         text.setText(title);
         text.setTextColor(c.getResources().getColor(R.color.navy_blue));
+        DisplayMetrics metrics = c.getResources().getDisplayMetrics();
+        float textSizeDimen = c.getResources().getDimension(R.dimen.ts_popup);
+        float textSizeInPX = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, textSizeDimen, metrics);
+        text.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPX);
 
         LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         int textMargin = (int) c.getResources().getDimension(R.dimen.mg_s_popup_title);
@@ -73,7 +79,7 @@ public class PopupBuilder {
         }
         CardView cardView = new CardView(c);
         cardView.addView(main);
-        cardView.setCardElevation(30);
+        cardView.setCardElevation(toDp(30));
         cardView.setRadius(toDp(5));
         cardView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         int popupWidth = (int) c.getResources().getDimension(R.dimen.w_popup);
