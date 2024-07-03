@@ -59,11 +59,17 @@
 
     <dimen name="mg_tb_fragment_category_recycler">5dp</dimen>
 
+
     <dimen name="mg_b_send_message_title">5dp</dimen>
     <dimen name="mg_s_send_message_title">5dp</dimen>
     <dimen name="mg_send_message_header_footer">5dp</dimen>
     
     <dimen name="mg_tb_dialog_items">15dp</dimen>
+
+
+    <dimen name="mg_t_dialog_item">12dp</dimen>
+    <dimen name="mg_b_dialog_title">10dp</dimen>
+    <dimen name="mg_b_dialog_items">9dp</dimen>
 
     
     
@@ -86,7 +92,14 @@
 
     <dimen name="pad_se_action_bar_icons">8dp</dimen>
     
+
     <dimen name="pad_tb_send_message">10dp</dimen>
+
+    <dimen name="pad_tb_dialog_item">10dp</dimen>
+    <dimen name="pad_se_dialog_item">5dp</dimen>
+    <dimen name="pad_se_dialog_main">18dp</dimen>
+    <dimen name="pad_tb_dialog_main">20dp</dimen>
+
 
     <dimen name="pad_se_send_message">20dp</dimen>
     <dimen name="pad_se_send_message_fields">10dp</dimen>
@@ -105,10 +118,17 @@
     <dimen name="ts_bottom_bar">10sp</dimen>
     <dimen name="ts_card_category_title">15sp</dimen>
     <dimen name="ts_action_bar_title">15sp</dimen>
+
     <dimen name="ts_send_message_box_remaining_chars">9sp</dimen>
     <dimen name="ts_send_message_header_footer">11sp</dimen>
     <dimen name="ts_popup">12sp</dimen>
     <dimen name="ts_dialog_title">25sp</dimen>
     <dimen name="ts_dialog_items">14sp</dimen>
+
+    
+    <dimen name="ts_dialog_title">25sp</dimen>
+    <dimen name="ts_dialog_subtitle">13sp</dimen>
+    <dimen name="ts_dialog_text">11sp</dimen>
+
 
 </resources>

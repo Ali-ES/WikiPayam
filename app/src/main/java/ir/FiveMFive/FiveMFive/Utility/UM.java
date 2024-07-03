@@ -93,6 +93,7 @@ public class UM {
         }
         return false;
     }
+
     public static boolean checkEditNullWithResponse(Context c, View v, EditText[] editTexts, int[] errorIds) {
 
         for(int i = 0; i < editTexts.length; i++) {
@@ -108,13 +109,42 @@ public class UM {
         final float scale = c.getResources().getDisplayMetrics().density;
         int pixels = (int) (dps * scale + 0.5f);
         return pixels;
-    }
-    public static void showKeyboard(Context c, View v) {
+    }    public static void showKeyboard(Context c, View v) {
         InputMethodManager manager = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
         manager.showSoftInput(v, 0);
     }
     public static void hideKeyboard(Context c, View v) {
         InputMethodManager manager = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
         manager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+    public static String addThousandSeparator(String in) {
+        String input = in;
+        if(input.length() > 1) {
+            if(input.charAt(0) == '0') {
+                input = input.substring(1);
+            }
+        }
+        String output = "";
+        int commas = input.length()/3;
+        if((input.length()%3) == 0) {
+            commas--;
+        }
+        if(input.contains("-") && (input.length()%3 == 1))  {
+            commas--;
+        }
+        int counter = 0;
+
+
+        for (int i = input.length()-1; i >= 0; i--) {
+            output = input.charAt(i) + output;
+            counter++;
+            if((counter%3 == 0) && (commas > 0)) {
+                output = "," + output;
+                commas--;
+            }
+        }
+
+        return output;
+
     }
 }

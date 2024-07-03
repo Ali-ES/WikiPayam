@@ -50,6 +50,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.FiveMFive.FiveMFive.ViewsSetup.PriceDialogBuilder;
+
+
 public class SingleMessageFragment extends Fragment {
     public static final String TAG = "SingleMessage";
     private static final String EXTRA_NUMBERS = "numbers";
@@ -172,7 +175,8 @@ public class SingleMessageFragment extends Fragment {
         ToolbarIcon priceIcon = new ToolbarIcon(R.string.message_send_price, R.drawable.ic_price, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                PriceDialogBuilder builder = new PriceDialogBuilder(c);
+                builder.showDialog();
             }
         });
         toolbarHandler.addIcon(priceIcon);
