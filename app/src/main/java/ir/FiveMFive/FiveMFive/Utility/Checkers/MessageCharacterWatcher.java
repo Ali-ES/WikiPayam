@@ -61,11 +61,6 @@ public class MessageCharacterWatcher implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
         handler.removeCallbacks(runnable);
         runnable = new Runnable() {
             @Override
@@ -86,5 +81,10 @@ public class MessageCharacterWatcher implements TextWatcher {
             }
         };
         handler.postDelayed(runnable, DELAY);
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }

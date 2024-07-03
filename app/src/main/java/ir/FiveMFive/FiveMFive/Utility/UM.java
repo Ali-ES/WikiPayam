@@ -55,16 +55,13 @@ public class UM {
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus) {
                     layout.setBackground(ContextCompat.getDrawable(c, R.drawable.bg_field_focused));
-                    if(text != null) {
-                        text.setVisibility(View.INVISIBLE);
-                    }
+                    text.setVisibility(View.INVISIBLE);
                 } else {
                     layout.setBackground(ContextCompat.getDrawable(c, R.drawable.bg_field_unfocused));
-                    if(text != null) {
-                        if (edit.getText().toString().isEmpty()) {
-                            text.setVisibility(View.VISIBLE);
-                        }
+                    if (edit.getText().toString().isEmpty()) {
+                        text.setVisibility(View.VISIBLE);
                     }
+
                 }
             }
         });
@@ -99,7 +96,7 @@ public class UM {
     public static boolean checkEditNullWithResponse(Context c, View v, EditText[] editTexts, int[] errorIds) {
 
         for(int i = 0; i < editTexts.length; i++) {
-            if(editTexts[i].getText().toString().equals("")) {
+            if(editTexts[i].getText().toString().isEmpty()) {
                 String text = c.getString(errorIds[i]);
                 SnackbarBuilder.showSnack(c, v, text, SnackbarBuilder.SnackType.ERROR);
                 return true;

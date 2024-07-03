@@ -1,7 +1,6 @@
 package ir.FiveMFive.FiveMFive.Fragment.SendMessage;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,9 +11,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ir.FiveMFive.FiveMFive.Interface.ListModifyListener;
 import ir.FiveMFive.FiveMFive.Java.ToolbarIcon;
 import ir.FiveMFive.FiveMFive.Java.User;
 import ir.FiveMFive.FiveMFive.R;
@@ -34,7 +29,7 @@ import ir.FiveMFive.FiveMFive.RetrofitClient;
 import ir.FiveMFive.FiveMFive.RetrofitInterface;
 import ir.FiveMFive.FiveMFive.Utility.ActivityContentResultHelper;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.ConnectivityChecker;
-import ir.FiveMFive.FiveMFive.Utility.Checkers.MessageCharacterController;
+import ir.FiveMFive.FiveMFive.Utility.Checkers.MessageCharacterWatcher;
 import ir.FiveMFive.FiveMFive.Utility.Constants;
 import ir.FiveMFive.FiveMFive.Utility.CredentialCrypter;
 import ir.FiveMFive.FiveMFive.Utility.Handlers.ExcelHandler;
@@ -217,7 +212,11 @@ public class SingleMessageFragment extends Fragment {
             receiverComma.append(number);
             receiverComma.append(",");
         }
+        if(receiverComma.toString().endsWith(",")) {
+            receiverComma.deleteCharAt(receiverComma.length()-1);
+        }
         String message = messageEdit.getText().toString();
+        message = message.replace(Constants.DEFAULT_MESSAGE_END, "");
 
 
         CredentialCrypter crypter = new CredentialCrypter(c);
@@ -232,7 +231,14 @@ public class SingleMessageFragment extends Fragment {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     String result = response.body().string();
-                    Log.v(TAG, result);
+                    try {
+                        long code = Long.parseLong(result);
+                        SnackbarBuilder.showSnack(c, getView(), getString(R.string.success_sending_single_sms), SnackbarBuilder.SnackType.SUCCESS);
+                        getParentFragmentManager().popBackStack();
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                        SnackbarBuilder.showSnack(c, getView(), getString(R.string.error_sending_single_sms), SnackbarBuilder.SnackType.ERROR);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -245,39 +251,8 @@ public class SingleMessageFragment extends Fragment {
         });
     }
     private void handleRemainingChars() {
-        MessageCharacterController characterController = new MessageCharacterController(c);
-        remainingCharsText.setText(MessageCharacterController.getCharacterCountDefault(c));
-        messageEdit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                characterController.setText(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                messageEdit.removeTextChangedListener(this);
-
-                String outputText = characterController.getOutputText();
-                messageEdit.setText(outputText);
-
-                remainingCharsText.setText(characterController.getCharactersCountText());
-
-                try {
-                    int messageEnd = outputText.length() - 6;
-                    if(messageEdit.getSelectionStart() == messageEnd) {
-                        messageEdit.setSelection(messageEnd);
-                    }
-                } catch (IndexOutOfBoundsException e) {
-                    e.printStackTrace();
-                }
-
-                messageEdit.addTextChangedListener(this);
-            }
-        });
+        MessageCharacterWatcher messageCharacterWatcher = new MessageCharacterWatcher(c, messageEdit, remainingCharsText);
+        messageEdit.addTextChangedListener(messageCharacterWatcher);
     }
     private void handleAdd() {
         add.setOnClickListener(new View.OnClickListener() {
@@ -299,14 +274,17 @@ public class SingleMessageFragment extends Fragment {
                             @Override
                             public void gotResult(Uri uri) {
                                 if(uri != null) {
+                                    showProgress();
                                     ExcelHandler excelHandler = new ExcelHandler(c, uri);
                                     List<String> importedNumbers = excelHandler.getNumbers();
                                     numbers.addAll(importedNumbers);
                                     updateNumberView();
+                                    hideProgress();
                                     excelHandler.showResultSnack(getView());
                                 } else {
                                     contentResultHelper.showNoFileSelectedSnack();
                                 }
+                                builder.dismiss();
                             }
                         });
                         contentResultHelper.getExcel();
@@ -321,15 +299,18 @@ public class SingleMessageFragment extends Fragment {
                             @Override
                             public void gotResult(Uri uri) {
                                 if(uri != null) {
+                                    showProgress();
                                     TextFileHandler textFileHandler = new TextFileHandler(c, uri);
                                     List<String> importedMobiles = textFileHandler.getMobiles();
                                     numbers.addAll(importedMobiles);
                                     updateNumberView();
+                                    hideProgress();
                                     textFileHandler.showResultSnack(getView());
 
                                 } else {
                                     contentResultHelper.showNoFileSelectedSnack();
                                 }
+                                builder.dismiss();
                             }
                         });
                         contentResultHelper.getTextFile();
