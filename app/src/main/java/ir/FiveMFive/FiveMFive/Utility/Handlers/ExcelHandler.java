@@ -2,6 +2,7 @@ package ir.FiveMFive.FiveMFive.Utility.Handlers;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -24,6 +25,7 @@ public class ExcelHandler {
     private Uri data;
     private List<String> numbers;
     private boolean isExcelFormatWrong;
+    private int counter = 0;
     public ExcelHandler(Context c, Uri uri) {
         this.c = c;
         this.data = uri;
@@ -37,17 +39,26 @@ public class ExcelHandler {
             InputStream inputStream = c.getContentResolver().openInputStream(data);
 
             Workbook workbook = new HSSFWorkbook(inputStream);
-            Sheet sheet = workbook.getSheetAt(0);
-            for(Row row : sheet) {
-                if(row.getRowNum() > 0) {
-                    Cell cell = row.getCell(0);
-                    cell.setCellType(Cell.CELL_TYPE_STRING);
-                    String number = cell.getStringCellValue();
-                    if(PhoneNumberFormatChecker.checkNumberFormat(number)) {
-                        numbers.add(number);
+            for(int i = 0; i < workbook.getNumberOfSheets(); i++) {
+                Sheet sheet = workbook.getSheetAt(i);
+                for (Row row : sheet) {
+                    if (row.getRowNum() > 0) {
+                        Cell cell = row.getCell(0);
+                        cell.setCellType(Cell.CELL_TYPE_STRING);
+                        String number = cell.getStringCellValue();
+                        if(!number.isEmpty()) {
+                            if (!number.startsWith("+") && !number.startsWith("0")) {
+                                number = "0" + number;
+                            }
+                            if (PhoneNumberFormatChecker.checkNumberFormat(number)) {
+                                numbers.add(number);
+                                counter++;
+                            }
+                        }
                     }
                 }
             }
+            Log.v(TAG, String.valueOf(counter));
         } catch (Exception e) {
             e.printStackTrace();
             isExcelFormatWrong = true;
