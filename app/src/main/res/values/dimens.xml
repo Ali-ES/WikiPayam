@@ -122,7 +122,6 @@
     <dimen name="ts_send_message_box_remaining_chars">9sp</dimen>
     <dimen name="ts_send_message_header_footer">11sp</dimen>
     <dimen name="ts_popup">12sp</dimen>
-    <dimen name="ts_dialog_title">25sp</dimen>
     <dimen name="ts_dialog_items">14sp</dimen>
 
     

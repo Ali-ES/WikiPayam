@@ -116,6 +116,7 @@ public class UM {
     public static void hideKeyboard(Context c, View v) {
         InputMethodManager manager = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
         manager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
 
     public static String addThousandSeparator(String in) {
         String input = in;
