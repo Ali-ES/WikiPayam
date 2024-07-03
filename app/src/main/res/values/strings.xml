@@ -74,6 +74,9 @@
     <string name="warn_empty_receiver">دریافت کننده نمیتواند خالی باشد</string>
     <string name="warn_empty_message">متن پیام نمیتواند خالی باشد</string>
 
+    <string name="success_sending_single_sms">ارسال پیامک تکی با موفقیت انجام شد</string>
+    <string name="error_sending_single_sms">ارسال پیامک با شکست مواجه شد</string>
+
     <!-- Phone Numbers Dialog -->
     <string name="add">افزودن</string>
     <string name="mobile_number">شماره موبایل</string>

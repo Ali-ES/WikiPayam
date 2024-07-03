@@ -44,8 +44,8 @@ public class DashboardHolder extends RecyclerView.ViewHolder implements View.OnC
         // TODO: change this to newInstance and category types
         Fragment f = CategoryFragment.newInstance(CategoryFragment.CategoryType.SEND_MESSAGE);
         FragmentTransaction ft = fragment.getParentFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
         ft.replace(R.id.fragment_container, f);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack(null);
         ft.commit();
     }

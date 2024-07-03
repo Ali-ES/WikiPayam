@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
     private void openDashboardFragment() {
         Fragment fragment = new DashboardFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
         ft.replace(R.id.fragment_container, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }
     public void onBackPressed() {
