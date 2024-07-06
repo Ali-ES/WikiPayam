@@ -14,7 +14,7 @@ import android.widget.TextView;
 import ir.FiveMFive.FiveMFive.R;
 
 public class MessageCharacterWatcher implements TextWatcher {
-    private final long DELAY = 500;
+    private final long DELAY = 300;
     private final Handler handler = new Handler();
     private Runnable runnable;
     private Context c;
@@ -40,14 +40,6 @@ public class MessageCharacterWatcher implements TextWatcher {
         String charCountText = c.getString(R.string.remaining_chars_);
         return String.format(charCountText, remainingChars, messageCount, characterCount);
     }
-    public String getOutputText() {
-        String text = messageEdit.getText().toString();
-        if(!text.endsWith(DEFAULT_MESSAGE_END)) {
-            text += DEFAULT_MESSAGE_END;
-        }
-        outputText = text;
-        return outputText;
-    }
 
     public String getCharacterCountDefault() {
         return String.format(c.getString(R.string.remaining_chars_), DEFAULT_MESSAGE_CHARS, 1, 0);
@@ -68,7 +60,13 @@ public class MessageCharacterWatcher implements TextWatcher {
                 messageEdit.removeTextChangedListener(MessageCharacterWatcher.this);
 
                 int selection = messageEdit.getSelectionEnd();
-                messageEdit.setText(getOutputText());
+                String message = messageEdit.getText().toString();
+                if(!message.endsWith(DEFAULT_MESSAGE_END)) {
+                    message += DEFAULT_MESSAGE_END;
+                    messageEdit.setText(message);
+                }
+                outputText = message;
+
                 try {
                     messageEdit.setSelection(selection);
                 } catch (Exception e) {
