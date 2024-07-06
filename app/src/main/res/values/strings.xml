@@ -84,7 +84,9 @@
     <string name="error_wrong_number_format">فرمت شماره موبایل غلط است</string>
     <string name="success_adding_number">شماره موبایل اضافه شد</string>
 
-
+    <!-- Groups Dialog -->
+    <string name="groups">گروه ها</string>
+    <string name="group">گروه</string>
 
     <!-- Send Group Message Fragment -->
     <string name="send_group_message">ارسال پیامک گروهی</string>
