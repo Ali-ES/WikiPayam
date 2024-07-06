@@ -14,6 +14,7 @@ import java.util.List;
 import ir.FiveMFive.FiveMFive.Interface.ListModifyListener;
 import ir.FiveMFive.FiveMFive.Java.CategoryItem;
 import ir.FiveMFive.FiveMFive.Java.DashboardItem;
+import ir.FiveMFive.FiveMFive.Java.Group;
 import ir.FiveMFive.FiveMFive.ViewHolders.CategoryHolder;
 import ir.FiveMFive.FiveMFive.ViewHolders.DashboardHolder;
 import ir.FiveMFive.FiveMFive.ViewHolders.GroupHolder;
@@ -78,7 +79,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                 if(listModifyListener != null) {
                     group.setListModifyListener(listModifyListener);
                 }
-                group.bind((String) items.get(position));
+                group.bind((Group) items.get(position));
                 break;
         }
     }
