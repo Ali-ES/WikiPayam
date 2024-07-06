@@ -21,4 +21,11 @@ public interface RetrofitInterface {
     @GET("sms_group_list.php")
     Call<List<Group>> getGroupsList(@Query("username") String user,
                                     @Query("password") String pass);
+    @GET("sms_send_group.php")
+    Call<ResponseBody> sendGroupMessage(@Query("username") String user,
+                                        @Query("password") String pass,
+                                        @Query("sender_number") String senderNumber,
+                                        @Query("note") String message,
+                                        @Query("categories[]") List<String> receivers,
+                                        @Query("blacklist") boolean shouldSendToBlackList);
 }
