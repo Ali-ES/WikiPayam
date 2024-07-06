@@ -180,7 +180,6 @@ public class SingleMessageFragment extends Fragment {
             }
         });
         toolbarHandler.addIcon(priceIcon);
-        ToolbarHandler.handleBackNav(this, toolbar);
     }
 
     private void handleSendMessage() {
