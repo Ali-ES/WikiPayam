@@ -1,14 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.SendMessage.GroupMessageFragment">
+    android:layoutDirection="rtl"
+    tools:context=".Fragment.SendMessage.SingleMessageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include
+        layout="@layout/toolbar_with_back_nav"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/pad_tb_send_message"
+            android:paddingBottom="@dimen/pad_tb_send_message"
+            android:paddingStart="@dimen/pad_se_send_message"
+            android:paddingEnd="@dimen/pad_se_send_message">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sender_layout"
+                style="@style/send_message_fields_layout"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sender_tv"
+                    android:text="@string/sender_number"
+                    style="@style/send_message_fields_title" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sender_et"
+                    android:inputType="phone"
+                    style="@style/send_message_fields_edit"
+                    android:labelFor="@id/sender_layout"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/receiver_layout"
+                style="@style/send_message_fields_layout"
+                app:layout_constraintTop_toBottomOf="@id/sender_layout">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/receiver_title_tv"
+                        android:text="@string/receiver"
+                        style="@style/send_message_fields_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/add_all_groups_tv"
+                        android:text="@string/add_all_groups"
+                        android:textColor="@color/navy_blue"
+                        android:textSize="@dimen/ts_send_message_header_footer"
+                        android:layout_marginEnd="@dimen/mg_send_message_header_footer"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/receiver_title_tv"
+                        app:layout_constraintBottom_toBottomOf="@id/receiver_title_tv" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/receiver_tv"
+                    android:maxLines="1"
+                    android:ellipsize="start"
+                    android:textSize="16sp"
+                    style="@style/send_message_fields_edit"
+                    android:background="@drawable/bg_field_unfocused" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/message_layout"
+                style="@style/send_message_fields_layout"
+                app:layout_constraintTop_toBottomOf="@id/receiver_layout" >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/message_header_layout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/message_tv"
+                        android:text="@string/message_text"
+                        style="@style/send_message_fields_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/use_patterns_tv"
+                        android:text="@string/use_patterns"
+                        android:textColor="@color/navy_blue"
+                        android:textSize="@dimen/ts_send_message_header_footer"
+                        android:layout_marginEnd="@dimen/mg_send_message_header_footer"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/h_send_message_box"
+                    android:id="@+id/message_box_layout"
+                    android:background="@drawable/bg_field_unfocused" >
+
+                    <androidx.core.widget.NestedScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/message_et_layout"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/remaining_chars_tv">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/message_et"
+                            style="@style/send_message_fields_edit"
+                            android:background="@null"
+                            android:inputType="textMultiLine" />
+
+                    </androidx.core.widget.NestedScrollView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/remaining_chars_tv"
+                        android:text="@string/remaining_chars."
+                        style="@style/remaining_char_texts"
+                        android:layout_margin="@dimen/mg_send_message_header_footer"
+                        app:layout_constraintTop_toBottomOf="@id/message_et_layout"
+                        app:layout_constraintBottom_toTopOf="@id/message_divider"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/wh_send_message_divider"
+                        android:id="@+id/message_divider"
+                        android:background="@color/gray_stroke"
+                        app:layout_constraintTop_toBottomOf="@id/remaining_chars_tv"
+                        app:layout_constraintBottom_toTopOf="@id/attention_layout" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/attention_layout"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/pad_send_message_attention_layout"
+                        app:layout_constraintTop_toBottomOf="@id/message_divider"
+                        app:layout_constraintBottom_toBottomOf="parent" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/attention."
+                            android:textColor="@color/yellow_attention"
+                            android:textSize="@dimen/ts_send_message_header_footer" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/attention_explain"
+                            android:textColor="@color/gray_attention_explain"
+                            android:textSize="@dimen/ts_send_message_header_footer" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/send_message_bt"
+                android:text="@string/send_message"
+                android:backgroundTint="@null"
+                style="@style/login_button"
+                app:layout_constraintTop_toBottomOf="@id/message_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <include
+        layout="@layout/layout_progress_indicator" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
