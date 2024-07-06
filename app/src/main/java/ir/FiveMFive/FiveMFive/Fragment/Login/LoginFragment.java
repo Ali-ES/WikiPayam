@@ -95,7 +95,7 @@ public class LoginFragment extends Fragment {
                             if (status) {
                                 login();
                             } else {
-                                ConnectivityChecker.showConnectionFailSnack(getContext(), v);
+                                ConnectivityChecker.showNoConnectionSnack(getContext(), v);
                                 hideProgress();
                             }
                         }
@@ -189,7 +189,7 @@ public class LoginFragment extends Fragment {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.v(TAG, "failed", t);
                 hideProgress();
-                ConnectivityChecker.showConnectionFailSnack(getContext(), v);
+                ConnectivityChecker.showNoConnectionSnack(getContext(), v);
             }
         });
     }

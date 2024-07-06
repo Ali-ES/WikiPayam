@@ -201,7 +201,7 @@ public class SingleMessageFragment extends Fragment {
                         hideProgress();
                     }
                 } else {
-                    ConnectivityChecker.showConnectionFailSnack(c, getView());
+                    ConnectivityChecker.showNoConnectionSnack(c, getView());
                     hideProgress();
                 }
             }
