@@ -7,10 +7,14 @@ import static ir.FiveMFive.FiveMFive.Utility.UM.setEditTextLayoutFocus;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,6 +66,7 @@ public class GroupDialogBuilder implements ListModifyListener {
         setUpRecyclerView();
         handleAddButton();
     }
+
     private void setUpRecyclerView() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -92,6 +97,9 @@ public class GroupDialogBuilder implements ListModifyListener {
         TextView groupText = groupLayout.findViewById(R.id.group_tv);
         AutoCompleteTextView groupCompleteText = groupLayout.findViewById(R.id.group_ctv);
         setEditTextLayoutFocus(c, groupLayout, groupText, groupCompleteText);
+
+        setUpGroupCompleteText(groupCompleteText, groupLayout);
+
 
         Button add = mainLayout.findViewById(R.id.add_bt);
         add.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +160,26 @@ public class GroupDialogBuilder implements ListModifyListener {
                 return false;
             }
         });
+    }
+
+    private void setUpGroupCompleteText(AutoCompleteTextView groupCompleteText, ConstraintLayout groupLayout) {
+        List<String> groupNames = new ArrayList<>();
+        for(Group group : groups) {
+            groupNames.add(group.getName());
+        }
+        groupCompleteText.setAdapter(new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, groupNames));
+
+
+        groupCompleteText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(groupCompleteText.getText().toString().equals("")) {
+                    groupCompleteText.showDropDown();
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
