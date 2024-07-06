@@ -49,6 +49,7 @@
             style="@style/login_field_et"
             android:inputType="text"
             android:imeOptions="actionDone"
+            android:completionThreshold="0"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
