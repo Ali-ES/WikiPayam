@@ -87,6 +87,10 @@
     <!-- Groups Dialog -->
     <string name="groups">گروه ها</string>
     <string name="group">گروه</string>
+    <string name="warn_empty_group">نام گروه خالی است</string>
+    <string name="warn_duplicate_group">نام گروه تکراری است</string>
+    <string name="error_group_not_exist">این گروه وجود ندارد</string>
+    <string name="success_adding_group">گروه با موفقیت اضافه شد</string>
 
     <!-- Send Group Message Fragment -->
     <string name="send_group_message">ارسال پیامک گروهی</string>

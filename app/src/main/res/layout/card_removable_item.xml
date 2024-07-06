@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/mobile_tv"
+        android:id="@+id/item_tv"
         android:textSize="@dimen/ts_dialog_items"
         android:layout_gravity="center_vertical"
         tools:text="09191234567"
@@ -31,7 +31,7 @@
         android:layout_height="1dp"
         android:id="@+id/divider"
         android:background="@color/gray_stroke"
-        android:layout_below="@id/mobile_tv"
+        android:layout_below="@id/item_tv"
         android:layout_marginTop="@dimen/mg_tb_dialog_items" />
 
 </RelativeLayout>
