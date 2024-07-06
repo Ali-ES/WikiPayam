@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ir.FiveMFive.FiveMFive.Interface.ListModifyListener;
+import ir.FiveMFive.FiveMFive.Java.Group;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.RecyclerViewAdapter;
 
@@ -37,8 +38,8 @@ public class GroupHolder extends RecyclerView.ViewHolder {
             }
         });
     }
-    public void bind(String number) {
-        group.setText(number);
+    public void bind(Group g) {
+        group.setText(g.getName());
     }
 
     public void setListModifyListener(ListModifyListener listener) {
