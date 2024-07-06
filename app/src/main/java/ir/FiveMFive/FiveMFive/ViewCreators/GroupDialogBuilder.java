@@ -89,7 +89,7 @@ public class GroupDialogBuilder implements ListModifyListener {
 
     private void handleAddButton() {
         ConstraintLayout groupLayout = mainLayout.findViewById(R.id.group_layout);
-        TextView groupText = groupLayout.findViewById(R.id.item_tv);
+        TextView groupText = groupLayout.findViewById(R.id.group_tv);
         AutoCompleteTextView groupCompleteText = groupLayout.findViewById(R.id.group_ctv);
         setEditTextLayoutFocus(c, groupLayout, groupText, groupCompleteText);
 
