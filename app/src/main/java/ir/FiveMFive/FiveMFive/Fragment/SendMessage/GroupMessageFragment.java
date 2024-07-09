@@ -329,16 +329,21 @@ public class GroupMessageFragment extends Fragment {
         addAllGroupsText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(groups.size() != selectedGroups.size()) {
-                    for(Group group : groups) {
-                        if(!selectedGroups.contains(group)) {
-                            selectedGroups.add(group);
+                if(groups.size() > 0) {
+                    if (groups.size() != selectedGroups.size()) {
+                        for (Group group : groups) {
+                            if (!selectedGroups.contains(group)) {
+                                selectedGroups.add(group);
+                            }
                         }
+                        updateReceiversView();
                     }
-                    updateReceiversView();
+                    String successMessage = getString(R.string.success_adding_all_groups);
+                    SnackbarBuilder.showSnack(c, v, successMessage, SnackbarBuilder.SnackType.SUCCESS);
+                } else {
+                    String warnMessage = getString(R.string.warn_no_group_exist);
+                    SnackbarBuilder.showSnack(c, v, warnMessage, SnackbarBuilder.SnackType.WARNING);
                 }
-                String successMessage = getString(R.string.success_adding_all_groups);
-                SnackbarBuilder.showSnack(c, v, successMessage, SnackbarBuilder.SnackType.SUCCESS);
             }
         });
     }

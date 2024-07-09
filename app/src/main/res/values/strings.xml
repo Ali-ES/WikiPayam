@@ -97,6 +97,7 @@
     <string name="add_all_groups">افزودن همه گروه ها</string>
     <string name="warn_receiver_groups_not_exits">هیچ گروهی برای دریافت کننده وجود نداره</string>
     <string name="success_adding_all_groups">همه گروه ها افزوده شدند</string>
+    <string name="warn_no_group_exist">هیچ گروهی جهت افزودن وجود ندارد</string>
 
     <!-- Network Operations -->
     <string name="error_connecting_to_server">اتصال به سرور با خطا مواجه شد</string>

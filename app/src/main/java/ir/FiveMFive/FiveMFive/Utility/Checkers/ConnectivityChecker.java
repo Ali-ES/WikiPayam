@@ -45,7 +45,7 @@ public class ConnectivityChecker {
     }
 
     public static void showNoConnectionSnack(Context c, View v) {
-        SnackbarBuilder.showSnack(c, v, c.getResources().getString(R.string.warn_connection_failed), SnackbarBuilder.SnackType.WARNING);
+        SnackbarBuilder.showSnack(c, v, c.getString(R.string.warn_connection_failed), SnackbarBuilder.SnackType.WARNING);
     }
     public static void showServerFailSnack(Context c, View v) {
         String errorMessage = c.getString(R.string.error_server_no_response);
