@@ -14,6 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,10 +26,14 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.FiveMFive.FiveMFive.BottomSheetDialog.BlacklistBottomSheet;
 import ir.FiveMFive.FiveMFive.Java.Group;
 import ir.FiveMFive.FiveMFive.Java.User;
 import ir.FiveMFive.FiveMFive.R;
@@ -231,7 +237,16 @@ public class GroupMessageFragment extends Fragment {
                     if(!checkEditNullWithResponse(c, v, new EditText[] {senderEdit, messageEdit},
                             new int[] {R.string.warn_empty_sender, R.string.warn_empty_message})) {
                         if (selectedGroups.size() != 0) {
-                            sendMessage();
+                            BlacklistBottomSheet blacklistBottomSheet = new BlacklistBottomSheet();
+                            blacklistBottomSheet.setBlacklistSendListener(new BlacklistBottomSheet.BlacklistSendListener() {
+                                @Override
+                                public void onClick(boolean sendToBlacklist) {
+                                    shouldSendToBlackList = sendToBlacklist;
+                                    sendMessage();
+                                }
+                            });
+                            blacklistBottomSheet.show(getParentFragmentManager(), null);
+
                         } else {
                             String errorMsg = getString(R.string.warn_empty_receiver);
                             SnackbarBuilder.showSnack(c, getView(), errorMsg, SnackbarBuilder.SnackType.WARNING);
@@ -270,12 +285,12 @@ public class GroupMessageFragment extends Fragment {
                     try {
                         String result = response.body().string();
                         try {
-                            long code = Long.parseLong(result);
+                            long code = Long.parseLong(result.split("_")[0]);
                             SnackbarBuilder.showSnack(c, getView(), getString(R.string.success_sending_single_sms), SnackbarBuilder.SnackType.SUCCESS);
                             getParentFragmentManager().popBackStack();
                         } catch (NumberFormatException e) {
                             e.printStackTrace();
-                            SnackbarBuilder.showSnack(c, getView(), getString(R.string.error_sending_single_sms), SnackbarBuilder.SnackType.ERROR);
+                            SnackbarBuilder.showSnack(c, getView(), result, SnackbarBuilder.SnackType.ERROR);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
