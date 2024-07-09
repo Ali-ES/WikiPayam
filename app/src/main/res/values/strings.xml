@@ -94,12 +94,20 @@
 
     <!-- Send Group Message Fragment -->
     <string name="send_group_message">ارسال پیامک گروهی</string>
+    <string name="add_all_groups">افزودن همه گروه ها</string>
+    <string name="warn_receiver_groups_not_exits">هیچ گروهی برای دریافت کننده وجود نداره</string>
+    <string name="success_adding_all_groups">همه گروه ها افزوده شدند</string>
+
+    <!-- Network Operations -->
+    <string name="error_connecting_to_server">اتصال به سرور با خطا مواجه شد</string>
+    <string name="error_server_no_response">عدم دریافت پاسخ از سرور</string>
+    <string name="warn_connection_failed">لطفا اتصال اینترنت خود را بررسی کنید</string>
 
 
     <!-- Snackbar -->
     <string name="email_send_success">ایمیل با موفقیت ارسال شد</string>
     <string name="desc_success_snack">موفق</string>
-    <string name="warn_connection_failed">لطفا اتصال اینترنت خود را بررسی کنید</string>
+
     <string name="warn_no_file_selected">هیچ فایلی انتخاب نشد</string>
     <string name="success_importing_number">شماره ها با موفقیت وارد شدند</string>
     <string name="empty_numbers_list">شماره ای جهت وارد کردن وجود ندارد!</string>
