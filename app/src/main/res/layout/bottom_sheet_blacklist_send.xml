@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="rtl"
-    android:padding="@dimen/pad_bottom_sheet_dialog" >
+    android:padding="@dimen/pad_bottom_sheet_dialog">
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/h_bottom_sheet_scroll"
         android:id="@+id/blacklist_explain_layout"
         android:layout_marginTop="@dimen/mg_t_bottom_sheet_items"
         app:layout_constraintTop_toBottomOf="@id/send_blacklist_title_tv"
@@ -47,7 +47,7 @@
         style="@style/outline_button"
         android:layout_marginTop="@dimen/mg_t_bottom_sheet_items"
         android:text="@string/regular_send"
-        app:layout_constraintTop_toBottomOf="@id/send_blacklist_btn"
+        app:layout_constraintTop_toBottomOf="@id/send_blacklist_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

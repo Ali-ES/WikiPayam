@@ -19,6 +19,12 @@ public class BlacklistBottomSheet extends BottomSheetDialogFragment {
     public interface BlacklistSendListener {
         void onClick(boolean sendToBlacklist);
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_sheet_blacklist_send, container, false);
@@ -30,6 +36,7 @@ public class BlacklistBottomSheet extends BottomSheetDialogFragment {
                 if(blacklistSendListener != null) {
                     blacklistSendListener.onClick(true);
                 }
+                dismiss();
             }
         });
 
@@ -40,6 +47,7 @@ public class BlacklistBottomSheet extends BottomSheetDialogFragment {
                 if(blacklistSendListener != null) {
                     blacklistSendListener.onClick(false);
                 }
+                dismiss();
             }
         });
 

@@ -42,6 +42,8 @@
 
     <dimen name="h_dialog_scroll">200dp</dimen>
 
+    <dimen name="h_bottom_sheet_scroll">140dp</dimen>
+
     <!-- Margins -->
     <dimen name="login_top">40dp</dimen>
     <dimen name="login_start_end">20dp</dimen>
