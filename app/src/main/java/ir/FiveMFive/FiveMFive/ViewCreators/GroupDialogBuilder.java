@@ -111,6 +111,7 @@ public class GroupDialogBuilder implements ListModifyListener {
                     for(Group group : selectedGroups) {
                         if (group.getName().equals(groupTitle)) {
                             isGroupDuplicate = true;
+                            hideKeyboard(c, v);
                             String warnMessage = c.getString(R.string.warn_duplicate_group);
                             SnackbarBuilder.showSnack(c, v, warnMessage, SnackbarBuilder.SnackType.WARNING);
                             groupCompleteText.setText("");
@@ -139,6 +140,7 @@ public class GroupDialogBuilder implements ListModifyListener {
                         String successMessage = c.getString(R.string.success_adding_group);
                         SnackbarBuilder.showSnack(c, v, successMessage, SnackbarBuilder.SnackType.SUCCESS);
                     } else if(!isGroupDuplicate) {
+                        hideKeyboard(c, v);
                         String errorMessage = c.getString(R.string.error_group_not_exist);
                         SnackbarBuilder.showSnack(c, v, errorMessage, SnackbarBuilder.SnackType.ERROR);
                     }
