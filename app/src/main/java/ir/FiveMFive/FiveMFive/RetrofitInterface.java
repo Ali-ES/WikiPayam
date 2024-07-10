@@ -28,4 +28,10 @@ public interface RetrofitInterface {
                                         @Query("note") String message,
                                         @Query("categories[]") List<String> receivers,
                                         @Query("blacklist") boolean shouldSendToBlackList);
+    @GET("add_mobile_group.php")
+    Call<ResponseBody> addMobilesToGroup(@Query("username") String user,
+                                         @Query("password") String pass,
+                                         @Query("group") String groupId,
+                                         @Query("fullname") String groupName,
+                                         @Query("mobile") String mobiles);
 }

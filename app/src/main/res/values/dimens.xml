@@ -73,7 +73,7 @@
     <dimen name="mg_b_dialog_title">10dp</dimen>
     <dimen name="mg_b_dialog_items">9dp</dimen>
 
-    <dimen name="mg_t_bottom_sheet_items">15dp</dimen>
+    <dimen name="mg_bottom_sheet_items">20dp</dimen>
     
     <!-- Paddings -->
     <dimen name="edit_top_bottom">12dp</dimen>
@@ -113,6 +113,9 @@
 
     <dimen name="pad_bottom_sheet_dialog">20dp</dimen>
 
+    <dimen name="pad_tb_single_selection_textview">8dp</dimen>
+    <dimen name="pad_se_single_selection_textview">15dp</dimen>
+
     <!-- Font Sizes -->
     <dimen name="header">20sp</dimen>
     <dimen name="text">16sp</dimen>
@@ -133,5 +136,6 @@
     <dimen name="ts_dialog_subtitle">13sp</dimen>
     <dimen name="ts_dialog_text">11sp</dimen>
 
+    <dimen name="stroke_thin">1dp</dimen>
 
 </resources>

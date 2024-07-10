@@ -121,7 +121,17 @@
     </string>
     <string name="send_to_blacklist_numbers">ارسال به شماره های بلک لیست</string>
     <string name="regular_send">ارسال بصورت عادی</string>
-    
+
+    <!-- Group Save Bottom Sheet Dialog -->
+    <string name="save_to_phonebook">ثبت در دفترچه تلفن</string>
+    <string name="add_to_group">افزودن به گروه</string>
+    <string name="no_desire">تمایلی ندارم</string>
+    <string name="refresh">بارگذاری مجدد</string>
+    <string name="error_wrong_selected_group">گروه انتخابی غلط است</string>
+    <string-array name="select_group">
+        <item>انتخاب گروه مورد نظر</item>
+    </string-array>
+
     <!-- Action Bar -->
     <string name="more">بیشتر</string>
 
