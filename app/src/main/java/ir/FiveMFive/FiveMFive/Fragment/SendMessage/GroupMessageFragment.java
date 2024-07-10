@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -86,8 +87,6 @@ public class GroupMessageFragment extends Fragment {
         groups = new ArrayList<>();
         selectedGroups = new ArrayList<>();
 
-        getGroupsList();
-
         contentResultHelper = new ActivityContentResultHelper(GroupMessageFragment.this);
         if(savedInstanceState != null) {
             // code...
@@ -120,7 +119,7 @@ public class GroupMessageFragment extends Fragment {
         setEditTextFocus(c, senderEdit, null);
         setEditTextLayoutFocus(c, messageBoxLayout, null, messageEdit, messageDivider);
 
-        getGroupsList();
+
 
         messageEditLayout.setOnTouchListener((v, event) -> {
             messageEdit.requestFocus();
@@ -175,6 +174,12 @@ public class GroupMessageFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getGroupsList();
+    }
+
+    @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
@@ -222,7 +227,7 @@ public class GroupMessageFragment extends Fragment {
                         }
                     });
                 } else {
-                    ConnectivityChecker.showNoConnectionSnack(c, v);
+                    ConnectivityChecker.showNoConnectionSnack(requireContext(), getView());
                 }
             }
         });
@@ -253,7 +258,7 @@ public class GroupMessageFragment extends Fragment {
                         }
                     }
                 } else {
-                    ConnectivityChecker.showNoConnectionSnack(c, getView());
+                    ConnectivityChecker.showNoConnectionSnack(requireContext(), getView());
                 }
             }
         });
