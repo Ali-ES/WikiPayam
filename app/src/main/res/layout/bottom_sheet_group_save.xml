@@ -16,12 +16,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/select_group_tv"
-        android:text="@string/select_group"
+        android:id="@+id/select_group_spin"
         android:textColor="@color/black_unimportant"
+        android:entries="@array/select_group"
         android:background="@drawable/bg_single_selection_textview"
         android:paddingTop="@dimen/pad_tb_single_selection_textview"
         android:paddingBottom="@dimen/pad_tb_single_selection_textview"
@@ -40,7 +40,7 @@
         android:layout_marginEnd="@dimen/mg_bottom_sheet_items"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/cancel_btn"
-        app:layout_constraintTop_toBottomOf="@id/select_group_tv" />
+        app:layout_constraintTop_toBottomOf="@id/select_group_spin" />
 
     <Button
         android:layout_width="0dp"
@@ -51,7 +51,9 @@
         android:text="@string/no_desire"
         app:layout_constraintStart_toEndOf="@id/add_to_group_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/select_group_tv" />
+        app:layout_constraintTop_toBottomOf="@id/select_group_spin" />
 
+    <include
+        layout="@layout/layout_progress_indicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
