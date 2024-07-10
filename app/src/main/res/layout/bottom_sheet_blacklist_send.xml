@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/add_to_group_title_tv"
+        android:id="@+id/send_to_blacklist_title_tv"
         android:text="@string/send_to_blacklist"
         android:textSize="@dimen/title"
         android:textStyle="bold"
@@ -21,8 +21,7 @@
         android:layout_height="@dimen/h_bottom_sheet_scroll"
         android:id="@+id/blacklist_explain_layout"
         android:layout_marginTop="@dimen/mg_bottom_sheet_items"
-        app:layout_constraintTop_toBottomOf="@id/add_to_group_title_tv"
-        app:layout_constraintBottom_toTopOf="@id/add_to_group_btn" >
+        app:layout_constraintTop_toBottomOf="@id/send_to_blacklist_title_tv" >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,7 +33,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/add_to_group_btn"
+        android:id="@+id/send_blacklist_btn"
         style="@style/normal_button"
         android:layout_marginTop="@dimen/mg_bottom_sheet_items"
         android:text="@string/send_to_blacklist_numbers"
@@ -43,11 +42,11 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cancel_btn"
+        android:id="@+id/send_regular_btn"
         style="@style/outline_button"
         android:layout_marginTop="@dimen/mg_bottom_sheet_items"
         android:text="@string/regular_send"
-        app:layout_constraintTop_toBottomOf="@id/add_to_group_btn" />
+        app:layout_constraintTop_toBottomOf="@id/send_blacklist_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
