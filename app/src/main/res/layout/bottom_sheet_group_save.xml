@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:padding="@dimen/pad_bottom_sheet_dialog">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_to_group_title_tv"
+        android:text="@string/save_to_phonebook"
+        android:textSize="@dimen/title"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_group_tv"
+        android:text="@string/select_group"
+        android:textColor="@color/black_unimportant"
+        android:background="@drawable/bg_single_selection_textview"
+        android:paddingTop="@dimen/pad_tb_single_selection_textview"
+        android:paddingBottom="@dimen/pad_tb_single_selection_textview"
+        android:paddingStart="@dimen/pad_se_single_selection_textview"
+        android:paddingEnd="@dimen/pad_se_single_selection_textview"
+        android:layout_marginTop="@dimen/mg_bottom_sheet_items"
+        app:layout_constraintTop_toBottomOf="@id/add_to_group_title_tv" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_to_group_btn"
+        style="@style/normal_button"
+        android:text="@string/add_to_group"
+        android:layout_marginTop="@dimen/mg_bottom_sheet_items"
+        android:layout_marginEnd="@dimen/mg_bottom_sheet_items"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cancel_btn"
+        app:layout_constraintTop_toBottomOf="@id/select_group_tv" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancel_btn"
+        style="@style/outline_button"
+        android:layout_marginTop="@dimen/mg_bottom_sheet_items"
+        android:text="@string/no_desire"
+        app:layout_constraintStart_toEndOf="@id/add_to_group_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/select_group_tv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
