@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/submit_bt"
             android:text="@string/submit"
-            style="@style/login_button"
+            style="@style/normal_button"
             app:layout_constraintTop_toBottomOf="@id/pass_layout" />
 
         <TextView

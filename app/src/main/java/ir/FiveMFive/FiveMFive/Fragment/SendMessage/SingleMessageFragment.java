@@ -180,7 +180,6 @@ public class SingleMessageFragment extends Fragment {
             }
         });
         toolbarHandler.addIcon(priceIcon);
-        ToolbarHandler.handleBackNav(this, toolbar);
     }
 
     private void handleSendMessage() {
@@ -202,7 +201,7 @@ public class SingleMessageFragment extends Fragment {
                         hideProgress();
                     }
                 } else {
-                    ConnectivityChecker.showConnectionFailSnack(c, getView());
+                    ConnectivityChecker.showNoConnectionSnack(c, getView());
                     hideProgress();
                 }
             }

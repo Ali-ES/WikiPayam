@@ -14,8 +14,10 @@ import java.util.List;
 import ir.FiveMFive.FiveMFive.Interface.ListModifyListener;
 import ir.FiveMFive.FiveMFive.Java.CategoryItem;
 import ir.FiveMFive.FiveMFive.Java.DashboardItem;
+import ir.FiveMFive.FiveMFive.Java.Group;
 import ir.FiveMFive.FiveMFive.ViewHolders.CategoryHolder;
 import ir.FiveMFive.FiveMFive.ViewHolders.DashboardHolder;
+import ir.FiveMFive.FiveMFive.ViewHolders.GroupHolder;
 import ir.FiveMFive.FiveMFive.ViewHolders.MobileHolder;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter {
@@ -27,7 +29,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     public enum LayoutType {
         DASHBOARD,
         CATEGORY,
-        MOBILE
+        MOBILE,
+        GROUP
     }
     public RecyclerViewAdapter(Fragment fragment, LayoutType layoutType, ArrayList<?> items) {
         this.fragment = fragment;
@@ -41,11 +44,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         switch (layoutType) {
             case DASHBOARD:
             return new DashboardHolder(inflater, parent, fragment);
-
             case CATEGORY:
                 return new CategoryHolder(inflater, parent, fragment);
             case MOBILE:
                 return new MobileHolder(inflater, parent, this);
+            case GROUP:
+                return new GroupHolder(inflater, parent, this);
             default:
                 return null;
         }
@@ -69,6 +73,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                     mobile.setListModifyListener(listModifyListener);
                 }
                 mobile.bind((String) items.get(position));
+                break;
+            case GROUP:
+                GroupHolder group = (GroupHolder) holder;
+                if(listModifyListener != null) {
+                    group.setListModifyListener(listModifyListener);
+                }
+                group.bind((Group) items.get(position));
                 break;
         }
     }

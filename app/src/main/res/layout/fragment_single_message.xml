@@ -218,7 +218,7 @@
                 android:id="@+id/send_message_bt"
                 android:text="@string/send_message"
                 android:backgroundTint="@null"
-                style="@style/login_button"
+                style="@style/normal_button"
                 app:layout_constraintTop_toBottomOf="@id/message_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

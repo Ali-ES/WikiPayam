@@ -75,7 +75,7 @@ public class SingupFragment extends Fragment {
         nameText = v.findViewById(R.id.name_tv);
         nameEdit = v.findViewById(R.id.name_et);
         mobileLayout = v.findViewById(R.id.mobile_layout);
-        mobileText = v.findViewById(R.id.mobile_tv);
+        mobileText = v.findViewById(R.id.item_tv);
         mobileEdit = v.findViewById(R.id.mobile_et);
         rulesText = v.findViewById(R.id.rules_tv);
         rulesCheck = v.findViewById(R.id.rules_check);

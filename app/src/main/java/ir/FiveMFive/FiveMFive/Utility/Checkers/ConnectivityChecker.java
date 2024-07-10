@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.view.View;
 
 import java.net.InetAddress;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 import ir.FiveMFive.FiveMFive.R;
@@ -43,8 +44,20 @@ public class ConnectivityChecker {
 
     }
 
-    public static void showConnectionFailSnack(Context c, View v) {
-        SnackbarBuilder.showSnack(c, v, c.getResources().getString(R.string.warn_connection_failed), SnackbarBuilder.SnackType.WARNING);
+    public static void showNoConnectionSnack(Context c, View v) {
+        SnackbarBuilder.showSnack(c, v, c.getString(R.string.warn_connection_failed), SnackbarBuilder.SnackType.WARNING);
     }
-
+    public static void showServerFailSnack(Context c, View v) {
+        String errorMessage = c.getString(R.string.error_server_no_response);
+        SnackbarBuilder.showSnack(c, v, errorMessage, SnackbarBuilder.SnackType.ERROR);
+    }
+    public static void showConnectionFailSnack(Context c, View v, Throwable t) {
+        String errorMessage;
+        if(t instanceof SocketTimeoutException) {
+            errorMessage = c.getString(R.string.warn_connection_failed);
+        } else {
+            errorMessage = c.getString(R.string.error_connecting_to_server);
+        }
+        SnackbarBuilder.showSnack(c, v, errorMessage, SnackbarBuilder.SnackType.ERROR);
+    }
 }

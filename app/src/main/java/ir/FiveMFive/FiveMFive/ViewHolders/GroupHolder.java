@@ -9,19 +9,20 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ir.FiveMFive.FiveMFive.Interface.ListModifyListener;
+import ir.FiveMFive.FiveMFive.Java.Group;
 import ir.FiveMFive.FiveMFive.R;
 import ir.FiveMFive.FiveMFive.RecyclerViewAdapter;
 
-public class MobileHolder extends RecyclerView.ViewHolder {
-    private TextView mobile;
+public class GroupHolder extends RecyclerView.ViewHolder {
+    private TextView group;
     private ImageView delete;
     private RecyclerViewAdapter adapter;
     private ListModifyListener listModifyListener;
-    public MobileHolder(LayoutInflater inflater, ViewGroup parent, RecyclerViewAdapter adapter) {
+    public GroupHolder(LayoutInflater inflater, ViewGroup parent, RecyclerViewAdapter adapter) {
         super(inflater.inflate(R.layout.card_removable_item, parent, false));
         this.adapter = adapter;
 
-        mobile = itemView.findViewById(R.id.item_tv);
+        group = itemView.findViewById(R.id.item_tv);
         delete = itemView.findViewById(R.id.delete_iv);
 
         handleDelete();
@@ -37,8 +38,8 @@ public class MobileHolder extends RecyclerView.ViewHolder {
             }
         });
     }
-    public void bind(String number) {
-        mobile.setText(number);
+    public void bind(Group g) {
+        group.setText(g.getName());
     }
 
     public void setListModifyListener(ListModifyListener listener) {

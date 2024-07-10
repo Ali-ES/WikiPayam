@@ -84,22 +84,44 @@
     <string name="error_wrong_number_format">فرمت شماره موبایل غلط است</string>
     <string name="success_adding_number">شماره موبایل اضافه شد</string>
 
-
+    <!-- Groups Dialog -->
+    <string name="groups">گروه ها</string>
+    <string name="group">گروه</string>
+    <string name="warn_empty_group">نام گروه خالی است</string>
+    <string name="warn_duplicate_group">نام گروه تکراری است</string>
+    <string name="error_group_not_exist">این گروه وجود ندارد</string>
+    <string name="success_adding_group">گروه با موفقیت اضافه شد</string>
 
     <!-- Send Group Message Fragment -->
     <string name="send_group_message">ارسال پیامک گروهی</string>
+    <string name="add_all_groups">افزودن همه گروه ها</string>
+    <string name="warn_receiver_groups_not_exits">هیچ گروهی برای دریافت کننده وجود نداره</string>
+    <string name="success_adding_all_groups">همه گروه ها افزوده شدند</string>
+    <string name="warn_no_group_exist">هیچ گروهی جهت افزودن وجود ندارد</string>
+
+    <!-- Network Operations -->
+    <string name="error_connecting_to_server">اتصال به سرور با خطا مواجه شد</string>
+    <string name="error_server_no_response">عدم دریافت پاسخ از سرور</string>
+    <string name="warn_connection_failed">لطفا اتصال اینترنت خود را بررسی کنید</string>
 
 
     <!-- Snackbar -->
     <string name="email_send_success">ایمیل با موفقیت ارسال شد</string>
     <string name="desc_success_snack">موفق</string>
-    <string name="warn_connection_failed">لطفا اتصال اینترنت خود را بررسی کنید</string>
+
     <string name="warn_no_file_selected">هیچ فایلی انتخاب نشد</string>
     <string name="success_importing_number">شماره ها با موفقیت وارد شدند</string>
     <string name="empty_numbers_list">شماره ای جهت وارد کردن وجود ندارد!</string>
     <string name="wrong_excel_format">فرمت فایل اکسل غلط است</string>
 
 
+    <!-- Blacklist Send Bottom Sheet Dialog -->
+    <string name="send_to_blacklist">ارسال به لیست سیاه</string>
+    <string name="blacklist_send_explain">بیش از ۵۰ درصد مخاطبین کشوردر لیست سیاه قراردارند\nچنانچه تمایل دارید کلیه مخاطبان شما(به همراه شماره های لیست سیاه) این پیام را دریافت کنند دکمه آبی را کلیک نمایید.\nارسال به مخاطبین عادی شما طبق تعرفه شما خواهد بود\nبه ازای ارسال هرپیام به مخاطبین لیست سیاه ۲۵۰ تومان کسر خواهد شد\nبه دلیل بالا بودن شماره ها در لیست سیاه در صورت کسری شارژ پیام های شما ارسال نمیگردد بنابراین از بالابودن میزان موجودی خود آگاه باشید\nچنانچه متن ارسالی شما نیاز به دریافت داشت(مانند منشی پیامک ها)، حتما شماره ی دریافت کننده خود را در متن پیامک ارسال نمایید.\nباتشکر
+    </string>
+    <string name="send_to_blacklist_numbers">ارسال به شماره های بلک لیست</string>
+    <string name="regular_send">ارسال بصورت عادی</string>
+    
     <!-- Action Bar -->
     <string name="more">بیشتر</string>
 

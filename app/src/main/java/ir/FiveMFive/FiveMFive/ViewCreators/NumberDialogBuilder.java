@@ -2,27 +2,16 @@ package ir.FiveMFive.FiveMFive.ViewCreators;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -93,7 +82,7 @@ public class NumberDialogBuilder implements ListModifyListener {
 
     private void handleAddButton() {
         ConstraintLayout mobileLayout = mainLayout.findViewById(R.id.mobile_layout);
-        TextView mobileText = mobileLayout.findViewById(R.id.mobile_tv);
+        TextView mobileText = mobileLayout.findViewById(R.id.item_tv);
         EditText mobileEdit = mobileLayout.findViewById(R.id.mobile_et);
         setEditTextLayoutFocus(c, mobileLayout, mobileText, mobileEdit);
 
