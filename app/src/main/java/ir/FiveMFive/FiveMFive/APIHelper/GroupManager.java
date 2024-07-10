@@ -50,7 +50,6 @@ public class GroupManager {
                     ConnectivityChecker.showServerFailSnack(c, root);
                     groupManagerListener.gotGroups(null);
                 }
-                groupManagerListener.gotGroups(null);
             }
 
             @Override
