@@ -124,10 +124,13 @@
 
     <!-- Group Save Bottom Sheet Dialog -->
     <string name="save_to_phonebook">ثبت در دفترچه تلفن</string>
-    <string name="select_group">انتخاب گروه مورد نظر</string>
     <string name="add_to_group">افزودن به گروه</string>
     <string name="no_desire">تمایلی ندارم</string>
-    
+
+    <string-array name="select_group">
+        <item>انتخاب گروه مورد نظر</item>
+    </string-array>
+
     <!-- Action Bar -->
     <string name="more">بیشتر</string>
 
