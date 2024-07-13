@@ -21,7 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/contact_phone_tv"
+        android:id="@+id/contact_mobile_tv"
         android:text="09124568785"
         app:layout_constraintTop_toBottomOf="@id/contact_name_tv"
         app:layout_constraintStart_toStartOf="parent" />
@@ -38,6 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/h_divider_regular"
         android:background="@color/gray_popup_divider"
-        app:layout_constraintTop_toBottomOf="@id/contact_phone_tv" />
+        app:layout_constraintTop_toBottomOf="@id/contact_mobile_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
