@@ -44,6 +44,8 @@
 
     <dimen name="h_bottom_sheet_scroll">140dp</dimen>
 
+    <dimen name="h_divider_regular">1dp</dimen>
+
     <!-- Margins -->
     <dimen name="login_top">40dp</dimen>
     <dimen name="login_start_end">20dp</dimen>
@@ -115,6 +117,10 @@
 
     <dimen name="pad_tb_single_selection_textview">8dp</dimen>
     <dimen name="pad_se_single_selection_textview">15dp</dimen>
+
+
+    <dimen name="pad_se_card_item">20dp</dimen>
+    <dimen name="pad_tb_card_item">5dp</dimen>
 
     <!-- Font Sizes -->
     <dimen name="header">20sp</dimen>
