@@ -54,7 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
             case GROUP:
                 return new GroupHolder(inflater, parent, this);
             case CONTACT:
-                return new ContactHolder(inflater, parent, (List<Contact>) items);
+                return new ContactHolder(inflater, parent, (ArrayList<Contact>) items);
             default:
                 return null;
         }
