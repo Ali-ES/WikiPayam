@@ -139,6 +139,7 @@
     <string name="close">بستن</string>
     <string name="import_contacts">ورود مخاطبین</string>
     <string name="select_all">انتخاب همه</string>
+    <string name="error_no_contacts_selected">هیچ مخاطبی انتخاب نشده است</string>
 
     <!-- Action Bar -->
     <string name="more">بیشتر</string>
