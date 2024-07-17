@@ -4,9 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
-import android.util.Log;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 import ir.FiveMFive.FiveMFive.Java.Contact;
