@@ -34,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ir.FiveMFive.FiveMFive.BottomSheetDialog.ContactsBottomSheet;
+import ir.FiveMFive.FiveMFive.BottomSheetDialog.GroupAddBottomSheet;
 import ir.FiveMFive.FiveMFive.Java.Contact;
 import ir.FiveMFive.FiveMFive.Java.ToolbarIcon;
 import ir.FiveMFive.FiveMFive.Java.User;
@@ -391,6 +392,21 @@ public class SingleMessageFragment extends Fragment {
                     }
                     numbers.addAll(selectedMobiles);
                     updateNumberView();
+
+                    GroupAddBottomSheet groupAddBottomSheet = GroupAddBottomSheet.newInstance(selectedMobiles);
+                    groupAddBottomSheet.show(getParentFragmentManager(), null);
+                    groupAddBottomSheet.setGroupAddFinishListener(new GroupAddBottomSheet.GroupAddFinishListener() {
+                        @Override
+                        public void onFinish(boolean isSuccessful) {
+                            if(isSuccessful) {
+                                String successMessage = getString(R.string.success_adding_to_group);
+                                SnackbarBuilder.showSnack(c, v, successMessage, SnackbarBuilder.SnackType.SUCCESS);
+                            } else {
+                                String errorMessage = getString(R.string.error_adding_to_group);
+                                SnackbarBuilder.showSnack(c, v, errorMessage, SnackbarBuilder.SnackType.ERROR);
+                            }
+                        }
+                    });
 
                 } else {
                     String errorMessage = getString(R.string.error_no_contacts_selected);

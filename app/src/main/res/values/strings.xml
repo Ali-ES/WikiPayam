@@ -79,6 +79,7 @@
     
     <string name="error_contact_permission_denied">برای ورود از مخاطبین به دسترسی نیاز است</string>
 
+
     <!-- Phone Numbers Dialog -->
     <string name="add">افزودن</string>
     <string name="mobile_number">شماره موبایل</string>
@@ -133,6 +134,8 @@
     <string-array name="select_group">
         <item>انتخاب گروه مورد نظر</item>
     </string-array>
+    <string name="success_adding_to_group">شماره ها با موفقیت به گروه اضافه شدند</string>
+    <string name="error_adding_to_group">افزودن شماره ها به گروه با شکست مواجه شد</string>
     
     
     <!-- Contacts Bottom Sheet Dialog -->

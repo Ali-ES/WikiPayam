@@ -3,6 +3,7 @@ package ir.FiveMFive.FiveMFive.BottomSheetDialog;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,6 +21,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,8 @@ public class GroupAddBottomSheet extends BottomSheetDialogFragment {
     private FrameLayout progressIndicator;
     private boolean gotGroups = false;
     private static final String EXTRA_MOBILES = "mobilesToAdd";
+    private int currentGroupSend = 0;
+    private GroupAddFinishListener groupAddFinishListener;
     public static GroupAddBottomSheet newInstance(List<String> mobiles) {
         Bundle bundle = new Bundle();
         bundle.putStringArrayList(EXTRA_MOBILES, (ArrayList<String>) mobiles);
@@ -56,6 +60,10 @@ public class GroupAddBottomSheet extends BottomSheetDialogFragment {
         GroupAddBottomSheet bottomSheet = new GroupAddBottomSheet();
         bottomSheet.setArguments(bundle);
         return bottomSheet;
+    }
+
+    public interface GroupAddFinishListener {
+        void onFinish(boolean isSuccessful);
     }
 
     @Override
@@ -100,35 +108,10 @@ public class GroupAddBottomSheet extends BottomSheetDialogFragment {
 
                     Group selectedGroup = groups.get(selectGroupSpin.getSelectedItemPosition());
 
+                    addMobilesToGroup(user, selectedGroup);
 
 
-                    Retrofit retrofit = RetrofitClient.getClient();
-                    RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
-                    Call<ResponseBody> call = retrofitInterface.addMobilesToGroup(user.getUsername(),
-                            user.getPassword(),
-                            selectedGroup.getId(),
-                            selectedGroup.getName(),
-                            getCommaSeparatedMobiles());
-                    call.enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if(response.isSuccessful()) {
-                                //String r = response.body().string();
 
-                            } else {
-                                ConnectivityChecker.showServerFailSnack(c, root);
-                            }
-                            dismiss();
-                            hideProgress();
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            ConnectivityChecker.showConnectionFailSnack(c, root, t);
-                            dismiss();
-                            hideProgress();
-                        }
-                    });
                 } else {
                     String errorMessage = getString(R.string.error_wrong_selected_group);
                     SnackbarBuilder.showSnack(c, root, errorMessage, SnackbarBuilder.SnackType.ERROR);
@@ -198,6 +181,66 @@ public class GroupAddBottomSheet extends BottomSheetDialogFragment {
         connectivityChecker.checkConnection(requireActivity());
     }
 
+    private void addMobilesToGroup(User user, Group selectedGroup) {
+        Retrofit retrofit = RetrofitClient.getClient();
+        RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);
+        Call<ResponseBody> call = retrofitInterface.addMobileToGroup(user.getUsername(),
+                user.getPassword(),
+                selectedGroup.getId(),
+                selectedGroup.getName(),
+                mobiles.get(currentGroupSend));
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()) {
+                    try {
+                        String output = response.body().string();
+                        Log.v(TAG, output);
+                        if (output.equals("success")) {
+                            if(currentGroupSend == (mobiles.size()-1)) {
+                                hideProgress();
+                                dismiss();
+                                currentGroupSend = 0;
+                                if(groupAddFinishListener != null) {
+                                    groupAddFinishListener.onFinish(true);
+                                }
+                            } else {
+                                currentGroupSend++;
+                                addMobilesToGroup(user, selectedGroup);
+                            }
+                        } else {
+                            hideProgress();
+                            dismiss();
+                            currentGroupSend = 0;
+                            if(groupAddFinishListener != null) {
+                                groupAddFinishListener.onFinish(false);
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    ConnectivityChecker.showServerFailSnack(c, root);
+                    dismiss();
+                    hideProgress();
+                    if(groupAddFinishListener != null) {
+                        groupAddFinishListener.onFinish(false);
+                    }
+                }
+
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                ConnectivityChecker.showConnectionFailSnack(c, root, t);
+                dismiss();
+                hideProgress();
+                if(groupAddFinishListener != null) {
+                    groupAddFinishListener.onFinish(false);
+                }
+            }
+        });
+    }
+
     public String getCommaSeparatedMobiles() {
         String mobilesComma = "";
         for(String mobile : mobiles) {
@@ -216,5 +259,7 @@ public class GroupAddBottomSheet extends BottomSheetDialogFragment {
     private void hideProgress() {
         progressIndicator.setVisibility(View.GONE);
     }
-
+    public void setGroupAddFinishListener(GroupAddFinishListener listener) {
+        this.groupAddFinishListener = listener;
+    }
 }

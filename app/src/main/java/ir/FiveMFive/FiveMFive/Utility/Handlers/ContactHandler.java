@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import ir.FiveMFive.FiveMFive.Java.Contact;
@@ -22,6 +24,9 @@ public class ContactHandler {
                 @SuppressLint("Range") String contactName = phoneNumbers.getString(phoneNumbers.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                 @SuppressLint("Range") String contactMobile = phoneNumbers.getString(phoneNumbers.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
+                contactMobile = contactMobile.replaceAll(" ", "");
+                contactMobile = contactMobile.replace("+98", "0");
+                Log.v("ContactHelper", contactMobile);
                 if(PhoneNumberFormatChecker.checkNumberFormat(contactMobile)) {
                     Contact contact = new Contact(contactName, contactMobile);
                     contacts.add(contact);
