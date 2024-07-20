@@ -13,9 +13,11 @@ import java.util.List;
 
 import ir.FiveMFive.FiveMFive.Interface.ListModifyListener;
 import ir.FiveMFive.FiveMFive.Java.CategoryItem;
+import ir.FiveMFive.FiveMFive.Java.Contact;
 import ir.FiveMFive.FiveMFive.Java.DashboardItem;
 import ir.FiveMFive.FiveMFive.Java.Group;
 import ir.FiveMFive.FiveMFive.ViewHolders.CategoryHolder;
+import ir.FiveMFive.FiveMFive.ViewHolders.ContactHolder;
 import ir.FiveMFive.FiveMFive.ViewHolders.DashboardHolder;
 import ir.FiveMFive.FiveMFive.ViewHolders.GroupHolder;
 import ir.FiveMFive.FiveMFive.ViewHolders.MobileHolder;
@@ -30,7 +32,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         DASHBOARD,
         CATEGORY,
         MOBILE,
-        GROUP
+        GROUP,
+        CONTACT
     }
     public RecyclerViewAdapter(Fragment fragment, LayoutType layoutType, ArrayList<?> items) {
         this.fragment = fragment;
@@ -50,6 +53,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                 return new MobileHolder(inflater, parent, this);
             case GROUP:
                 return new GroupHolder(inflater, parent, this);
+            case CONTACT:
+                return new ContactHolder(inflater, parent, (ArrayList<Contact>) items);
             default:
                 return null;
         }
@@ -80,6 +85,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
                     group.setListModifyListener(listModifyListener);
                 }
                 group.bind((Group) items.get(position));
+                break;
+            case CONTACT:
+                ContactHolder contact = (ContactHolder) holder;
+                contact.bind();
                 break;
         }
     }

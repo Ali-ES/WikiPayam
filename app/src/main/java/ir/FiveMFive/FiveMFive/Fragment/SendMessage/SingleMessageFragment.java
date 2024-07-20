@@ -1,16 +1,27 @@
 package ir.FiveMFive.FiveMFive.Fragment.SendMessage;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,9 +33,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import ir.FiveMFive.FiveMFive.BottomSheetDialog.ContactsBottomSheet;
+import ir.FiveMFive.FiveMFive.BottomSheetDialog.GroupAddBottomSheet;
+import ir.FiveMFive.FiveMFive.Java.Contact;
 import ir.FiveMFive.FiveMFive.Java.ToolbarIcon;
 import ir.FiveMFive.FiveMFive.Java.User;
 import ir.FiveMFive.FiveMFive.R;
+import ir.FiveMFive.FiveMFive.RecyclerViewAdapter;
 import ir.FiveMFive.FiveMFive.RetrofitClient;
 import ir.FiveMFive.FiveMFive.RetrofitInterface;
 import ir.FiveMFive.FiveMFive.Utility.ActivityContentResultHelper;
@@ -32,8 +47,10 @@ import ir.FiveMFive.FiveMFive.Utility.Checkers.ConnectivityChecker;
 import ir.FiveMFive.FiveMFive.Utility.Checkers.MessageCharacterWatcher;
 import ir.FiveMFive.FiveMFive.Utility.Constants;
 import ir.FiveMFive.FiveMFive.Utility.CredentialCrypter;
+import ir.FiveMFive.FiveMFive.Utility.Handlers.ContactHandler;
 import ir.FiveMFive.FiveMFive.Utility.Handlers.ExcelHandler;
 import ir.FiveMFive.FiveMFive.Utility.Handlers.TextFileHandler;
+import ir.FiveMFive.FiveMFive.Utility.PermissionManager;
 import ir.FiveMFive.FiveMFive.Utility.PopupBuilder;
 import ir.FiveMFive.FiveMFive.Utility.SnackbarBuilder;
 import ir.FiveMFive.FiveMFive.Utility.ToolbarHandler;
@@ -73,13 +90,16 @@ public class SingleMessageFragment extends Fragment {
     private TextView remainingCharsText;
     private Button sendMessage;
     private ActivityContentResultHelper contentResultHelper;
+    private PermissionManager permissionManager;
     private List<String> numbers;
     private FrameLayout progressIndicator;
+    private ActivityResultLauncher<String> requestContactPermissionLauncher;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         contentResultHelper = new ActivityContentResultHelper(SingleMessageFragment.this);
+        permissionManager = new PermissionManager(this, R.string.error_contact_permission_denied);
 
         if(savedInstanceState != null) {
             numbers = savedInstanceState.getStringArrayList(EXTRA_NUMBERS);
@@ -157,6 +177,9 @@ public class SingleMessageFragment extends Fragment {
                 handleSendMessage();
             }
         });
+
+
+
         return v;
     }
 
@@ -265,6 +288,24 @@ public class SingleMessageFragment extends Fragment {
                 View.OnClickListener contactImportListener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(permissionManager.checkPermission(Manifest.permission.READ_CONTACTS)) {
+                            handleContacts();
+                            builder.dismiss();
+                        }
+
+                        permissionManager.setPermissionListener(new PermissionManager.PermissionListener() {
+                            @Override
+                            public void setPermission(boolean isGranted) {
+                                if(isGranted) {
+                                    handleContacts();
+                                } else {
+                                    String errorMessage = c.getString(R.string.error_contact_permission_denied);
+                                    SnackbarBuilder.showSnack(c, v, errorMessage, SnackbarBuilder.SnackType.ERROR);
+                                }
+                                builder.dismiss();
+                            }
+                        });
+
 
                     }
                 };
@@ -321,7 +362,6 @@ public class SingleMessageFragment extends Fragment {
                 };
                 builder.addItem(R.drawable.ic_text_file, R.string.import_via_text_file, textFileListener);
 
-
                 builder.showPopup(add);
             }
         });
@@ -338,6 +378,42 @@ public class SingleMessageFragment extends Fragment {
         }
         String result = stringBuilder.toString();
         receiverText.setText(result);
+    }
+    private void handleContacts() {
+        ContactsBottomSheet bottomSheet = new ContactsBottomSheet();
+        bottomSheet.show(getParentFragmentManager(), null);
+        bottomSheet.setContactImportListener(new ContactsBottomSheet.ContactImportListener() {
+            @Override
+            public void onImport(List<Contact> contacts) {
+                if(!contacts.isEmpty()) {
+                    List<String> selectedMobiles = new ArrayList<>();
+                    for (Contact c : contacts) {
+                        selectedMobiles.add(c.getMobile());
+                    }
+                    numbers.addAll(selectedMobiles);
+                    updateNumberView();
+
+                    GroupAddBottomSheet groupAddBottomSheet = GroupAddBottomSheet.newInstance(selectedMobiles);
+                    groupAddBottomSheet.show(getParentFragmentManager(), null);
+                    groupAddBottomSheet.setGroupAddFinishListener(new GroupAddBottomSheet.GroupAddFinishListener() {
+                        @Override
+                        public void onFinish(boolean isSuccessful) {
+                            if(isSuccessful) {
+                                String successMessage = getString(R.string.success_adding_to_group);
+                                SnackbarBuilder.showSnack(c, v, successMessage, SnackbarBuilder.SnackType.SUCCESS);
+                            } else {
+                                String errorMessage = getString(R.string.error_adding_to_group);
+                                SnackbarBuilder.showSnack(c, v, errorMessage, SnackbarBuilder.SnackType.ERROR);
+                            }
+                        }
+                    });
+
+                } else {
+                    String errorMessage = getString(R.string.error_no_contacts_selected);
+                    SnackbarBuilder.showSnack(c, v, errorMessage, SnackbarBuilder.SnackType.ERROR);
+                }
+            }
+        });
     }
     private void showProgress() {
         progressIndicator.setVisibility(View.VISIBLE);

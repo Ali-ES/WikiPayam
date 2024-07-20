@@ -76,6 +76,9 @@
 
     <string name="success_sending_single_sms">ارسال پیامک تکی با موفقیت انجام شد</string>
     <string name="error_sending_single_sms">ارسال پیامک با شکست مواجه شد</string>
+    
+    <string name="error_contact_permission_denied">برای ورود از مخاطبین به دسترسی نیاز است</string>
+
 
     <!-- Phone Numbers Dialog -->
     <string name="add">افزودن</string>
@@ -131,6 +134,15 @@
     <string-array name="select_group">
         <item>انتخاب گروه مورد نظر</item>
     </string-array>
+    <string name="success_adding_to_group">شماره ها با موفقیت به گروه اضافه شدند</string>
+    <string name="error_adding_to_group">افزودن شماره ها به گروه با شکست مواجه شد</string>
+    
+    
+    <!-- Contacts Bottom Sheet Dialog -->
+    <string name="close">بستن</string>
+    <string name="import_contacts">ورود مخاطبین</string>
+    <string name="select_all">انتخاب همه</string>
+    <string name="error_no_contacts_selected">هیچ مخاطبی انتخاب نشده است</string>
 
     <!-- Action Bar -->
     <string name="more">بیشتر</string>
