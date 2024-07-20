@@ -26,10 +26,19 @@ public class ContactHandler {
 
                 contactMobile = contactMobile.replaceAll(" ", "");
                 contactMobile = contactMobile.replace("+98", "0");
-                Log.v("ContactHelper", contactMobile);
-                if(PhoneNumberFormatChecker.checkNumberFormat(contactMobile)) {
-                    Contact contact = new Contact(contactName, contactMobile);
-                    contacts.add(contact);
+
+                if(contacts.size() > 0) {
+                    if (!contacts.get(contacts.size() - 1).getMobile().equals(contactMobile)) {
+                        if (PhoneNumberFormatChecker.checkNumberFormat(contactMobile)) {
+                            Contact contact = new Contact(contactName, contactMobile);
+                            contacts.add(contact);
+                        }
+                    }
+                } else {
+                    if (PhoneNumberFormatChecker.checkNumberFormat(contactMobile)) {
+                        Contact contact = new Contact(contactName, contactMobile);
+                        contacts.add(contact);
+                    }
                 }
             }
             phoneNumbers.close();
